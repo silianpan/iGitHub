@@ -4,6 +4,11 @@
 		"^u-(.*)": "@/uview/components/u-$1/u-$1.vue"
 	},
 	"pages": [{
+		"path": "pages/login/login",
+		"style": {
+			"titleNView": false
+		}
+	}, {
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarTitleText": "uni-ui基础项目"

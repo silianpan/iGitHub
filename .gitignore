@@ -1,5 +1,6 @@
 .DS_*
 node_modules/
+unpackage/
 
 npm-debug.log
 yarn-error.log

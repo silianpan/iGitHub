@@ -13,6 +13,11 @@
 		"style": {
 			"navigationBarTitleText": "uni-ui基础项目"
 		}
+	}, {
+		"path": "pages/login/auth",
+		"style": {
+			"navigationBarTitleText": "安全登录"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

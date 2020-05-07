@@ -1,5 +1,5 @@
 <template>
-	<view ref="mp">
+	<view>
 		<web-view :webviewStyles="webviewStyles" :src="authUrl"></web-view>
 	</view>
 </template>
@@ -9,10 +9,10 @@
 	export default {
 		data() {
 			return {
-				authUrl: '',
+				authUrl: 'https://github.com/login/oauth/authorize?client_id=13c7b1a5149de3461f90&state=app',
 				webviewStyles: {
 					progress: {
-						color: '#FF3333'
+						color: '#00FF00'
 					}
 				}
 			}
@@ -27,9 +27,6 @@
 				})
 			}, 1000) //如果是页面初始化调用时，需要延时一下
 			// #endif
-		},
-		onLoad(options) {
-			this.authUrl = 'https://github.com/login/oauth/authorize?client_id=13c7b1a5149de3461f90&state=app'
 		}
 	}
 </script>

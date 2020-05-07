@@ -8,6 +8,7 @@
 </template>
 
 <script>
+	import { getQueryString } from '@/utils/href'
 	export default {
 		data() {
 			return {
@@ -22,6 +23,12 @@
 					text: '评论'
 				}],
 				show: true
+			}
+		},
+		onLoad(option) {
+			const code = getQueryString('code')
+			if (code) {
+				
 			}
 		},
 		methods: {

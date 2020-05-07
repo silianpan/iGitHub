@@ -9,6 +9,7 @@
 
 <script>
 	import { getQueryString } from '@/utils/href'
+	import { githubClientId, githubClientSecret } from '@/config'
 	export default {
 		data() {
 			return {

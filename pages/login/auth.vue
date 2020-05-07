@@ -5,11 +5,12 @@
 </template>
 
 <script>
+	import globalConfig from '@/config'
 	let wv
 	export default {
 		data() {
 			return {
-				authUrl: 'https://github.com/login/oauth/authorize?client_id=13c7b1a5149de3461f90&state=app',
+				authUrl: globalConfig.githubAuthUrl,
 				webviewStyles: {
 					progress: {
 						color: '#00FF00'

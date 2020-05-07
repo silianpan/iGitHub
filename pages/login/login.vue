@@ -15,6 +15,7 @@
 </template>
 
 <script>
+	import globalConfig from '@/config'
 	export default {
 		data() {
 			return {
@@ -25,9 +26,14 @@
 		methods: {
 			login() {},
 			loginAuth() {
+				//#ifdef APP-PLUS
 				uni.navigateTo({
 					url: '/pages/login/auth'
 				})
+				//#endif
+				//#ifdef H5
+				window.location.href = globalConfig.githubAuthUrl
+				//#endif
 			}
 		}
 	}

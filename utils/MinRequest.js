@@ -7,8 +7,11 @@ class MinRequest {
 	[config] = {
 		baseURL: '',
 		header: {
-			'content-type': 'application/json'
+			'X-Requested-With': 'XMLHttpRequest',
+			'content-type': 'application/json; charset=utf-8',
+			'Accept': 'application/json'
 		},
+		withCredentials: true,
 		method: 'GET',
 		dataType: 'json',
 		responseType: 'text'
@@ -84,6 +87,13 @@ class MinRequest {
 		options.url = url
 		options.data = data
 		options.method = 'POST'
+		return this.request(options)
+	}
+	
+	delete(url, data, options = {}) {
+		options.url = url
+		options.data = data
+		options.method = 'DELETE'
 		return this.request(options)
 	}
 }

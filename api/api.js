@@ -22,5 +22,13 @@ minRequest.setConfig((config) => {
 
 export default {
 	// 这里统一管理api请求
-	apis: {}
+	apis: {
+		login(code) {
+			return minRequest.post('/login/oauth/access_token', {
+				client_id: globalConfig.githubClientId,
+				client_secret: globalConfig.githubClientSecret,
+				code
+			})
+		}
+	}
 }

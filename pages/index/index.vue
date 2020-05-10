@@ -29,7 +29,9 @@
 		onLoad(option) {
 			const code = getQueryString('code')
 			if (code) {
-				
+				this.$minApi.login(code).then(res => {
+					console.log('res', res)
+				})
 			}
 		},
 		methods: {

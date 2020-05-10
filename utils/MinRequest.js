@@ -9,7 +9,7 @@ class MinRequest {
 		header: {
 			'X-Requested-With': 'XMLHttpRequest',
 			'content-type': 'application/json; charset=utf-8',
-			'Accept': 'application/json'
+			'Accept': 'application/vnd.github.v3+json'
 		},
 		withCredentials: true,
 		method: 'GET',

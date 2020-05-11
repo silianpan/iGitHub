@@ -23,7 +23,7 @@ minRequest.setConfig((config) => {
 export default {
 	// 这里统一管理api请求
 	apis: {
-		listRepo(params) {
+		listRepo(params = {}) {
 			return minRequest.get('/repositories', params)
 		}
 	}

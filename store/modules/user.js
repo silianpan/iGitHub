@@ -11,7 +11,6 @@ export default {
 		async authLogin({ commit }, code) {
 			if (code) {
 				let res = await Vue.prototype.$minApi.login(code)
-				console.log('res', res)
 				if (res.access_token) {
 					// 初始化octokit实例
 					const octokitRequest = new OctokitRequest(res.access_token)

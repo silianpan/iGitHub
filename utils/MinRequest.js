@@ -1,3 +1,4 @@
+import { checkStatus } from '@/utils/checkResponse'
 const config = Symbol('config')
 const isCompleteURL = Symbol('isCompleteURL')
 const requestBefore = Symbol('requestBefore')
@@ -80,21 +81,21 @@ class MinRequest {
 		options.url = url
 		options.data = data
 		options.method = 'GET'
-		return this.request(options)
+		return this.request(options).then(checkStatus)
 	}
 
 	post(url, data, options = {}) {
 		options.url = url
 		options.data = data
 		options.method = 'POST'
-		return this.request(options)
+		return this.request(options).then(checkStatus)
 	}
 	
 	delete(url, data, options = {}) {
 		options.url = url
 		options.data = data
 		options.method = 'DELETE'
-		return this.request(options)
+		return this.request(options).then(checkStatus)
 	}
 }
 

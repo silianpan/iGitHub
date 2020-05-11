@@ -99,32 +99,22 @@ const showErrorMsg = debounce(
 /**
  *
  *检查reponse返回状态
- * @author hsc
+ * @author silianpan
  * @date 2019-11-29
  * @param {*} [response={}]
  * @returns
  */
 export const checkStatus = (response = {}) => {
-	let {
-		status,
-		statusText
-	} = response
-	if (status === 200 || status === 304) {
-		return response.data
-	} else {
-		let msg = HttpErrorCode[status] || statusText
-		showErrorMsg(msg)
-		return {
-			code: status,
-			msg: msg
-		}
+	if (response.error) {
+		showErrorMsg(response.error_description || response.error)
 	}
+	return response
 }
 
 /**
  *检查登录状态
  *
- * @author hsc
+ * @author silianpan
  * @date 2019-11-29
  * @param {*} response
  * @returns
@@ -140,7 +130,7 @@ export const checkLogin = (response) => {
 }
 /**
  *检查服务器返回结果
- * @author hsc
+ * @author silianpan
  * @date 2019-11-29
  * @param {*} result
  * @returns

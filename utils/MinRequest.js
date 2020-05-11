@@ -9,7 +9,7 @@ class MinRequest {
 		header: {
 			'X-Requested-With': 'XMLHttpRequest',
 			'content-type': 'application/json; charset=utf-8',
-			'Accept': 'application/vnd.github.v3+json'
+			'Accept': 'application/json'
 		},
 		withCredentials: true,
 		method: 'GET',
@@ -101,15 +101,22 @@ class MinRequest {
 MinRequest.install = function(Vue) {
 	Vue.mixin({
 		beforeCreate: function() {
-			if (this.$options.minRequest) {
-				console.log(this.$options.minRequest)
-				Vue._minRequest = this.$options.minRequest
+			if (this.$options.minApi) {
+				Vue._minApi = this.$options.minApi
+			}
+			if (this.$options.minApiTrending) {
+				Vue._minApiTrending = this.$options.minApiTrending
 			}
 		}
 	})
 	Object.defineProperty(Vue.prototype, '$minApi', {
 		get: function() {
-			return Vue._minRequest.apis
+			return Vue._minApi.apis
+		}
+	})
+	Object.defineProperty(Vue.prototype, '$minApiTrending', {
+		get: function() {
+			return Vue._minApiTrending.apis
 		}
 	})
 }

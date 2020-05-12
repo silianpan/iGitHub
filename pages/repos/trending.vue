@@ -17,8 +17,8 @@
 									<view class="content">
 										<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>
 										<view class="type">{{ item.description }}</view>
+										<view class="delivery-time">今日{{ item.currentPeriodStars }}星</view>
 									</view>
-									<u-divider></u-divider>
 								</view>
 							</view>
 							<u-loadmore :status="loadStatus" bgColor="#f2f2f2"></u-loadmore>
@@ -103,7 +103,6 @@
 		height: 100%;
 		background-color: #f2f2f2;
 	}
-
 	/* #endif */
 </style>
 
@@ -153,6 +152,7 @@
 
 			.content {
 				.title {
+					color: #177cb0;
 					font-size: 28rpx;
 					line-height: 50rpx;
 				}
@@ -164,7 +164,7 @@
 				}
 
 				.delivery-time {
-					color: #e5d001;
+					color: $u-tips-color;
 					font-size: 24rpx;
 				}
 			}

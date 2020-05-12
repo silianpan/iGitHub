@@ -19,20 +19,23 @@
 										<view class="type">{{ item.description }}</view>
 										<view class="delivery-time">今日{{ item.currentPeriodStars }}星</view>
 										<u-row>
-											<u-col span="3">
+											<u-col span="2.5">
 												<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.languageColor}"></text>
-												<text>{{item.language}}</text>
+												<text class="u-font-xs">{{item.language}}</text>
 											</u-col>
-											<u-col span="3">
+											<u-col span="2.5">
 												<text class="iconfont icongithub-star margin-right-xs text-main"></text>
-												<text class="text-main">{{item.stars}}</text>
+												<text class="text-main u-font-xs">{{item.stars}}</text>
 											</u-col>
-											<u-col span="3">
+											<u-col span="2.5">
 												<text class="iconfont iconcode-fork margin-right-xs text-main"></text>
-												<text class="text-main">{{item.forks}}</text>
+												<text class="text-main u-font-xs">{{item.forks}}</text>
 											</u-col>
-											<u-col span="3">
-												<u-avatar v-for="build in item.builtBy" :key="build.username" :src="build.avatar" :mode="square"></u-avatar>
+											<u-col span="4.5">
+												<view class="flex justify-end">
+													<u-avatar v-for="build in item.builtBy" :key="build.username" :src="build.avatar" mode="square" :size="40"
+													style="padding-right:2rpx;"></u-avatar>
+												</view>
 											</u-col>
 										</u-row>
 									</view>

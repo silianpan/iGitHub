@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="login-logo">
-			<image mode="aspectFit" src="../../assets/img/Octocat.jpg" />
+			<image mode="aspectFit" src="../../assets/img/Octocat.png" />
 		</view>
 		<u-cell-group>
 			<u-field style="margin: 60rpx" v-model="username" placeholder="账号" clearable :label-width="0" icon="account-fill">

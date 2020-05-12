@@ -20,7 +20,10 @@ export default {
 	src: url('/static/uni.ttf');
 }
 /* #endif */
+@import "colorui/main.css";
+@import "colorui/icon.css";
 @import 'assets/css/uni.css';
 @import 'assets/css/iconfont.css';
-@import "@/uview/index.scss";
+@import '@/uview/index.scss';
+@import 'assets/css/custom.css';
 </style>

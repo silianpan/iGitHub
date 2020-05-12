@@ -9,8 +9,8 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
 						<view class="page-box">
-							<view class="order">
-								<view class="item" v-for="(item, index) in repos" :key="index">
+							<view class="order" v-for="(item, index) in repos" :key="index">
+								<view class="item">
 									<view class="left">
 										<image :src="item.avatar" mode="aspectFill"></image>
 									</view>
@@ -18,6 +18,20 @@
 										<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>
 										<view class="type">{{ item.description }}</view>
 										<view class="delivery-time">今日{{ item.currentPeriodStars }}星</view>
+										<u-row>
+											<u-col span="4">
+												<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.languageColor}"></text>
+												<text>{{item.language}}</text>
+											</u-col>
+											<u-col span="4">
+												<text class="iconfont icongithub-star margin-right-xs text-main"></text>
+												<text class="text-main">{{item.stars}}</text>
+											</u-col>
+											<u-col span="4">
+												<text class="iconfont iconcode-fork margin-right-xs text-main"></text>
+												<text class="text-main">{{item.forks}}</text>
+											</u-col>
+										</u-row>
 									</view>
 								</view>
 							</view>
@@ -103,15 +117,16 @@
 		height: 100%;
 		background-color: #f2f2f2;
 	}
+
 	/* #endif */
 </style>
 
 <style lang="scss" scoped>
 	.order {
-		width: 710rpx;
+		// width: 710rpx;
 		background-color: #ffffff;
-		margin: 20rpx auto;
-		border-radius: 20rpx;
+		// margin: 20rpx auto;
+		// border-radius: 20rpx;
 		box-sizing: border-box;
 		padding: 20rpx;
 		font-size: 28rpx;
@@ -144,15 +159,16 @@
 				margin-right: 20rpx;
 
 				image {
-					width: 60rpx;
-					height: 60rpx;
+					width: 55rpx;
+					height: 55rpx;
 					border-radius: 10rpx;
 				}
 			}
 
 			.content {
+				width: 100%;
 				.title {
-					color: #177cb0;
+					color: #0965d2;
 					font-size: 28rpx;
 					line-height: 50rpx;
 				}
@@ -160,7 +176,7 @@
 				.type {
 					margin: 10rpx 0;
 					font-size: 24rpx;
-					color: $u-tips-color;
+					color: #343e47;
 				}
 
 				.delivery-time {

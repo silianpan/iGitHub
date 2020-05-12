@@ -1,8 +1,8 @@
 {
-  "name": "github-app",
+  "name": "iGitHub",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:silianpan/github-app.git",
+  "repository": "git@github.com:silianpan/iGitHub.git",
   "author": "twofloor <1206284818@qq.com>",
   "license": "MIT",
   "dependencies": {

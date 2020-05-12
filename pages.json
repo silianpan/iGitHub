@@ -18,11 +18,57 @@
 		"style": {
 			"navigationBarTitleText": "安全登录"
 		}
+	}, {
+		"path": "pages/news/news",
+		"style": {
+			"navigationBarTitleText": "通知"
+		}
+	}, {
+		"path": "pages/star/star",
+		"style": {
+			"navigationBarTitleText": "星"
+		}
+	}, {
+		"path": "pages/search/search",
+		"style": {
+			"navigationBarTitleText": "搜索"
+		}
+	}, {
+		"path": "pages/github/github",
+		"style": {
+			"navigationBarTitleText": "我的"
+		}
 	}],
+	"tabBar": {
+		"color": "#8699a7",
+		"selectedColor": "#0068d7",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/img/tabbar/trending.png",
+			"selectedIconPath": "static/img/tabbar/trendingHL.png"
+		}, {
+			"pagePath": "pages/news/news",
+			"iconPath": "static/img/tabbar/news.png",
+			"selectedIconPath": "static/img/tabbar/newsHL.png"
+		}, {
+			"pagePath": "pages/star/star",
+			"iconPath": "static/img/tabbar/star.png",
+			"selectedIconPath": "static/img/tabbar/starHL.png"
+		}, {
+			"pagePath": "pages/search/search",
+			"iconPath": "static/img/tabbar/search.png",
+			"selectedIconPath": "static/img/tabbar/searchHL.png"
+		}, {
+			"pagePath": "pages/github/github",
+			"iconPath": "static/img/tabbar/github.png",
+			"selectedIconPath": "static/img/tabbar/githubHL.png"
+		}]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarBackgroundColor": "#0068d7",
 		"backgroundColor": "#FFFFFF"
 	}
 }

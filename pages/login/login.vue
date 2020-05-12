@@ -4,9 +4,9 @@
 			<image mode="aspectFit" src="../../assets/img/Octocat.jpg" />
 		</view>
 		<u-cell-group>
-			<u-field style="margin: 60rpx" v-model="username" placeholder="账号" clearable required :label-width="0" icon="account-fill">
+			<u-field style="margin: 60rpx" v-model="username" placeholder="账号" clearable :label-width="0" icon="account-fill">
 			</u-field>
-			<u-field style="margin: 60rpx" v-model="password" password placeholder="密码" clearable required :label-width="0" icon="lock-fill">
+			<u-field style="margin: 60rpx" v-model="password" password placeholder="密码" clearable :label-width="0" icon="lock-fill">
 			</u-field>
 		</u-cell-group>
 		<u-button style="margin: 60rpx" type="primary" shape="circle" :ripple="true" @click="login">登录</u-button>

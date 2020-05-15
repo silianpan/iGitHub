@@ -28,8 +28,10 @@
 			}
 		},
 		onLoad(option) {
+			// #ifdef H5
 			const code = getQueryString('code')
 			this.$store.dispatch('authLogin', code)
+			// #endif
 		},
 		methods: {
 			testOctokit() {

@@ -15,6 +15,9 @@ export default {
 					// 初始化octokit实例
 					// const octokitRequest = new OctokitRequest(res.access_token)
 					// Vue.prototype.$octokit = octokitRequest
+					uni.reLaunch({
+						url: '/pages/index/index'
+					})
 				} else {
 					uni.reLaunch({
 						url: '/pages/login/login'

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import OctokitRequest from '@/utils/OctokitRequest'
+// import OctokitRequest from '@/utils/OctokitRequest'
 export default {
 	state: {},
 	getters: {},
@@ -13,8 +13,8 @@ export default {
 				let res = await Vue.prototype.$minApi.login(code)
 				if (res.access_token) {
 					// 初始化octokit实例
-					const octokitRequest = new OctokitRequest(res.access_token)
-					Vue.prototype.$octokit = octokitRequest
+					// const octokitRequest = new OctokitRequest(res.access_token)
+					// Vue.prototype.$octokit = octokitRequest
 				} else {
 					uni.reLaunch({
 						url: '/pages/login/login'

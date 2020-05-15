@@ -5,6 +5,7 @@
 </template>
 
 <script>
+	import { getQueryString4Url } from '@/utils/href'
 	import globalConfig from '@/config'
 	let wv
 	export default {
@@ -25,6 +26,10 @@
 				wv = currentWebview.children()[0]
 				wv.setStyle({
 					scalable: true
+				})
+				wv.overrideUrlLoading({mode: 'reject'}, event => {
+					const code = getQueryString4Url(event.url, 'code')
+					this.$store.dispatch('authLogin', code)
 				})
 			}, 1000) //如果是页面初始化调用时，需要延时一下
 			// #endif

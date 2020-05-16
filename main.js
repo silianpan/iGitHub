@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App'
 import MinRequest from './utils/MinRequest'
-import minApi from './api/api'
 import minApiTrending from './api/apiTrending'
 import MinCache from './utils/MinCache'
 import store from './store'
@@ -19,7 +18,6 @@ App.mpType = 'app'
 
 const app = new Vue({
 	store,
-	minApi,
 	minApiTrending,
 	...App
 })

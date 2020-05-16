@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import MinRequest from './utils/MinRequest'
-import minApiTrending from './api/apiTrending'
+import minApi from './api/api'
 import MinCache from './utils/MinCache'
 import store from './store'
 import _ from 'lodash'
@@ -18,7 +18,7 @@ App.mpType = 'app'
 
 const app = new Vue({
 	store,
-	minApiTrending,
+	minApi,
 	...App
 })
 app.$mount()

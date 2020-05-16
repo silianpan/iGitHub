@@ -16,6 +16,7 @@ minRequest.interceptors.response((response) => {
 
 // 设置默认配置
 minRequest.setConfig((config) => {
+	// 默认为Trending baseUrl
 	config.baseURL = globalConfig.baseUrlTrending
 	return config
 })
@@ -23,6 +24,13 @@ minRequest.setConfig((config) => {
 export default {
 	// 这里统一管理api请求
 	apis: {
+		loginAuth(params = {}) {
+			console.log('params', params)
+			return minRequest.post('/login/oauth/access_token?client_id=' + globalConfig.githubClientId + '&client_secret=' +
+				globalConfig.githubClientSecret + '&code=' + params.code + '&state=' + params.state, null, {
+					baseURL: globalConfig.baseUrlToken
+				})
+		},
 		listRepo(params = {}) {
 			return minRequest.get('/repositories', params)
 		}

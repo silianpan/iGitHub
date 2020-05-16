@@ -26,6 +26,7 @@ export const getQueryString = key => {
 export const getQueryString4Url = (url, key) => {
 	const reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)")
 	const r = url.substr(url.indexOf('?') + 1).match(reg)
+	console.log('r', r)
 	if (r != null) return unescape(r[2])
 	return null
 }

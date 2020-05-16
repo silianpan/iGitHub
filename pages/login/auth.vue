@@ -30,7 +30,8 @@
 				wv.overrideUrlLoading({mode: 'reject', match: '^igithub://oauth.*'}, event => {
 					const code = getQueryString4Url(event.url, 'code')
 					const state = getQueryString4Url(event.url, 'state')
-					this.$store.dispatch('authLogin', code, state)
+					console.log('state', code, state)
+					this.$store.dispatch('authLogin', { code, state })
 				})
 			}, 1000) //如果是页面初始化调用时，需要延时一下
 			// #endif

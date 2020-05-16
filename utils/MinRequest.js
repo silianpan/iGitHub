@@ -88,6 +88,7 @@ class MinRequest {
 		options.url = url
 		options.data = data
 		options.method = 'POST'
+		console.log('options', JSON.stringify(options))
 		return this.request(options).then(checkStatus)
 	}
 	
@@ -102,14 +103,14 @@ class MinRequest {
 MinRequest.install = function(Vue) {
 	Vue.mixin({
 		beforeCreate: function() {
-			if (this.$options.minApiTrending) {
-				Vue._minApiTrending = this.$options.minApiTrending
+			if (this.$options.minApi) {
+				Vue._minApi = this.$options.minApi
 			}
 		}
 	})
-	Object.defineProperty(Vue.prototype, '$minApiTrending', {
+	Object.defineProperty(Vue.prototype, '$minApi', {
 		get: function() {
-			return Vue._minApiTrending.apis
+			return Vue._minApi.apis
 		}
 	})
 }

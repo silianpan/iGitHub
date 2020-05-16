@@ -11,7 +11,8 @@
 	}, {
 		"path": "pages/index/index",
 		"style": {
-			"titleNView": false
+			"navigationBarTitleText": "趋势"
+			// "titleNView": false
 		}
 	}, {
 		"path": "pages/login/auth",

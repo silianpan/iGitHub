@@ -11,7 +11,8 @@
 	}, {
 		"path": "pages/index/index",
 		"style": {
-			"navigationStyle": "custom"
+			"navigationStyle": "custom",
+			"navigationBarTextStyle": "white"
 		}
 	}, {
 		"path": "pages/login/auth",

@@ -4,41 +4,36 @@ import globalConfig from '@/config'
 import { checkStatus } from '@/utils/checkResponse'
 export default {
 	state: {
-		accessCode: ''
+		accessToken: ''
 	},
 	getters: {
-		accessCode: state => {
-			if (state.accessCode) {
-				return state.accessCode
+		accessToken: state => {
+			if (state.accessToken) {
+				return state.accessToken
 			}
-			return Vue.prototype.$cache.get('_accessCode')
+			return Vue.prototype.$cache.get('_accessToken')
 		}
 	},
 	mutations: {
-		loginSuccess: (state, accessCode) => {
-			console.log('accessCode', accessCode)
-			state.accessCode = accessCode
-			Vue.prototype.$cache.set('_accessCode', accessCode, 0)
+		loginSuccess: (state, accessToken) => {
+			state.accessToken = accessToken
+			Vue.prototype.$cache.set('_accessToken', accessToken, 0)
 		},
 		logoutSuccess: state => {
-			state.accessCode = ''
-			Vue.prototype.$cache.delete('_accessCode')
+			state.accessToken = ''
+			Vue.prototype.$cache.delete('_accessToken')
 		}
 	},
 	actions: {
-		authLogin({
-			commit,
-			getters
-		}) {
-			const code = getters.accessCode
+		authLogin({ commit }, code, stateStr) {
 			if (code) {
 				// #ifdef H5
 				const url = '/apitoken/login/oauth/access_token?client_id=' + globalConfig.githubClientId + '&client_secret=' +
-						globalConfig.githubClientSecret + '&code=' + code + '&state=igithub'
+						globalConfig.githubClientSecret + '&code=' + code + '&state=' + stateStr
 				// #endif
 				// #ifdef APP-PLUS
 				const url = 'https://github.com/login/oauth/access_token?client_id=' + globalConfig.githubClientId + '&client_secret=' +
-						globalConfig.githubClientSecret + '&code=' + code + '&state=igithub'
+						globalConfig.githubClientSecret + '&code=' + code + '&state=' + stateStr
 				// #endif
 				uni.request({
 					url,
@@ -50,7 +45,9 @@ export default {
 					method: 'POST',
 					success: res => {
 						if (res.data && res.data.access_token) {
-							const gh = GithubApi.loginAuth(res.data.access_token)
+							const accessToken = res.data.access_token
+							commit('loginSuccess', accessToken)
+							const gh = GithubApi.loginAuth(accessToken)
 							Vue.prototype.$gh = gh
 							uni.reLaunch({
 								url: '/pages/index/index'

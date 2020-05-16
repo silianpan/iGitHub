@@ -24,12 +24,7 @@
 			}
 		},
 		methods: {
-			login() {
-				// this.$minApi.login('46410f9a6cf2f35ef0c9').then(res => {
-				// 	console.log('res', res)
-				// })
-				this.$store.commit('logoutSuccess')
-			},
+			login() {},
 			loginAuth() {
 				//#ifdef APP-PLUS
 				uni.navigateTo({

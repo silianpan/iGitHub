@@ -30,9 +30,9 @@
 		onLoad(option) {
 			// #ifdef H5
 			const code = getQueryString('code')
-			this.$store.commit('loginSuccess', code)
+			const state = getQueryString('state')
+			this.$store.dispatch('authLogin', code, state)
 			// #endif
-			this.$store.dispatch('authLogin')
 		},
 		methods: {
 			testOctokit() {

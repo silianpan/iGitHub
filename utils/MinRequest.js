@@ -10,7 +10,8 @@ class MinRequest {
 		header: {
 			'X-Requested-With': 'XMLHttpRequest',
 			'content-type': 'application/json; charset=utf-8',
-			'Accept': 'application/json'
+			'Accept': 'application/json',
+			'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Mobile Safari/537.36'
 		},
 		withCredentials: true,
 		method: 'GET',

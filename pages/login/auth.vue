@@ -29,7 +29,10 @@
 				})
 				wv.overrideUrlLoading({mode: 'reject'}, event => {
 					const code = getQueryString4Url(event.url, 'code')
-					this.$store.dispatch('authLogin', code)
+					this.$store.commit('loginSuccess', code)
+					uni.reLaunch({
+						url: '/pages/index/index'
+					})
 				})
 			}, 1000) //如果是页面初始化调用时，需要延时一下
 			// #endif

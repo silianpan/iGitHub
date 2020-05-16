@@ -4,6 +4,10 @@
 			<view class="u-tabs-box">
 				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#0068d7" activeColor="#f9906f" ref="uTabs" :list="list" :current="current" @change="tabsChange" :is-scroll="false"
 				 swiperWidth="750"></u-tabs-swiper>
+				 <view style="background-color: #0068d7; color: #ffffff;" class="padding-xs">
+					<text class="iconfont iconguolv margin-right-xs"></text>
+					<text>所有语言 | 今日</text>
+				 </view>
 			</view>
 			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item">

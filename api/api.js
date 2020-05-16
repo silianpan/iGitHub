@@ -24,11 +24,8 @@ export default {
 	// 这里统一管理api请求
 	apis: {
 		login(code) {
-			return minRequest.post('/login/oauth/access_token', {
-				client_id: globalConfig.githubClientId,
-				client_secret: globalConfig.githubClientSecret,
-				code
-			})
+			return minRequest.post('/login/oauth/access_token?client_id=' + globalConfig.githubClientId + '&client_secret=' +
+				globalConfig.githubClientSecret + '&code=' + code + '&state=igithub')
 		}
 	}
 }

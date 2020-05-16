@@ -27,8 +27,10 @@
 				wv.setStyle({
 					scalable: true
 				})
-				wv.overrideUrlLoading({mode: 'reject'}, event => {
+				wv.overrideUrlLoading({mode: 'reject', match: '^igithub://oauth.*'}, event => {
+					console.log('url', event.url)
 					const code = getQueryString4Url(event.url, 'code')
+					console.log('code2', code)
 					this.$store.commit('loginSuccess', code)
 					uni.reLaunch({
 						url: '/pages/index/index'

@@ -25,7 +25,6 @@ export default {
 	// 这里统一管理api请求
 	apis: {
 		loginAuth(params = {}) {
-			console.log('params', params)
 			return minRequest.post('/login/oauth/access_token?client_id=' + globalConfig.githubClientId + '&client_secret=' +
 				globalConfig.githubClientSecret + '&code=' + params.code + '&state=' + params.state, null, {
 					baseURL: globalConfig.baseUrlToken

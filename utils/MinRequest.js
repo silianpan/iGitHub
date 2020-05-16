@@ -88,7 +88,6 @@ class MinRequest {
 		options.url = url
 		options.data = data
 		options.method = 'POST'
-		console.log('options', JSON.stringify(options))
 		return this.request(options).then(checkStatus)
 	}
 	

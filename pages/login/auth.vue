@@ -21,11 +21,25 @@
 		},
 		onReady() {
 			// #ifdef APP-PLUS
+			uni.showLoading({
+				title: '努力加载中...'
+			})
 			var currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
 			setTimeout(() => {
 				wv = currentWebview.children()[0]
 				wv.setStyle({
 					scalable: true
+				})
+				wv.addEventListener('loading', e => {
+					uni.showLoading({
+						title: '努力加载中...'
+					})
+				})
+				wv.addEventListener('loaded', e => {
+					uni.hideLoading()
+				})
+				wv.addEventListener('error', e => {
+					uni.hideLoading()
 				})
 				wv.overrideUrlLoading({mode: 'reject', match: '^igithub://oauth.*'}, event => {
 					const code = getQueryString4Url(event.url, 'code')

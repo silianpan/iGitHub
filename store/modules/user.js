@@ -26,7 +26,6 @@ export default {
 		async authLogin({ commit }, params) {
 			if (params && params.code) {
 				const res = await Vue.prototype.$minApi.loginAuth(params)
-				console.log('res', res)
 				if (res.access_token) {
 					const accessToken = res.access_token
 					commit('loginSuccess', accessToken)

@@ -9,7 +9,7 @@
 					<text>所有语言 | 今日</text>
 				</view>
 			</view>
-			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
+			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" @change="swiperChange">
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
@@ -18,6 +18,7 @@
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;">
+						<TrendingDeveloper ref="refTrendingDeveloper" />
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -27,9 +28,11 @@
 
 <script>
 	import TrendingRepo from './trending-repos'
+	import TrendingDeveloper from '@/pages/developer/trending-developer'
 	export default {
 		components: {
-			TrendingRepo
+			TrendingRepo,
+			TrendingDeveloper
 		},
 		data() {
 			return {
@@ -52,9 +55,17 @@
 			this.loadData(true, false)
 		},
 		methods: {
+			swiperChange() {
+				this.onRefresh()
+			},
 			loadData(triggered, freshing) {
 				if (this.current === 0) {
 					this.$refs.refTrendingRepo.listRepo().then(() => {
+						this.triggered = triggered
+						this._freshing = freshing
+					})
+				} else if (this.current === 1) {
+					this.$refs.refTrendingDeveloper.listDeveloper().then(() => {
 						this.triggered = triggered
 						this._freshing = freshing
 					})

@@ -32,6 +32,9 @@ export default {
 		},
 		listRepo(params = {}) {
 			return minRequest.get('/repositories', params)
+		},
+		listDeveloper(params = {}) {
+			return minRequest.get('/developers', params)
 		}
 	}
 }

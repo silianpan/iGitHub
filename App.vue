@@ -56,4 +56,5 @@
 	@import 'assets/css/iconfont.css';
 	@import '@/uview/index.scss';
 	@import 'assets/css/custom.css';
+	@import 'assets/css/custom.less';
 </style>

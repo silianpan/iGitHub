@@ -10,7 +10,7 @@
 						<view class="title u-line-2">{{ item.name + ' (' + item.username + ')' }}</view>
 						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="small" />
 					</view>
-					<view class="delivery-time">{{ item.repo.name }}</view>
+					<view class="delivery-time"><text class="iconfont iconbook1 margin-right-xs" />{{ item.repo.name }}</view>
 					<view class="type">{{ item.repo.description }}</view>
 				</view>
 			</view>

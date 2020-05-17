@@ -32,7 +32,6 @@
 				</view>
 			</view>
 		</view>
-		<u-loadmore :status="loadStatus" bgColor="#f2f2f2"></u-loadmore>
 	</view>
 </template>
 

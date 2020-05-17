@@ -2,16 +2,17 @@
 	<view>
 		<view class="wrap">
 			<view class="u-tabs-box">
-				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#0068d7" activeColor="#f9906f" ref="uTabs" :list="list" :current="current" @change="tabsChange" :is-scroll="false"
-				 swiperWidth="750"></u-tabs-swiper>
-				 <view style="background-color: #0068d7; color: #ffffff;" class="padding-xs">
+				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#0068d7" activeColor="#f9906f" ref="uTabs" :list="list"
+				 :current="current" @change="tabsChange" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
+				<view style="background-color: #0068d7; color: #ffffff;" class="padding-xs">
 					<text class="iconfont iconguolv margin-right-xs"></text>
 					<text>所有语言 | 今日</text>
-				 </view>
+				</view>
 			</view>
 			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
+					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
+					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 						<TrendingRepo />
 					</scroll-view>
 				</swiper-item>
@@ -32,6 +33,8 @@
 		},
 		data() {
 			return {
+				_freshing: false,
+				triggered: false,
 				list: [{
 						name: '仓库'
 					},
@@ -43,7 +46,30 @@
 				swiperCurrent: 0
 			}
 		},
+		onLoad() {
+			this._freshing = false;
+			setTimeout(() => {
+				this.triggered = true; //触发onRefresh来加载自己的数据，如果不用这种方式，不要在此改变triggered的值  
+			}, 1000)
+		},
 		methods: {
+			onPulling(e) {},
+			onRefresh() {
+				if (this._freshing) return
+				this._freshing = true
+				if (!this.triggered) //界面下拉触发，triggered可能不是true，要设为true  
+					this.triggered = true
+				setTimeout(() => {
+					this.triggered = false //触发onRestore，并关闭刷新图标  
+					this._freshing = false
+				}, 3000)
+			},
+			onRestore() {
+				console.log("onRestore")
+			},
+			onAbort() {
+				console.log("onAbort")
+			},
 			// scroll-view到底部加载更多
 			reachBottom() {},
 			// tabs通知swiper切换

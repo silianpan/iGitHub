@@ -22,6 +22,10 @@
 			const state = getQueryString('state')
 			this.$store.dispatch('authLogin', code, state)
 			// #endif
+		},
+		onPullDownRefresh() {
+			console.log('pushdown')
+			setTimeout(() => { uni.stopPullDownRefresh() }, 5000)
 		}
 	}
 </script>

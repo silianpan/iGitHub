@@ -24,10 +24,10 @@ export default {
 	},
 	actions: {
 		async authLogin({ commit }, params) {
-			uni.showLoading({
-				title: '努力加载中...'
-			})
 			if (params && params.code) {
+				uni.showLoading({
+					title: '努力加载中...'
+				})
 				const res = await Vue.prototype.$minApi.loginAuth(params)
 				uni.hideLoading()
 				if (res.access_token) {

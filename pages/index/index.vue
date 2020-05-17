@@ -1,10 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar :fixed="false" :border="false" color="#ffffff" background-color="#0068d7">
-			<!-- <block slot="right">
-				<view class="iconfont iconguolv"></view>
-			</block> -->
-		</uni-nav-bar>
+		<uni-nav-bar :fixed="false" :border="false" color="#ffffff" background-color="#0068d7" />
 		<RepoTrending />
 	</view>
 </template>

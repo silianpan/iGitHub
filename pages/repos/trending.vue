@@ -113,7 +113,7 @@
 	.wrap {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - var(--window-top));
+		height: calc(100vh - var(--status-bar-height));
 		width: 100%;
 	}
 

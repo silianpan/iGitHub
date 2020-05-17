@@ -6,7 +6,10 @@
 					<image :src="item.avatar" mode="aspectFill"></image>
 				</view>
 				<view class="content">
-					<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>
+					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
+						<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>
+						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="small" />
+					</view>
 					<view class="type">{{ item.description }}</view>
 					<view class="delivery-time">今日{{ item.currentPeriodStars }}星</view>
 					<u-row>

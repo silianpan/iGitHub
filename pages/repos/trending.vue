@@ -13,7 +13,7 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
-						<TrendingRepo />
+						<TrendingRepo ref="refTrendingRepo" />
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
@@ -46,30 +46,30 @@
 				swiperCurrent: 0
 			}
 		},
-		onLoad() {
-			this._freshing = false;
-			setTimeout(() => {
-				this.triggered = true; //触发onRefresh来加载自己的数据，如果不用这种方式，不要在此改变triggered的值  
-			}, 1000)
+		mounted() {
+			this._freshing = false
+			// 触发onRefresh来加载自己的数据，如果不用这种方式，不要在此改变triggered的值
+			this.loadData(true, false)
 		},
 		methods: {
+			loadData(triggered, freshing) {
+				if (this.current === 0) {
+					this.$refs.refTrendingRepo.listRepo().then(() => {
+						this.triggered = triggered
+						this._freshing = freshing
+					})
+				}
+			},
 			onPulling(e) {},
 			onRefresh() {
 				if (this._freshing) return
 				this._freshing = true
-				if (!this.triggered) //界面下拉触发，triggered可能不是true，要设为true  
+				if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
 					this.triggered = true
-				setTimeout(() => {
-					this.triggered = false //触发onRestore，并关闭刷新图标  
-					this._freshing = false
-				}, 3000)
+				this.loadData(false, false)
 			},
-			onRestore() {
-				console.log("onRestore")
-			},
-			onAbort() {
-				console.log("onAbort")
-			},
+			onRestore() {},
+			onAbort() {},
 			// scroll-view到底部加载更多
 			reachBottom() {},
 			// tabs通知swiper切换

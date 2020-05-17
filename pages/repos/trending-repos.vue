@@ -43,9 +43,6 @@
 				repos: []
 			}
 		},
-		mounted() {
-			this.listRepo()
-		},
 		methods: {
 			async listRepo() {
 				this.repos = await this.$minApi.listRepo()

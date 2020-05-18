@@ -10,8 +10,8 @@
 						<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>
 						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="small" />
 					</view>
-					<view class="type">{{ item.description }}</view>
-					<view class="delivery-time">今日{{ item.currentPeriodStars }}星</view>
+					<view class="description">{{ item.description }}</view>
+					<view class="remark">今日{{ item.currentPeriodStars }}星</view>
 					<u-row>
 						<u-col span="2.5">
 							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.languageColor}"></text>

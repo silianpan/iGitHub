@@ -7,11 +7,11 @@
 				</view>
 				<view class="content">
 					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
-						<view class="title u-line-2">{{ item.name + ' (' + item.username + ')' }}</view>
+						<view class="title u-line-2">{{ item.name }}<text class="sub-title">{{' (' + item.username + ')' }}</text></view>
 						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="small" />
 					</view>
-					<view class="delivery-time"><text class="iconfont iconbook1 margin-right-xs" />{{ item.repo.name }}</view>
-					<view class="type">{{ item.repo.description }}</view>
+					<view class="remark2"><text class="iconfont iconbook1 margin-right-xs" />{{ item.repo.name }}</view>
+					<view class="description">{{ item.repo.description }}</view>
 				</view>
 			</view>
 		</view>

@@ -9,7 +9,7 @@
 					<text>所有语言 | 今日</text>
 				</view>
 			</view>
-			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" @change="swiperChange">
+			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
@@ -56,9 +56,6 @@
 			this.loadData(true, false)
 		},
 		methods: {
-			swiperChange() {
-				this.onRefresh()
-			},
 			loadData(triggered, freshing) {
 				if (this.current === 0) {
 					this.$refs.refTrendingRepo.listRepo().then(() => {
@@ -106,6 +103,8 @@
 				this.$refs.uTabs.setFinishCurrent(current)
 				this.swiperCurrent = current
 				this.current = current
+				// 执行更新方法
+				this.onRefresh()
 			}
 		}
 	}

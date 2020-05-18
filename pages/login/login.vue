@@ -24,7 +24,9 @@
 			}
 		},
 		methods: {
-			login() {},
+			login() {
+				this.$store.dispatch('login', {username: this.username, password: this.password})
+			},
 			loginAuth() {
 				//#ifdef APP-PLUS
 				uni.navigateTo({

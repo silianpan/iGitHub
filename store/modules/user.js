@@ -44,6 +44,16 @@ export default {
 					})
 				}
 			}
+		},
+		// 即将过期的登录方式
+		login({ commit }, params) {
+			console.log('params', params)
+			const gh = GithubApi.login(params)
+			Vue.prototype.$gh = gh
+			console.log('gh', gh)
+			uni.reLaunch({
+				url: '/pages/index/index'
+			})
 		}
 	}
 }

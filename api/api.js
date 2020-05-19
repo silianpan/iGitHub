@@ -6,6 +6,12 @@ const minRequest = new MinRequest()
 
 // 请求拦截器
 minRequest.interceptors.request((request) => {
+	const accessToken = Vue.prototype.$store.getters.accessToken
+	console.log('accessToken', accessToken)
+	if (accessToken) {
+		request.header['Authorization'] = `token ${accessToken}`
+	}
+	console.log('request', request)
 	return request
 })
 
@@ -18,11 +24,6 @@ minRequest.interceptors.response((response) => {
 minRequest.setConfig((config) => {
 	// 默认为授权后的Api的baseUrl
 	config.baseURL = globalConfig.baseUrl
-	const accessToken = Vue.prototype.$store.getters.accessToken
-	console.log('accessToken', accessToken)
-	if (accessToken) {
-		config.header['Authorization'] = `token ${accessToken}`
-	}
 	return config
 })
 

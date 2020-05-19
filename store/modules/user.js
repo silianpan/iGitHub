@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import GithubApi from '@/utils/GithubApi'
 export default {
 	state: {
 		accessToken: ''
@@ -33,8 +32,6 @@ export default {
 				if (res.access_token) {
 					const accessToken = res.access_token
 					commit('loginSuccess', accessToken)
-					const gh = GithubApi.loginAuth(accessToken)
-					Vue.prototype.$gh = gh
 					uni.reLaunch({
 						url: '/pages/index/index'
 					})
@@ -44,16 +41,6 @@ export default {
 					})
 				}
 			}
-		},
-		// 即将过期的登录方式
-		login({ commit }, params) {
-			console.log('params', params)
-			const gh = GithubApi.login(params)
-			Vue.prototype.$gh = gh
-			console.log('gh', gh)
-			uni.reLaunch({
-				url: '/pages/index/index'
-			})
 		}
 	}
 }

@@ -47,7 +47,7 @@
 		},
 		methods: {
 			async listRepo() {
-				this.repos = await this.$minApi.listRepo()
+				this.repos = await this.$minApi.listTrendingRepo()
 			}
 		}
 	}

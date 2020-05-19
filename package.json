@@ -6,8 +6,6 @@
   "author": "twofloor <1206284818@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "^17.6.0",
-    "github-api": "^3.3.0",
     "lodash": "^4.17.15"
   }
 }

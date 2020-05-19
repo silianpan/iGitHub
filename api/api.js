@@ -16,8 +16,13 @@ minRequest.interceptors.response((response) => {
 
 // 设置默认配置
 minRequest.setConfig((config) => {
-	// 默认为Trending baseUrl
-	config.baseURL = globalConfig.baseUrlTrending
+	// 默认为授权后的Api的baseUrl
+	config.baseURL = globalConfig.baseUrl
+	const accessToken = Vue.prototype.$store.getters.accessToken
+	console.log('accessToken', accessToken)
+	if (accessToken) {
+		config.header['Authorization'] = `token ${accessToken}`
+	}
 	return config
 })
 
@@ -30,11 +35,14 @@ export default {
 					baseURL: globalConfig.baseUrlToken
 				})
 		},
-		listRepo(params = {}) {
-			return minRequest.get('/repositories', params)
+		listTrendingRepo(params = {}) {
+			return minRequest.get('/repositories', params, { baseURL: globalConfig.baseUrlTrending })
 		},
-		listDeveloper(params = {}) {
-			return minRequest.get('/developers', params)
+		listTrendingDeveloper(params = {}) {
+			return minRequest.get('/developers', params, { baseURL: globalConfig.baseUrlTrending })
+		},
+		getAuthUser() {
+			return minRequest.get('/user')
 		}
 	}
 }

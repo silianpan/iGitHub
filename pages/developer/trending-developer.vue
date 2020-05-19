@@ -27,7 +27,7 @@
 		},
 		methods: {
 			async listDeveloper() {
-				this.developers = await this.$minApi.listDeveloper()
+				this.developers = await this.$minApi.listTrendingDeveloper()
 			}
 		}
 	}

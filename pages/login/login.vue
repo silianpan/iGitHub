@@ -12,6 +12,9 @@
 <script>
 	import globalConfig from '@/config'
 	export default {
+		onLoad() {
+			this.$store.dispatch('autoLogin')
+		},
 		methods: {
 			loginAuth() {
 				this.$store.dispatch('loginAuth')

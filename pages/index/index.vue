@@ -14,9 +14,9 @@
 		},
 		onLoad(option) {
 			// #ifdef H5
-			if (!this.$store.getters.isAuthed && code && state) {
-				const code = getQueryString('code')
-				const state = getQueryString('state')
+			const code = getQueryString('code')
+			const state = getQueryString('state')
+			if (code && state) {
 				this.$store.dispatch('authLogin', { code, state })
 			}
 			// #endif

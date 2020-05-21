@@ -32,9 +32,11 @@ export default {
 				if (res.access_token) {
 					const accessToken = res.access_token
 					commit('loginSuccess', accessToken)
+					// #ifndef H5
 					uni.reLaunch({
 						url: '/pages/index/index'
 					})
+					// #endif
 				} else {
 					uni.reLaunch({
 						url: '/pages/login/login'

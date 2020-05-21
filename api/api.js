@@ -7,11 +7,9 @@ const minRequest = new MinRequest()
 // 请求拦截器
 minRequest.interceptors.request((request) => {
 	const accessToken = Vue.prototype.$store.getters.accessToken
-	console.log('accessToken', accessToken)
 	if (accessToken) {
 		request.header['Authorization'] = `token ${accessToken}`
 	}
-	console.log('request', request)
 	return request
 })
 

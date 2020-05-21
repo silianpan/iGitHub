@@ -1,9 +1,14 @@
 import Vue from 'vue'
+import _ from 'lodash'
+import globalConfig from '@/config'
 export default {
 	state: {
 		accessToken: ''
 	},
 	getters: {
+		isAuthed: (state, getters) => {
+			return !_.isEmpty(getters.accessToken)
+		},
 		accessToken: state => {
 			if (state.accessToken) {
 				return state.accessToken
@@ -22,6 +27,21 @@ export default {
 		}
 	},
 	actions: {
+		autoLogin({ getters, dispatch }) {
+			if (getters.isAuthed) {
+				dispatch('loginAuth')
+			}
+		},
+		loginAuth() {
+			//#ifdef APP-PLUS
+			uni.navigateTo({
+				url: '/pages/login/auth'
+			})
+			//#endif
+			//#ifdef H5
+			window.location.href = globalConfig.githubAuthUrl
+			//#endif
+		},
 		async authLogin({ commit }, params) {
 			if (params && params.code) {
 				uni.showLoading({

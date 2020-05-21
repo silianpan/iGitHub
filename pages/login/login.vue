@@ -3,7 +3,9 @@
 		<view class="login-logo">
 			<image mode="aspectFit" src="../../assets/img/Octocat.png" />
 		</view>
-		<u-button style="margin: 60rpx" type="success" shape="circle" :ripple="true" @click="loginAuth">安全登录</u-button>
+		<view class="padding-lr-xl flex flex-direction text-center">
+			<button class="cu-btn bg-gradual-green margin-tb-sm lg" @click="loginAuth">安全登录</button>
+		</view>
 	</view>
 </template>
 
@@ -12,14 +14,7 @@
 	export default {
 		methods: {
 			loginAuth() {
-				//#ifdef APP-PLUS
-				uni.navigateTo({
-					url: '/pages/login/auth'
-				})
-				//#endif
-				//#ifdef H5
-				window.location.href = globalConfig.githubAuthUrl
-				//#endif
+				this.$store.dispatch('loginAuth')
 			}
 		}
 	}
@@ -31,11 +26,11 @@
 		vertical-align: middle;
 		text-align: center;
 		width: calc(100vw);
-		height: 30vh;
+		height: 50vh;
 
 		uni-image {
-			width: 200rpx;
-			height: 200rpx;
+			width: 240rpx;
+			height: 240rpx;
 		}
 	}
 </style>

@@ -2,9 +2,18 @@
 	import Vue from 'vue'
 	export default {
 		onLaunch() {
+			// 初始化系统
 			this.initSystem()
+			// 自动登录
+			this.autoLogin()
 		},
 		methods: {
+			/**
+			 * 自动登录
+			 */
+			autoLogin() {
+				this.$store.dispatch('autoLogin')
+			},
 			/**
 			 * 初始化系统
 			 */
@@ -48,7 +57,6 @@
 		font-family: uniicons;
 		src: url('/static/uni.ttf');
 	}
-
 	/* #endif */
 	@import "colorui/main.css";
 	@import "colorui/icon.css";

@@ -41,7 +41,7 @@
 				wv.addEventListener('error', e => {
 					uni.hideLoading()
 				})
-				wv.overrideUrlLoading({mode: 'reject', match: '^igithub://oauth.*'}, event => {
+				wv.overrideUrlLoading({mode: 'reject', match: '^http://localhost:9090/igithub/#/pages/index/index.*'}, event => {
 					const code = getQueryString4Url(event.url, 'code')
 					const state = getQueryString4Url(event.url, 'state')
 					this.$store.dispatch('authLogin', { code, state })

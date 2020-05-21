@@ -16,7 +16,7 @@
 			// #ifdef H5
 			const code = getQueryString('code')
 			const state = getQueryString('state')
-			this.$store.dispatch('authLogin', code, state)
+			this.$store.dispatch('authLogin', { code, state })
 			// #endif
 		}
 	}

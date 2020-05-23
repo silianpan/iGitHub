@@ -13,6 +13,15 @@
 				</view>
 			</view>
 		</view>
+		<view class="cu-list grid col-3 text-center no-border">
+			<view class="cu-item" v-for="(value, key) in numRff" :key="key">
+				<view class="badge text-xxl text-black">
+					<block>{{value}}</block>
+				</view>
+				<!-- <view :class="['iconfont ' + iconList[index].icon, 'text-' + iconList[index].color, 'text-xxl']"></view> -->
+				<text class="text-xl">{{key}}</text>
+			</view>
+		</view>
 	</scroll-view>
 </template>
 
@@ -20,7 +29,8 @@
 	export default {
 		data() {
 			return {
-				authUser: {}
+				authUser: {},
+				numRff: {}
 			}
 		},
 		onReady() {
@@ -63,7 +73,11 @@
 					"created_at": "2014-03-27T13:33:01Z",
 					"updated_at": "2020-05-23T09:34:39Z"
 				}
-
+				this.numRff = {
+					public_repos: this.authUser.public_repos,
+					followers: this.authUser.followers,
+					following: this.authUser.following
+				}
 			}
 		}
 	}

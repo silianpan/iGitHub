@@ -29,22 +29,28 @@
 
 	.item {
 		display: flex;
-		margin: 20rpx 0 0;
+		// margin: 20rpx 0 0;
+		// align-items: center;
+		flex-direction: row;
 
 		.left {
-			margin-right: 20rpx;
+			margin-right: 14rpx;
 
 			.avatar {
 				width: 55rpx;
 				height: 55rpx;
 				border-radius: 10rpx;
 			}
-			
-			.avatar2 {
-				width: 80rpx;
-				height: 80rpx;
-				border-radius: 10rpx;
-			}
+		}
+		
+		.avatar {
+			padding-top: 14rpx;
+			padding-right: 14rpx;
+		}
+		
+		.avatar2 {
+			padding-top: 14rpx;
+			padding-right: 20rpx;
 		}
 
 		.content {
@@ -61,7 +67,7 @@
 			}
 
 			.description {
-				margin: 10rpx 0;
+				// margin: 10rpx 0;
 				font-size: 24rpx;
 				color: #343e47;
 			}
@@ -78,9 +84,9 @@
 		}
 
 		.right {
-			margin-left: 10rpx;
-			padding-top: 20rpx;
-			text-align: right;
+			// margin-left: 10rpx;
+			// padding-top: 20rpx;
+			// text-align: right;
 
 			.decimal {
 				font-size: 24rpx;

@@ -5,6 +5,7 @@
 				<view class="left">
 					<image class="avatar" :src="item.avatar" mode="aspectFill"></image>
 				</view>
+				<!-- <u-avatar class="avatar" :src="item.avatar" mode="square" size="mini"/> -->
 				<view class="content">
 					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
 						<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>

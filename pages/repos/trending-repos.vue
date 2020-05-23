@@ -3,7 +3,7 @@
 		<view class="order" v-for="(item, index) in repos" :key="index">
 			<view class="item">
 				<view class="left">
-					<image :src="item.avatar" mode="aspectFill"></image>
+					<image class="avatar" :src="item.avatar" mode="aspectFill"></image>
 				</view>
 				<view class="content">
 					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">

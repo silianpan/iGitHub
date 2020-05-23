@@ -4,15 +4,15 @@
 		"^u-(.*)": "@/uview/components/u-$1/u-$1.vue"
 	},
 	"pages": [{
-		"path": "pages/login/login",
-		"style": {
-			"titleNView": false
-		}
-	}, {
 		"path": "pages/index/index",
 		"style": {
 			"navigationStyle": "custom",
 			"navigationBarTextStyle": "white"
+		}
+	}, {
+		"path": "pages/login/login",
+		"style": {
+			"titleNView": false
 		}
 	}, {
 		"path": "pages/login/auth",

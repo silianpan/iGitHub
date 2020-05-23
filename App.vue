@@ -5,7 +5,7 @@
 			// 初始化系统
 			this.initSystem()
 			// 自动登录
-			// this.autoLogin()
+			this.autoLogin()
 		},
 		methods: {
 			/**

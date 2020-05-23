@@ -43,7 +43,7 @@ export default {
 			//#endif
 		},
 		async authLogin({ commit }, params) {
-			if (params && params.code) {
+			if (params && params.code && params.state === 'igithub') {
 				uni.showLoading({
 					title: '努力加载中...'
 				})
@@ -52,11 +52,9 @@ export default {
 				if (res.access_token) {
 					const accessToken = res.access_token
 					commit('loginSuccess', accessToken)
-					// #ifndef H5
 					uni.reLaunch({
 						url: '/pages/index/index'
 					})
-					// #endif
 				} else {
 					uni.reLaunch({
 						url: '/pages/login/login'

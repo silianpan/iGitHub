@@ -11,15 +11,6 @@
 	export default {
 		components: {
 			RepoTrending
-		},
-		onLoad(option) {
-			// #ifdef H5
-			const code = getQueryString('code')
-			const state = getQueryString('state')
-			if (code && state) {
-				this.$store.dispatch('authLogin', { code, state })
-			}
-			// #endif
 		}
 	}
 </script>

@@ -20,6 +20,11 @@
 			"navigationBarTitleText": "安全登录"
 		}
 	}, {
+		"path": "pages/login/auth-h5-callback",
+		"style": {
+			"navigationBarTitleText": "安全登录中..."
+		}
+	}, {
 		"path": "pages/news/news",
 		"style": {
 			"navigationBarTitleText": "通知"

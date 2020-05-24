@@ -22,6 +22,9 @@
 				<text class="text-xl">{{key}}</text>
 			</view>
 		</view>
+		<view class="bg-white">
+			<view class="contri" v-html="contriHtml"></view>
+		</view>
 	</scroll-view>
 </template>
 
@@ -29,6 +32,7 @@
 	export default {
 		data() {
 			return {
+				contriHtml: '',
 				authUser: {},
 				numRff: {}
 			}
@@ -37,6 +41,13 @@
 			this.getAuthUser()
 		},
 		methods: {
+			async getContributions(params) {
+				const res = await this.$minApi.getContributions(params)
+				const reg = /[\s\S]*(\<svg[\s\S]*\<\/svg\>)[\s\S]*/
+				if (res && res.match(reg)) {
+					this.contriHtml = (reg.exec(res)[1]).trim()
+				}
+			},
 			async getAuthUser() {
 				// const user = await this.$minApi.getAuthUser()
 				// this.authUser = user
@@ -78,6 +89,7 @@
 					followers: this.authUser.followers,
 					following: this.authUser.following
 				}
+				this.getContributions({name: this.authUser.name})
 			}
 		}
 	}

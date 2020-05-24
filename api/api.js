@@ -34,6 +34,12 @@ export default {
 					baseURL: globalConfig.baseUrlToken
 				})
 		},
+		getContributions(params = {}) {
+			return minRequest.get(`/users/${params.name}/contributions`, null, { baseURL: globalConfig.baseUrlToken, header: {
+				'Accept': 'text/html',
+				'content-type': 'text/html; charset=utf-8'
+			} })
+		},
 		listTrendingRepo(params = {}) {
 			return minRequest.get('/repositories', params, { baseURL: globalConfig.baseUrlTrending })
 		},

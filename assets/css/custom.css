@@ -132,3 +132,10 @@ svg:not(:root) {
     height: 10px;
 }
 /* contributions end */
+
+/* modify colorui */
+.cu-list.menu>.cu-item .content {
+	display: flex;
+	align-items: center;
+	line-height: 1.8;
+}

@@ -14,7 +14,7 @@
 			</view>
 		</view>
 		<view class="cu-list grid col-3 text-center no-border">
-			<view class="cu-item" v-for="(value, key) in numRff" :key="key">
+			<view class="cu-item" v-for="(value, key) in numInfo" :key="key">
 				<view class="badge text-xxl text-black">
 					<block>{{value}}</block>
 				</view>
@@ -25,6 +25,18 @@
 		<view class="bg-white">
 			<view class="contri" v-html="contriHtml"></view>
 		</view>
+		<view class="bg-white">
+			<view class="cu-list menu sm-border">
+				<view class="cu-item" :class="baseInfoIcon[index].arrow?'arrow':''" v-for="(value, key, index) in baseInfo" :key="index"
+				 :index="index">
+					<view class="content">
+						<text class="cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]"
+						 style="width: 48rpx;height: 48rpx;" />
+						<text class="text-grey padding-left-sm">{{value}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
 	</scroll-view>
 </template>
 
@@ -34,7 +46,30 @@
 			return {
 				contriHtml: '',
 				authUser: {},
-				numRff: {}
+				numInfo: {},
+				baseInfo: {},
+				baseInfoIcon: [{
+						key: 'company',
+						icon: 'iconteam',
+						color: 'orange'
+					},
+					{
+						key: 'location',
+						icon: 'iconaddress',
+						color: 'green'
+					},
+					{
+						key: 'email',
+						icon: 'iconyoujian',
+						color: 'blue'
+					},
+					{
+						key: 'blog',
+						icon: 'iconlianjie1',
+						color: 'purple',
+						arrow: true
+					}
+				]
 			}
 		},
 		onReady() {
@@ -84,12 +119,20 @@
 					"created_at": "2014-03-27T13:33:01Z",
 					"updated_at": "2020-05-23T09:34:39Z"
 				}
-				this.numRff = {
+				this.numInfo = {
 					public_repos: this.authUser.public_repos,
 					followers: this.authUser.followers,
 					following: this.authUser.following
 				}
-				this.getContributions({name: this.authUser.name})
+				this.baseInfo = {
+					company: this.authUser.company,
+					location: this.authUser.location,
+					email: this.authUser.email,
+					blog: this.authUser.blog
+				}
+				this.getContributions({
+					name: this.authUser.name
+				})
 			}
 		}
 	}

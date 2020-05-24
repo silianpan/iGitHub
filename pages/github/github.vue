@@ -6,7 +6,7 @@
 				<view class="content">
 					<view class="title u-line-2">{{ authUser.name }}<text class="sub-title">{{' (' + authUser.login + ')' }}</text></view>
 					<view class="remark2">{{ authUser.bio }}</view>
-					<view class="description">{{ authUser.created_at }}</view>
+					<view class="description">注册于{{ $u.timeFormat(new Date(authUser.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</view>
 				</view>
 				<view class="right">
 					<u-icon name="arrow-right" color="#8799a3"></u-icon>
@@ -30,9 +30,30 @@
 				<view class="cu-item" :class="baseInfoIcon[index].arrow?'arrow':''" v-for="(value, key, index) in baseInfo" :key="index"
 				 :index="index">
 					<view class="content">
-						<text class="cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]"
-						 style="width: 48rpx;height: 48rpx;" />
+						<text class="list-left-icon cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]" />
 						<text class="text-grey padding-left-sm">{{value}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="bg-white margin-top-xs">
+			<view class="cu-list menu sm-border">
+				<view class="cu-item arrow">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
+						<text class="text-grey padding-left-sm">设置</text>
+					</view>
+				</view>
+				<view class="cu-item arrow">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round bg-mauve iconfont iconguanyu1" />
+						<text class="text-grey padding-left-sm">关于</text>
+					</view>
+				</view>
+				<view class="cu-item arrow">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round bg-red iconfont iconfankui1" />
+						<text class="text-grey padding-left-sm">反馈</text>
 					</view>
 				</view>
 			</view>
@@ -65,7 +86,7 @@
 					},
 					{
 						key: 'blog',
-						icon: 'iconlianjie1',
+						icon: 'iconlianjie',
 						color: 'purple',
 						arrow: true
 					}

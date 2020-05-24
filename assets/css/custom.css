@@ -2,6 +2,11 @@
 	color: #353b4b
 }
 
+.list-left-icon {
+	width: 48rpx;
+	height: 48rpx;
+}
+
 /* contributions start */
 .contri {
 	flex-direction: column!important;

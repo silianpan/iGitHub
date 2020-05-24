@@ -44,6 +44,11 @@
 		"style": {
 			"navigationBarTitleText": "我的"
 		}
+	}, {
+		"path": "pages/user/base-info",
+		"style": {
+			"navigationBarTitleText": "基本信息"
+		}
 	}],
 	"tabBar": {
 		"color": "#8699a7",

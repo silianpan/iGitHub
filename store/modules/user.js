@@ -27,6 +27,12 @@ export default {
 		}
 	},
 	actions: {
+		logoutAuth({ commit }) {
+			commit('logoutSuccess')
+			uni.reLaunch({
+				url: '/pages/login/login'
+			})
+		},
 		autoLogin({ getters, dispatch }) {
 			if (getters.isAuthed) {
 				dispatch('loginAuth')

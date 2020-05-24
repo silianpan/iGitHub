@@ -9,7 +9,7 @@
 					<view class="description">注册于{{ $u.timeFormat(new Date(authUser.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</view>
 				</view>
 				<view class="right">
-					<u-icon name="arrow-right" color="#8799a3"></u-icon>
+					<u-icon name="arrow-right" color="#8799a3" @click="briefInfoClick" />
 				</view>
 			</view>
 		</view>
@@ -97,6 +97,12 @@
 			this.getAuthUser()
 		},
 		methods: {
+			briefInfoClick() {
+				const tmp = { name: this.authUser.name, bio: this.authUser.bio, ...this.baseInfo}
+				uni.navigateTo({
+					url: '/pages/user/base-info?baseInfo=' + encodeURIComponent(JSON.stringify(tmp))
+				})
+			},
 			async getContributions(params) {
 				const res = await this.$minApi.getContributions(params)
 				const reg = /[\s\S]*(\<svg[\s\S]*\<\/svg\>)[\s\S]*/

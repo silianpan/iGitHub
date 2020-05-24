@@ -40,7 +40,7 @@
 			"navigationBarTitleText": "搜索"
 		}
 	}, {
-		"path": "pages/github/github",
+		"path": "pages/user/user",
 		"style": {
 			"navigationBarTitleText": "我的"
 		}
@@ -66,9 +66,9 @@
 			"iconPath": "static/img/tabbar/search.png",
 			"selectedIconPath": "static/img/tabbar/searchHL.png"
 		}, {
-			"pagePath": "pages/github/github",
-			"iconPath": "static/img/tabbar/github.png",
-			"selectedIconPath": "static/img/tabbar/githubHL.png"
+			"pagePath": "pages/user/user",
+			"iconPath": "static/img/tabbar/user.png",
+			"selectedIconPath": "static/img/tabbar/userHL.png"
 		}]
 	},
 	"globalStyle": {

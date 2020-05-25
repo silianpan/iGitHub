@@ -1,11 +1,11 @@
 <template>
 	<view class="bg-white">
-		<view class="padding-lg">
-			<view style="flex-flow: row wrap;flex-direction: row; align-items: center;display: flex;justify-content: space-between;"
-			 v-for="(value, key, index) in baseInfo" :key="index" :index="index">
-				<text style="flex:1" span="3">{{key}}</text>
-				<text style="flex:3" span="6">{{value}}</text>
-				<u-icon name="arrow-right" color="#8799a3" />
+		<view class="cu-list menu sm-border">
+			<view class="cu-item arrow" v-for="(value, key, index) in baseInfo" :key="index" :index="index">
+				<view class="content">
+					<text class="text-gray padding-left-sm">{{key}}</text>
+					<text class="text- padding-left-sm">{{value}}</text>
+				</view>
 			</view>
 		</view>
 		<view class="padding flex flex-direction">

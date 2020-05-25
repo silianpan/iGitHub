@@ -31,7 +31,8 @@
 				 :index="index">
 					<view class="content">
 						<text class="list-left-icon cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]" />
-						<text class="text-grey padding-left-sm">{{value}}</text>
+						<uni-link class="text-grey padding-left-sm" v-if="baseInfoIcon[index].arrow" :href="value" :text="value" showUnderLine="false"></uni-link>
+						<text v-else class="text-grey padding-left-sm">{{value}}</text>
 					</view>
 				</view>
 			</view>

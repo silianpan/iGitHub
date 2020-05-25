@@ -2,6 +2,14 @@
 	color: #353b4b
 }
 
+.text-form-label {
+	color: #6e7377;
+}
+
+.text-form-value {
+	color: #383a46;
+}
+
 .list-left-icon {
 	width: 48rpx;
 	height: 48rpx;
@@ -143,4 +151,9 @@ svg:not(:root) {
 	display: flex;
 	align-items: center;
 	line-height: 1.8;
+}
+
+.cu-list.menu>.cu-item .content > .uni-link {
+	font-size: 30rpx!important;
+	color: #8799a3!important;
 }

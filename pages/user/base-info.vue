@@ -3,8 +3,8 @@
 		<view class="cu-list menu sm-border">
 			<view class="cu-item arrow" v-for="(value, key, index) in baseInfo" :key="index" :index="index">
 				<view class="content">
-					<text class="text-gray padding-left-sm flex-sub">{{key}}</text>
-					<text class="text- padding-left-sm flex-treble">{{value}}</text>
+					<text class="padding-left-sm flex-sub text-form-label">{{key}}</text>
+					<text class="padding-left-sm flex-treble text-form-value">{{value}}</text>
 				</view>
 			</view>
 		</view>

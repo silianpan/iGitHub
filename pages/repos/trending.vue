@@ -57,17 +57,15 @@
 		},
 		methods: {
 			loadData(triggered, freshing) {
-				if (this.current === 0) {
-					this.$refs.refTrendingRepo.listRepo().then(() => {
-						this.triggered = triggered
-						this._freshing = freshing
-					})
-				} else if (this.current === 1) {
-					this.$refs.refTrendingDeveloper.listDeveloper().then(() => {
-						this.triggered = triggered
-						this._freshing = freshing
-					})
-				}
+				this.$refs.refTrendingRepo.listRepo().then(() => {
+					this.triggered = triggered
+					this._freshing = freshing
+				})
+
+				this.$refs.refTrendingDeveloper.listDeveloper().then(() => {
+					this.triggered = triggered
+					this._freshing = freshing
+				})
 			},
 			onPulling(e) {},
 			onRefresh() {
@@ -103,8 +101,8 @@
 				this.$refs.uTabs.setFinishCurrent(current)
 				this.swiperCurrent = current
 				this.current = current
-				// 执行更新方法
-				this.onRefresh()
+				// 执行更新方法，不用每次都加载
+				// this.onRefresh()
 			}
 		}
 	}

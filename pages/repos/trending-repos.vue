@@ -1,7 +1,7 @@
 <template>
 	<view class="page-box">
 		<view class="order" v-for="(item, index) in repos" :key="index">
-			<view class="item">
+			<view class="item" @tap="clickRepoDetail(item)">
 				<view class="left">
 					<image class="avatar" :src="item.avatar" mode="aspectFill"></image>
 				</view>
@@ -49,6 +49,11 @@
 		methods: {
 			async listRepo() {
 				this.repos = await this.$minApi.listTrendingRepo()
+			},
+			clickRepoDetail(item) {
+				uni.navigateTo({
+					url: `/pages/repos/detail?owner=${item.author}&repo=${item.name}`
+				})
 			}
 		}
 	}

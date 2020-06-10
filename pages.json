@@ -49,6 +49,11 @@
 		"style": {
 			"navigationBarTitleText": "基本信息"
 		}
+	}, {
+		"path": "pages/repos/detail",
+		"style": {
+			"navigationBarTitleText": "仓库"
+		}
 	}],
 	"tabBar": {
 		"color": "#8699a7",

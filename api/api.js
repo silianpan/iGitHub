@@ -48,6 +48,26 @@ export default {
 		},
 		getAuthUser() {
 			return minRequest.get('/user')
+		},
+		// 获取repo明细
+		getRepos(owner, repo) {
+			return minRequest.get(`/repos/${owner}/${repo}`)
+		},
+		// 获取repo语言
+		getReposLanguage(owner, repo) {
+			return minRequest.get(`/repos/${owner}/${repo}/language`)
+		},
+		// 获取pull requests
+		listPullRequests(owner, repo) {
+			return minRequest.get(`/repos/${owner}/${repo}/pulls`)
+		},
+		// 获取分支
+		listBranches(owner, repo) {
+			return minRequest.get(`/repos/${owner}/${repo}/branches`)
+		},
+		// 获取readme
+		getReposReadme(owner, repo) {
+			return minRequest.get(`/repos/${owner}/${repo}/readme`)
 		}
 	}
 }

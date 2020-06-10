@@ -22,6 +22,11 @@
 				<text class="text-xl">{{key}}</text>
 			</view>
 		</view>
+		<view class="cu-progress radius striped active">
+			<view class="bg-red" :style="[{ width:'30%'}]"></view>
+			<view class="bg-olive" :style="[{ width:'45%'}]"></view>
+			<view class="bg-cyan" :style="[{ width:'25%'}]"></view>
+		</view>
 	</scroll-view>
 </template>
 
@@ -32,11 +37,13 @@
 				numInfo: {},
 				repo: {
 					owner: {}
-				}
+				},
+				reposLanguage: []
 			}
 		},
 		onLoad(option) {
 			this.getRepos(option.owner, option.repo)
+			this.getReposLanguage(option.owner, option.repo)
 		},
 		methods: {
 			async getRepos(owner, repo) {
@@ -46,6 +53,10 @@
 					stargazers_count: this.repo.stargazers_count,
 					forks: this.repo.forks
 				}
+			},
+			async getReposLanguage(owner, repo) {
+				this.reposLanguage = await this.$minApi.getReposLanguage(owner, repo)
+				console.log(this.reposLanguage)
 			}
 		}
 	}

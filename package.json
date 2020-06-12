@@ -6,6 +6,7 @@
   "author": "twofloor <1206284818@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "number-precision": "^1.4.0"
   }
 }

@@ -54,8 +54,8 @@ export default {
 			return minRequest.get(`/repos/${owner}/${repo}`)
 		},
 		// 获取repo语言
-		getReposLanguage(owner, repo) {
-			return minRequest.get(`/repos/${owner}/${repo}/language`)
+		listReposLanguages(owner, repo) {
+			return minRequest.get(`/repos/${owner}/${repo}/languages`)
 		},
 		// 获取pull requests
 		listPullRequests(owner, repo) {

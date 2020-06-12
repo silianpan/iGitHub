@@ -22,15 +22,15 @@
 				<text class="text-xl">{{key}}</text>
 			</view>
 		</view>
-		<view class="cu-progress radius striped active">
-			<view class="bg-red" :style="[{ width:'30%'}]"></view>
-			<view class="bg-olive" :style="[{ width:'45%'}]"></view>
-			<view class="bg-cyan" :style="[{ width:'25%'}]"></view>
+		<view class="cu-progress radius">
+			<view v-for="item in reposLanguages" :key="item.lang" :style="[{ width: item.percent, 'background-color': item.color}]"></view>
 		</view>
 	</scroll-view>
 </template>
 
 <script>
+	import languageColors from '@/static/colors.json'
+	import NP from 'number-precision'
 	export default {
 		data() {
 			return {
@@ -38,12 +38,12 @@
 				repo: {
 					owner: {}
 				},
-				reposLanguage: []
+				reposLanguages: []
 			}
 		},
 		onLoad(option) {
 			this.getRepos(option.owner, option.repo)
-			this.getReposLanguage(option.owner, option.repo)
+			this.listReposLanguages(option.owner, option.repo)
 		},
 		methods: {
 			async getRepos(owner, repo) {
@@ -54,9 +54,22 @@
 					forks: this.repo.forks
 				}
 			},
-			async getReposLanguage(owner, repo) {
-				this.reposLanguage = await this.$minApi.getReposLanguage(owner, repo)
-				console.log(this.reposLanguage)
+			async listReposLanguages(owner, repo) {
+				const ret = await this.$minApi.listReposLanguages(owner, repo)
+				let sum = 0
+				Object.values(ret).forEach(item => {
+					sum = NP.plus(sum, item)
+				})
+				let newRet = []
+				for (let key in ret) {
+					let lang = {
+						'lang': key
+					}
+					lang['percent'] = NP.round(NP.times(NP.divide(ret[key], sum), 100), 4) + '%'
+					lang['color'] = languageColors[key].color
+					newRet.push(lang)
+				}
+				this.reposLanguages = newRet
 			}
 		}
 	}

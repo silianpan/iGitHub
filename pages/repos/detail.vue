@@ -22,9 +22,22 @@
 				<text class="text-xl">{{key}}</text>
 			</view>
 		</view>
-		<view class="cu-progress radius">
+		<view class="cu-progress radius" @tap="clickLangPercent">
 			<view v-for="item in reposLanguages" :key="item.lang" :style="[{ width: item.percent, 'background-color': item.color}]"></view>
 		</view>
+		<u-popup v-model="modelLangPercent" mode="top">
+			<view class="cu-list menu card-menu margin-top">
+				<view class="cu-item" v-for="item in reposLanguages" :key="item.lang">
+					<view class="content">
+						<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.color}"></text>
+						<text>{{item.lang}}</text>
+					</view>
+					<view class="action">
+						<view>{{item.percent}}</view>
+					</view>
+				</view>
+			</view>
+		</u-popup>
 	</scroll-view>
 </template>
 
@@ -34,6 +47,7 @@
 	export default {
 		data() {
 			return {
+				modelLangPercent: false,
 				numInfo: {},
 				repo: {
 					owner: {}
@@ -70,6 +84,9 @@
 					newRet.push(lang)
 				}
 				this.reposLanguages = newRet
+			},
+			clickLangPercent() {
+				this.modelLangPercent = true
 			}
 		}
 	}

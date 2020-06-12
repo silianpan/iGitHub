@@ -5,6 +5,7 @@ import minApi from './api/api'
 import MinCache from './utils/MinCache'
 import store from './store'
 import _ from 'lodash'
+import NP from 'number-precision'
 import uView from '@/uview'
 Vue.use(uView)
 Vue.use(MinRequest)
@@ -13,6 +14,7 @@ Vue.use(MinCache)
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.$_ = _
+Vue.prototype.$NP = NP
 
 App.mpType = 'app'
 

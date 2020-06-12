@@ -22,9 +22,23 @@
 				<text class="text-xl">{{key}}</text>
 			</view>
 		</view>
+		<u-gap />
 		<view class="cu-progress radius" @tap="clickLangPercent">
 			<view v-for="item in reposLanguages" :key="item.lang" :style="[{ width: item.percent, 'background-color': item.color}]"></view>
 		</view>
+
+		<view class="cu-list menu">
+			<view class="cu-item arrow">
+				<view class="content">
+					<text class="list-left-icon cu-avatar round iconfont iconcode" :style="{'background-color':languageColor}" />
+					<text class="padding-left-sm">{{repo.language}}</text>
+				</view>
+				<view class="action">
+					<view>{{$_.toString(repo.license.spdx_id) + ' · ' + $_.toString($NP.round($NP.divide(repo.size, 1024), 1)) + 'MB'}}</view>
+				</view>
+			</view>
+		</view>
+
 		<u-popup v-model="modelLangPercent" mode="top">
 			<view class="cu-list menu card-menu margin-top">
 				<view class="cu-item" v-for="item in reposLanguages" :key="item.lang">
@@ -43,19 +57,22 @@
 
 <script>
 	import languageColors from '@/static/colors.json'
-	import NP from 'number-precision'
 	export default {
 		data() {
 			return {
 				modelLangPercent: false,
 				numInfo: {},
+				languageColor: '#ff7500',
 				repo: {
-					owner: {}
+					owner: {},
+					license: {},
+					size: 0
 				},
 				reposLanguages: []
 			}
 		},
 		onLoad(option) {
+			this.languageColor = option.languageColor
 			this.getRepos(option.owner, option.repo)
 			this.listReposLanguages(option.owner, option.repo)
 		},
@@ -72,14 +89,14 @@
 				const ret = await this.$minApi.listReposLanguages(owner, repo)
 				let sum = 0
 				Object.values(ret).forEach(item => {
-					sum = NP.plus(sum, item)
+					sum = this.$NP.plus(sum, item)
 				})
 				let newRet = []
 				for (let key in ret) {
 					let lang = {
 						'lang': key
 					}
-					lang['percent'] = NP.round(NP.times(NP.divide(ret[key], sum), 100), 4) + '%'
+					lang['percent'] = this.$NP.round(this.$NP.times(this.$NP.divide(ret[key], sum), 100), 4) + '%'
 					lang['color'] = languageColors[key].color
 					newRet.push(lang)
 				}

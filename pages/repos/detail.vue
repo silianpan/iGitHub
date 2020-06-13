@@ -11,6 +11,8 @@
 						<view class="title u-line-2">{{ repo.full_name }}</view>
 					</view>
 					<view class="description">{{ repo.description }}</view>
+					<uni-link v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
+					<view class="remark">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
 				</view>
 			</view>
 		</view>
@@ -28,6 +30,7 @@
 		</view>
 
 		<view class="cu-list menu">
+			<!-- code -->
 			<view class="cu-item arrow">
 				<view class="content">
 					<text class="list-left-icon cu-avatar round iconfont iconcode" :style="{'background-color':languageColor}" />
@@ -35,6 +38,47 @@
 				</view>
 				<view class="action">
 					<view>{{$_.toString(repo.license.spdx_id) + ' · ' + $_.toString($NP.round($NP.divide(repo.size, 1024), 1)) + 'MB'}}</view>
+				</view>
+			</view>
+			<!-- issues -->
+			<view class="cu-item arrow">
+				<view class="content">
+					<text class="list-left-icon cu-avatar round iconfont iconissue" style="background-color: #37cb75;" />
+					<text class="padding-left-sm">Issues</text>
+				</view>
+				<view class="action">
+					<view>{{repo.open_issues}}</view>
+				</view>
+			</view>
+			<!-- pull requests -->
+			<view class="cu-item arrow">
+				<view class="content">
+					<text class="list-left-icon cu-avatar round iconfont iconpullrequest" style="background-color: #5756d5;" />
+					<text class="padding-left-sm">Pull Requests</text>
+				</view>
+				<view class="action">
+					<view>{{reposPullRequests.length}}</view>
+				</view>
+			</view>
+			<u-gap />
+			<!-- branches -->
+			<view class="cu-item arrow">
+				<view class="content">
+					<text class="list-left-icon cu-avatar round iconfont icon24gf-branches" style="background-color: #434955;" />
+					<text class="padding-left-sm">Branches</text>
+				</view>
+				<view class="action">
+					<view>{{ (!$_.isEmpty(reposBranches) ? reposBranches[0].name + ' · ' : '') + $_.toString(reposBranches.length)}}</view>
+				</view>
+			</view>
+			<!-- readme -->
+			<view class="cu-item">
+				<view class="content">
+					<text class="list-left-icon cu-avatar round iconfont iconreadme" style="background-color: #028fff;" />
+					<text class="padding-left-sm">Readme</text>
+				</view>
+				<view class="action">
+					<view class="iconfont iconrefresh" style="color:#028fff"></view>
 				</view>
 			</view>
 		</view>
@@ -68,13 +112,19 @@
 					license: {},
 					size: 0
 				},
-				reposLanguages: []
+				reposLanguages: [],
+				reposPullRequests: [],
+				reposBranches: [],
+				reposReadme: {}
 			}
 		},
 		onLoad(option) {
 			this.languageColor = option.languageColor
 			this.getRepos(option.owner, option.repo)
 			this.listReposLanguages(option.owner, option.repo)
+			this.listPullRequests(option.owner, option.repo)
+			this.listBranches(option.owner, option.repo)
+			this.getReposReadme(option.owner, option.repo)
 		},
 		methods: {
 			async getRepos(owner, repo) {
@@ -101,6 +151,16 @@
 					newRet.push(lang)
 				}
 				this.reposLanguages = newRet
+			},
+			async listPullRequests(owner, repo) {
+				this.reposPullRequests = await this.$minApi.listPullRequests(owner, repo)
+			},
+			async listBranches(owner, repo) {
+				this.reposBranches = await this.$minApi.listBranches(owner, repo)
+			},
+			async getReposReadme(owner, repo) {
+				this.reposReadme = await this.$minApi.getReposReadme(owner, repo)
+				console.log(this.reposReadme)
 			},
 			clickLangPercent() {
 				this.modelLangPercent = true

@@ -78,10 +78,12 @@
 					<text class="padding-left-sm">Readme</text>
 				</view>
 				<view class="action">
-					<view class="iconfont iconrefresh" style="color:#028fff"></view>
+					<view @tap="getReposReadme" class="iconfont iconrefresh" style="color:#028fff"></view>
 				</view>
 			</view>
 		</view>
+
+		<view class="order" v-html="reposReadme"></view>
 
 		<u-popup v-model="modelLangPercent" mode="top">
 			<view class="cu-list menu card-menu margin-top">
@@ -100,10 +102,13 @@
 </template>
 
 <script>
+	import marked from 'marked'
 	import languageColors from '@/static/colors.json'
 	export default {
 		data() {
 			return {
+				owner: '',
+				repoName: '',
 				modelLangPercent: false,
 				numInfo: {},
 				languageColor: '#ff7500',
@@ -115,28 +120,30 @@
 				reposLanguages: [],
 				reposPullRequests: [],
 				reposBranches: [],
-				reposReadme: {}
+				reposReadme: ''
 			}
 		},
 		onLoad(option) {
 			this.languageColor = option.languageColor
-			this.getRepos(option.owner, option.repo)
-			this.listReposLanguages(option.owner, option.repo)
-			this.listPullRequests(option.owner, option.repo)
-			this.listBranches(option.owner, option.repo)
-			this.getReposReadme(option.owner, option.repo)
+			this.owner = option.owner
+			this.repoName = option.repo
+			this.getRepos()
+			this.listReposLanguages()
+			this.listPullRequests()
+			this.listBranches()
+			this.getReposReadme()
 		},
 		methods: {
-			async getRepos(owner, repo) {
-				this.repo = await this.$minApi.getRepos(owner, repo)
+			async getRepos() {
+				this.repo = await this.$minApi.getRepos(this.owner, this.repoName)
 				this.numInfo = {
 					watchers: this.repo.watchers,
 					stargazers_count: this.repo.stargazers_count,
 					forks: this.repo.forks
 				}
 			},
-			async listReposLanguages(owner, repo) {
-				const ret = await this.$minApi.listReposLanguages(owner, repo)
+			async listReposLanguages() {
+				const ret = await this.$minApi.listReposLanguages(this.owner, this.repoName)
 				let sum = 0
 				Object.values(ret).forEach(item => {
 					sum = this.$NP.plus(sum, item)
@@ -152,15 +159,14 @@
 				}
 				this.reposLanguages = newRet
 			},
-			async listPullRequests(owner, repo) {
-				this.reposPullRequests = await this.$minApi.listPullRequests(owner, repo)
+			async listPullRequests() {
+				this.reposPullRequests = await this.$minApi.listPullRequests(this.owner, this.repoName)
 			},
-			async listBranches(owner, repo) {
-				this.reposBranches = await this.$minApi.listBranches(owner, repo)
+			async listBranches() {
+				this.reposBranches = await this.$minApi.listBranches(this.owner, this.repoName)
 			},
-			async getReposReadme(owner, repo) {
-				this.reposReadme = await this.$minApi.getReposReadme(owner, repo)
-				console.log(this.reposReadme)
+			async getReposReadme() {
+				this.reposReadme = await this.$minApi.getReposReadme(this.owner, this.repoName)
 			},
 			clickLangPercent() {
 				this.modelLangPercent = true

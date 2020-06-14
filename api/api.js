@@ -35,16 +35,23 @@ export default {
 				})
 		},
 		getContributions(params = {}) {
-			return minRequest.get(`/users/${params.name}/contributions`, null, { baseURL: globalConfig.baseUrlToken, header: {
-				'Accept': 'text/html',
-				'content-type': 'text/html; charset=utf-8'
-			} })
+			return minRequest.get(`/users/${params.name}/contributions`, null, {
+				baseURL: globalConfig.baseUrlToken,
+				header: {
+					'Accept': 'text/html',
+					'content-type': 'text/html; charset=utf-8'
+				}
+			})
 		},
 		listTrendingRepo(params = {}) {
-			return minRequest.get('/repositories', params, { baseURL: globalConfig.baseUrlTrending })
+			return minRequest.get('/repositories', params, {
+				baseURL: globalConfig.baseUrlTrending
+			})
 		},
 		listTrendingDeveloper(params = {}) {
-			return minRequest.get('/developers', params, { baseURL: globalConfig.baseUrlTrending })
+			return minRequest.get('/developers', params, {
+				baseURL: globalConfig.baseUrlTrending
+			})
 		},
 		getAuthUser() {
 			return minRequest.get('/user')
@@ -67,7 +74,11 @@ export default {
 		},
 		// 获取readme
 		getReposReadme(owner, repo) {
-			return minRequest.get(`/repos/${owner}/${repo}/readme`)
+			return minRequest.get(`/repos/${owner}/${repo}/readme`, null, {
+				header: {
+					'Accept': 'application/vnd.github.v3.html+json'
+				}
+			})
 		}
 	}
 }

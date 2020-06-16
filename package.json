@@ -6,6 +6,7 @@
   "author": "twofloor <1206284818@qq.com>",
   "license": "MIT",
   "dependencies": {
+    "file-icons-js": "websemantics/file-icons-js",
     "lodash": "^4.17.15",
     "marked": "^1.1.0",
     "number-precision": "^1.4.0"

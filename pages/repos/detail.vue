@@ -31,7 +31,7 @@
 
 		<view class="cu-list menu">
 			<!-- code -->
-			<view class="cu-item arrow">
+			<view class="cu-item arrow" @tap="tapCode">
 				<view class="content">
 					<text class="list-left-icon cu-avatar round iconfont iconcode" :style="{'background-color':languageColor}" />
 					<text class="padding-left-sm">{{repo.language}}</text>
@@ -170,7 +170,8 @@
 			},
 			clickLangPercent() {
 				this.modelLangPercent = true
-			}
+			},
+			tapCode() {}
 		}
 	}
 </script>

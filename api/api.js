@@ -79,6 +79,10 @@ export default {
 					'Accept': 'application/vnd.github.v3.html+json'
 				}
 			})
+		},
+		// get repos content
+		getReposContent(owner, repo, path = '') {
+			return minRequest.get(`/repos/${owner}/${repo}/contents/${path}`)
 		}
 	}
 }

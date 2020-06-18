@@ -1,9 +1,10 @@
 <template>
 	<view>
-		<u-sticky>
-			<view>
+		<u-sticky class="padding: 0 30rpx">
+			<text v-for="item in pathList" :key="item">
 				<u-icon name="arrow-right"></u-icon>
-			</view>
+				<text>{{ item }}</text>
+			</text>
 		</u-sticky>
 		<view class="cu-list menu">
 			<view class="cu-item" v-for="item in fileList" :key="item.sha" @tap="tapFileOrDir(item)">
@@ -25,7 +26,8 @@
 				owner: '',
 				repo: '',
 				path: '',
-				fileList: []
+				fileList: [],
+				pathList: []
 			}
 		},
 		onLoad(option) {
@@ -34,10 +36,14 @@
 			if (option.path) {
 				this.path = option.path
 			}
+			this.pathList = []
 			this.getReposContent()
 		},
 		methods: {
-			async getReposContent(path = '') {
+			async getReposContent() {
+				if (this.path) {
+					this.pathList.push(this.path.substring(this.path.lastIndexOf('/') + 1))
+				}
 				const res = await this.$minApi.getReposContent(this.owner, this.repo, this.path)
 				// 排序
 				let dirList = this.$_.filter(res, {
@@ -61,9 +67,8 @@
 			tapFileOrDir(item) {
 				switch (item.type) {
 					case 'dir':
-						uni.navigateTo({
-							url: `/pages/repos/code/code?owner=${this.owner}&repo=${this.repo}&path=${item.path}`
-						})
+						this.path = item.path
+						this.getReposContent()
 						break
 					case 'file':
 						// show code

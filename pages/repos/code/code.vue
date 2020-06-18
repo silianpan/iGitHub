@@ -1,5 +1,10 @@
 <template>
 	<view>
+		<u-sticky>
+			<view>
+				<u-icon name="arrow-right"></u-icon>
+			</view>
+		</u-sticky>
 		<view class="cu-list menu">
 			<view class="cu-item" v-for="item in fileList" :key="item.sha" @tap="tapFileOrDir(item)">
 				<view class="content">
@@ -35,8 +40,12 @@
 			async getReposContent(path = '') {
 				const res = await this.$minApi.getReposContent(this.owner, this.repo, this.path)
 				// 排序
-				let dirList = this.$_.filter(res, { 'type': 'dir' })
-				let fileList = this.$_.filter(res, o => { return o.type !== 'dir' })
+				let dirList = this.$_.filter(res, {
+					'type': 'dir'
+				})
+				let fileList = this.$_.filter(res, o => {
+					return o.type !== 'dir'
+				})
 				// dirList = this.$_.sortBy(dirList, ['name'])
 				// fileList = this.$_.sortBy(fileList, ['name'])
 				this.fileList = this.$_.concat(dirList, fileList)

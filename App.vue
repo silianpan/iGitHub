@@ -65,5 +65,5 @@
 	@import '@/uview/index.scss';
 	@import 'assets/css/custom.css';
 	@import 'assets/css/custom.less';
-	@import 'assets/css/file-icons/css/style.css';
+	@import 'assets/css/file-icons/style.css';
 </style>

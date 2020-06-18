@@ -101,33 +101,33 @@
 	font-family: FontAwesome;
 	font-weight: normal;
 	font-style: normal;
-	src: "../fonts/fontawesome.woff2";
+	src: url('~@/static/fonts/fontawesome.woff2');
 }
 
 @font-face {
 	font-family: Mfizz;
-	src: "../fonts/mfixx.woff2";
+	src: url('~@/static/fonts/mfixx.woff2');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: Devicons;
-	src: "../fonts/devopicons.woff2";
+	src: url('~@/static/fonts/devopicons.woff2');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: file-icons;
-	src: "../fonts/file-icons.woff2";
+	src: url('~@/static/fonts/file-icons.woff2');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: octicons;
-	src: "../fonts/octicons.woff2";
+	src: url('~@/static/fonts/octicons.woff2');
 	font-weight: normal;
 	font-style: normal;
 }

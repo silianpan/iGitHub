@@ -3,7 +3,7 @@
 		<view class="cu-list menu sm-border">
 			<view class="cu-item" v-for="item in fileList" :key="item.sha">
 				<view class="content">
-					<text :class="[FileIcons.getClassWithColor(item.name), getFileIconClass(item.type)]" class="margin-right-xs u-font-xl file-icon" />
+					<text :class="[getFileIconClass(item.type), FileIcons.getClassWithColor(item.name)]" class="margin-right-xs u-font-xl file-icon" />
 					<text class="u-font-xl">{{ item.name }}</text>
 				</view>
 			</view>
@@ -34,7 +34,9 @@
 			getFileIconClass(type) {
 				switch(type) {
 					case 'dir':
-						return 'package'
+						return 'iconfont iconfolder text-blue'
+					default:
+						return 'iconfont iconfile1 text-blue'
 				}
 			}
 		}

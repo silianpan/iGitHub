@@ -32,7 +32,7 @@
 				this.fileList = await this.$minApi.getReposContent(this.owner, this.repo, path)
 			},
 			getFileIconClass(type) {
-				switch(type) {
+				switch (type) {
 					case 'dir':
 						return 'iconfont iconfolder text-blue'
 					default:

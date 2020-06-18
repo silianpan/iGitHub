@@ -171,7 +171,11 @@
 			clickLangPercent() {
 				this.modelLangPercent = true
 			},
-			tapCode() {}
+			tapCode() {
+				uni.navigateTo({
+					url: `/pages/repos/code/code?owner=${this.owner}&repo=${this.repoName}`
+				})
+			}
 		}
 	}
 </script>

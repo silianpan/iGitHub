@@ -7,9 +7,12 @@ import store from './store'
 import _ from 'lodash'
 import NP from 'number-precision'
 import uView from '@/uview'
+import Highlight from '@/utils/Highlight.js'
+
 Vue.use(uView)
 Vue.use(MinRequest)
 Vue.use(MinCache)
+Vue.use(Highlight)
 
 Vue.config.productionTip = false
 Vue.prototype.$store = store

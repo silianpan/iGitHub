@@ -1,8 +1,12 @@
 <template>
-	<view class="order" v-html="reposContent"></view>
+	<!-- <view class="order" v-html="reposContent" v-highlight></view> -->
+	<view id="code">
+		<pre><code class="html" v-html="reposContent"></code></pre>
+	</view>
 </template>
 
 <script>
+	import Hljs from 'highlight.js'
 	export default {
 		data() {
 			return {
@@ -24,6 +28,8 @@
 						'Accept': 'application/vnd.github.v3.html+json'
 					}
 				})
+				let blocks = uni.createSelectorQuery().select('#code')
+				Hljs.highlightBlock(blocks)
 			}
 		}
 	}

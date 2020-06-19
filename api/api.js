@@ -81,8 +81,8 @@ export default {
 			})
 		},
 		// get repos content
-		getReposContent(owner, repo, path = '') {
-			return minRequest.get(`/repos/${owner}/${repo}/contents/${path}`)
+		getReposContent(owner, repo, path = '', options = {}) {
+			return minRequest.get(`/repos/${owner}/${repo}/contents/${path}`, null, options)
 		},
 		// get a tree
 		getATree(owner, repo, treeSha) {

@@ -74,6 +74,9 @@
 						break
 					case 'file':
 						// show code
+						uni.navigateTo({
+							url: `/pages/repos/code/content?owner=${this.owner}&repo=${this.repo}&path=${item.path}`
+						})
 						break
 				}
 			},

@@ -2,9 +2,9 @@
 	<view>
 		<view class="wrap">
 			<view class="u-tabs-box">
-				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#0068d7" activeColor="#f9906f" ref="uTabs" :list="list"
+				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#f24713" activeColor="#ffffb8" ref="uTabs" :list="list"
 				 :current="current" @change="tabsChange" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
-				<view style="background-color: #0068d7; color: #ffffff;" class="padding-xs">
+				<view class="primary-color padding-xs">
 					<text class="iconfont iconguolv margin-right-xs"></text>
 					<text>所有语言 | 今日</text>
 				</view>

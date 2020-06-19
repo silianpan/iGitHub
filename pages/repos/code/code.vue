@@ -1,10 +1,12 @@
 <template>
 	<view>
-		<u-sticky class="padding: 0 30rpx">
-			<text v-for="item in pathList" :key="item">
-				<u-icon name="arrow-right"></u-icon>
-				<text>{{ item }}</text>
-			</text>
+		<u-sticky>
+			<view class="primary-color u-font-xl" style="padding: 10rpx 30rpx;">
+				<block v-for="(item, index) in pathList" :key="index">
+					<u-icon name="arrow-right" @tap="tapDir(index, item)"></u-icon>
+					<text @tap="tapDir(index + 1, item)">{{ item }}</text>
+				</block>
+			</view>
 		</u-sticky>
 		<view class="cu-list menu">
 			<view class="cu-item" v-for="item in fileList" :key="item.sha" @tap="tapFileOrDir(item)">
@@ -26,8 +28,12 @@
 				owner: '',
 				repo: '',
 				path: '',
-				fileList: [],
-				pathList: []
+				fileList: []
+			}
+		},
+		computed: {
+			pathList() {
+				return this.$_.split(this.path, '/')
 			}
 		},
 		onLoad(option) {
@@ -36,14 +42,10 @@
 			if (option.path) {
 				this.path = option.path
 			}
-			this.pathList = []
 			this.getReposContent()
 		},
 		methods: {
 			async getReposContent() {
-				if (this.path) {
-					this.pathList.push(this.path.substring(this.path.lastIndexOf('/') + 1))
-				}
 				const res = await this.$minApi.getReposContent(this.owner, this.repo, this.path)
 				// 排序
 				let dirList = this.$_.filter(res, {
@@ -74,6 +76,10 @@
 						// show code
 						break
 				}
+			},
+			tapDir(index, item) {
+				this.path = this.$_.join(this.$_.slice(this.pathList, 0, index), '/')
+				this.getReposContent()
 			}
 		}
 	}

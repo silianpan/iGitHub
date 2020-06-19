@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar :fixed="false" :border="false" color="#ffffff" background-color="#0068d7" />
+		<uni-nav-bar :fixed="false" :border="false" color="#ffffff" background-color="#f24713" />
 		<RepoTrending />
 	</view>
 </template>

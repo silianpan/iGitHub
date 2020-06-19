@@ -67,3 +67,7 @@
 	@import 'assets/css/custom.less';
 	@import 'assets/css/file-icons/style.css';
 </style>
+
+<style lang="less">
+	@import 'assets/css/style.less';
+</style>

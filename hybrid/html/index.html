@@ -16,7 +16,12 @@
 		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script> -->
 		<link rel="stylesheet" href="css/github.min.css">
 		<script src="js/highlight.pack.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" href="css/custom.css">
+		<script src="js/highlightjs-line-numbers.min.js"></script>
+		<script>
+			hljs.initHighlightingOnLoad();
+			hljs.initLineNumbersOnLoad();
+		</script>
 		<script src="js/axios.min.js"></script>
 		<script type="text/javascript">
 			// document.addEventListener('UniAppJSBridgeReady', function() {
@@ -62,6 +67,9 @@
 				setTimeout(function() {
 					document.querySelectorAll('pre code').forEach((block) => {
 						hljs.highlightBlock(block);
+					});
+					document.querySelectorAll('code.hljs').forEach((block) => {
+						hljs.lineNumbersBlock(block);
 					});
 				}, 0);
 			});

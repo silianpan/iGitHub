@@ -16,7 +16,9 @@
 		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script> -->
 		<link rel="stylesheet" href="css/github.min.css">
 		<script src="js/highlight.pack.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script>
+		<script>
+			hljs.initHighlightingOnLoad();
+		</script>
 		<script type="text/javascript">
 			// document.addEventListener('UniAppJSBridgeReady', function() {
 			// 	当前环境
@@ -25,14 +27,26 @@
 			// 	});
 			// });
 
-			function getQueryString(key) {
-				var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)")
-				var r = window.location.search.substr(1).match(reg)
-				if (r != null) return unescape(r[2])
-				return null
+			/*
+			 * 取地址栏的参数 
+			 * @param key  
+			 * key为传递的参数名称 例如 http://localhost/test.html?p=广东&c=珠海,key就是p和c 
+			 * @returns 
+			 */
+			function getUrlParam(key) {
+				// 获取参数    
+				var url = window.location.search;
+				//window.search 取到的是一串带参数的字符串，如：?p=广东&c=珠海 
+
+				// 正则筛选地址栏    
+				var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+				// 匹配目标参数   
+				var result = url.substr(1).match(reg);
+				//返回参数值    
+				return result ? decodeURIComponent(result[2]) : null;
 			}
-			
-			const reposContent = decodeURIComponent(getQueryString('reposContent'))
+
+			const reposContent = getUrlParam('reposContent')
 			document.getElementById('hybrid-code').innerHTML = reposContent
 			setTimeout(function() {
 				document.querySelectorAll('pre code').forEach((block) => {

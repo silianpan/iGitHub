@@ -1,11 +1,11 @@
 <template>
 	<!-- #ifdef H5 -->
-	<div id="codeView" v-highlight>
+	<view v-if="reposContent" v-highlight>
 		<pre><code v-html="reposContent"></code></pre>
-	</div>
+	</view>
 	<!-- #endif -->
 	<!-- #ifndef H5 -->
-	<view>
+	<view v-if="reposContent">
 		<web-view :src="`/hybrid/html/index.html?reposContent=${encodeURIComponent(reposContent)}`"></web-view>
 	</view>
 	<!-- #endif -->

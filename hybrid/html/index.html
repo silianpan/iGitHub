@@ -7,41 +7,38 @@
 	</head>
 
 	<body>
-		<pre><code id="hybrid-code" class="language-java" style="font-size: xx-large;"></code></pre>
+		<pre><code id="hybrid-code" style="font-size: 32px;"></code></pre>
 		<!-- uni SDK -->
-		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+		<!-- <script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script> -->
 		<!-- highlight.js SDK -->
 		<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"> -->
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/tomorrow-night.min.css">
-		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+		<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/tomorrow-night.min.css"> -->
+		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script> -->
+		<link rel="stylesheet" href="css/github.min.css">
 		<script src="js/highlight.pack.js"></script>
-		<script>
-			hljs.initHighlightingOnLoad();
-		</script>
+		<script>hljs.initHighlightingOnLoad();</script>
 		<script type="text/javascript">
-			document.addEventListener('UniAppJSBridgeReady', function() {
-				// 当前环境
-				uni.getEnv(function(res) {
-					console.log('当前环境：' + JSON.stringify(res));
-				});
+			// document.addEventListener('UniAppJSBridgeReady', function() {
+			// 	当前环境
+			// 	uni.getEnv(function(res) {
+			// 		console.log('当前环境：' + JSON.stringify(res));
+			// 	});
+			// });
 
-				function getQueryString(key) {
-					var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)")
-					var r = window.location.search.substr(1).match(reg)
-					if (r != null) return unescape(r[2])
-					return null
-				}
-				
-				const reposContent = decodeURIComponent(getQueryString('reposContent'))
-				document.getElementById('hybrid-code').innerHTML = reposContent
-				
+			function getQueryString(key) {
+				var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)")
+				var r = window.location.search.substr(1).match(reg)
+				if (r != null) return unescape(r[2])
+				return null
+			}
+			
+			const reposContent = decodeURIComponent(getQueryString('reposContent'))
+			document.getElementById('hybrid-code').innerHTML = reposContent
+			setTimeout(function() {
 				document.querySelectorAll('pre code').forEach((block) => {
-				  hljs.highlightBlock(block);
+					hljs.highlightBlock(block);
 				});
-				
-				document.addEventListener('DOMContentLoaded', (event) => {
-				});
-			});
+			}, 0);
 		</script>
 	</body>
 </html>

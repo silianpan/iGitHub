@@ -7,16 +7,17 @@
 	</head>
 
 	<body>
-		<pre><code class="html"></code></pre>
+		<pre><code id="hybrid-code" class="language-java" style="font-size: xx-large;"></code></pre>
 		<!-- uni SDK -->
 		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
 		<!-- highlight.js SDK -->
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+		<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"> -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/tomorrow-night.min.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-		<!-- and it's easy to individually load additional languages -->
-		<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
-		<!-- axios -->
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="js/highlight.pack.js"></script>
+		<script>
+			hljs.initHighlightingOnLoad();
+		</script>
 		<script type="text/javascript">
 			document.addEventListener('UniAppJSBridgeReady', function() {
 				// 当前环境
@@ -30,24 +31,15 @@
 					if (r != null) return unescape(r[2])
 					return null
 				}
-				const owner = getQueryString('owner')
-				const repo = getQueryString('repo')
-				const path = getQueryString('path')
-				console.log(owner, repo, path)
-				// axios({
-				//   method: 'get',
-				//   baseURL: 'https://api.github.com',
-				//   headers: {
-				// 	  'Accept': 'application/vnd.github.v3.html+json'
-				//   },
-				//   url: `/repos/${owner}/${repo}/contents/${path}`
-				// }).then(res => {
-				// 	console.log(res)
-				// })
-			});
-			document.addEventListener('DOMContentLoaded', (event) => {
+				
+				const reposContent = decodeURIComponent(getQueryString('reposContent'))
+				document.getElementById('hybrid-code').innerHTML = reposContent
+				
 				document.querySelectorAll('pre code').forEach((block) => {
-					hljs.highlightBlock(block);
+				  hljs.highlightBlock(block);
+				});
+				
+				document.addEventListener('DOMContentLoaded', (event) => {
 				});
 			});
 		</script>

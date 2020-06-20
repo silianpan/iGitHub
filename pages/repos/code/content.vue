@@ -6,7 +6,7 @@
 	<!-- #endif -->
 	<!-- #ifndef H5 -->
 	<view>
-		<web-view :src="`/hybrid/html/index.html?owner=${owner}&repo=${repo}&path=${path}`"></web-view>
+		<web-view :src="`/hybrid/html/index.html?reposContent=${encodeURIComponent(reposContent)}`"></web-view>
 	</view>
 	<!-- #endif -->
 </template>

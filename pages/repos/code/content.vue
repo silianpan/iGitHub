@@ -1,7 +1,14 @@
 <template>
+	<!-- #ifdef H5 -->
 	<div id="codeView" v-highlight>
 		<pre><code v-html="reposContent"></code></pre>
 	</div>
+	<!-- #endif -->
+	<!-- #ifndef H5 -->
+	<view>
+		<web-view :src="`/hybrid/html/index.html?owner=${owner}&repo=${repo}&path=${path}`"></web-view>
+	</view>
+	<!-- #endif -->
 </template>
 
 <script>

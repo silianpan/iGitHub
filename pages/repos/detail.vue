@@ -37,7 +37,7 @@
 					<text class="padding-left-sm">{{repo.language}}</text>
 				</view>
 				<view class="action">
-					<view>{{$_.toString(repo.license.spdx_id) + ' · ' + $_.toString($NP.round($NP.divide(repo.size, 1024), 1)) + 'MB'}}</view>
+					<view>{{(repo.license && repo.license.spdx_id ? $_.toString(repo.license.spdx_id) + ' · ' : '') + $_.toString($NP.round($NP.divide(repo.size, 1024), 1)) + 'MB'}}</view>
 				</view>
 			</view>
 			<!-- issues -->

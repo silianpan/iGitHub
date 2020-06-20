@@ -16,9 +16,8 @@
 		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script> -->
 		<link rel="stylesheet" href="css/github.min.css">
 		<script src="js/highlight.pack.js"></script>
-		<script>
-			hljs.initHighlightingOnLoad();
-		</script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		<script src="js/axios.min.js"></script>
 		<script type="text/javascript">
 			// document.addEventListener('UniAppJSBridgeReady', function() {
 			// 	当前环境
@@ -46,13 +45,26 @@
 				return result ? decodeURIComponent(result[2]) : null;
 			}
 
-			const reposContent = getUrlParam('reposContent')
-			document.getElementById('hybrid-code').innerHTML = reposContent
-			setTimeout(function() {
-				document.querySelectorAll('pre code').forEach((block) => {
-					hljs.highlightBlock(block);
-				});
-			}, 0);
+			const owner = getUrlParam('owner')
+			const repo = getUrlParam('repo')
+			const path = getUrlParam('path')
+			axios({
+				method: 'get',
+				baseURL: 'https://api.github.com',
+				url: `/repos/${owner}/${repo}/contents/${path}`,
+				responseType: 'text',
+				withCredentials: true,
+				headers: {
+					'Accept': 'application/vnd.github.v3.html+json'
+				}
+			}).then(res => {
+				document.getElementById('hybrid-code').innerHTML = res.data
+				setTimeout(function() {
+					document.querySelectorAll('pre code').forEach((block) => {
+						hljs.highlightBlock(block);
+					});
+				}, 0);
+			});
 		</script>
 	</body>
 </html>

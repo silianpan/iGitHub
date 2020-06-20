@@ -5,8 +5,8 @@
 	</view>
 	<!-- #endif -->
 	<!-- #ifndef H5 -->
-	<view v-if="reposContent">
-		<web-view :src="`/hybrid/html/index.html?reposContent=${encodeURIComponent(reposContent)}`"></web-view>
+	<view v-if="owner && repo && path">
+		<web-view :src="`/hybrid/html/index.html?owner=${encodeURIComponent(owner)}&repo=${encodeURIComponent(repo)}&path=${encodeURIComponent(path)}`"></web-view>
 	</view>
 	<!-- #endif -->
 </template>
@@ -24,7 +24,9 @@
 			if (option.path) {
 				this.path = option.path
 			}
+			// #ifdef H5
 			this.getReposContent()
+			// #endif
 		},
 		methods: {
 			async getReposContent() {

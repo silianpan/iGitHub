@@ -66,7 +66,7 @@
 	@import 'assets/css/custom.css';
 	@import 'assets/css/custom.less';
 	@import 'assets/css/file-icons/style.css';
-	@import 'prismjs/themes/prism.css';
+	@import 'highlight.js/styles/github.css';
 </style>
 
 <style lang="less">

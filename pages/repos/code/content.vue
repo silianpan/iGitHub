@@ -1,11 +1,10 @@
 <template>
-	<view>
+	<div id="codeView" v-highlight>
 		<pre><code v-html="reposContent"></code></pre>
-	</view>
+	</div>
 </template>
 
 <script>
-	import Prism from 'prismjs'
 	export default {
 		data() {
 			return {
@@ -22,12 +21,11 @@
 		},
 		methods: {
 			async getReposContent() {
-				const code = await this.$minApi.getReposContent(this.owner, this.repo, this.path, {
+				this.reposContent = await this.$minApi.getReposContent(this.owner, this.repo, this.path, {
 					header: {
 						'Accept': 'application/vnd.github.v3.html+json'
 					}
 				})
-				this.reposContent = Prism.highlight(code, Prism.languages.html, 'html')
 			}
 		}
 	}

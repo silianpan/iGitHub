@@ -13,7 +13,7 @@
 						</view>
 						<view class="description u-skeleton-rect">{{ repo.description }}</view>
 						<uni-link class="u-skeleton-rect" v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
-						<view class="remark u-skeleton-rect">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
+						<view v-if="repo.updated_at" class="remark u-skeleton-rect">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
 					</view>
 				</view>
 			</view>

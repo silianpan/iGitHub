@@ -1,104 +1,107 @@
 <!-- repo detail -->
 <template>
-	<scroll-view scroll-y>
-		<view class="order">
-			<view class="item">
-				<view class="left">
-					<image class="avatar" :src="repo.owner.avatar_url" mode="aspectFill"></image>
-				</view>
-				<view class="content">
-					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
-						<view class="title u-line-2">{{ repo.full_name }}</view>
+	<view>
+		<scroll-view scroll-y class="u-skeleton">
+			<view class="order">
+				<view class="item">
+					<view class="left">
+						<image class="avatar u-skeleton-circle" :src="repo.owner.avatar_url" mode="aspectFill"></image>
 					</view>
-					<view class="description">{{ repo.description }}</view>
-					<uni-link v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
-					<view class="remark">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
+					<view class="content">
+						<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
+							<view class="title u-line-2 u-skeleton-rect">{{ repo.full_name }}</view>
+						</view>
+						<view class="description u-skeleton-rect">{{ repo.description }}</view>
+						<uni-link class="u-skeleton-rect" v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
+						<view class="remark u-skeleton-rect">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="cu-list grid col-3 text-center no-border">
-			<view class="cu-item" v-for="(value, key) in numInfo" :key="key">
-				<view class="badge text-xxl text-black">
-					<block>{{value}}</block>
-				</view>
-				<text class="text-xl">{{key}}</text>
-			</view>
-		</view>
-		<u-gap />
-		<view class="cu-progress radius" @tap="clickLangPercent">
-			<view v-for="item in reposLanguages" :key="item.lang" :style="[{ width: item.percent, 'background-color': item.color}]"></view>
-		</view>
-
-		<view class="cu-list menu">
-			<!-- code -->
-			<view class="cu-item arrow" @tap="tapCode">
-				<view class="content">
-					<text class="list-left-icon cu-avatar round iconfont iconcode" :style="{'background-color':languageColor}" />
-					<text class="padding-left-sm">{{repo.language}}</text>
-				</view>
-				<view class="action">
-					<view>{{(repo.license && repo.license.spdx_id ? $_.toString(repo.license.spdx_id) + ' · ' : '') + $_.toString($NP.round($NP.divide(repo.size, 1024), 1)) + 'MB'}}</view>
-				</view>
-			</view>
-			<!-- issues -->
-			<view class="cu-item arrow">
-				<view class="content">
-					<text class="list-left-icon cu-avatar round iconfont iconissue" style="background-color: #37cb75;" />
-					<text class="padding-left-sm">Issues</text>
-				</view>
-				<view class="action">
-					<view>{{repo.open_issues}}</view>
-				</view>
-			</view>
-			<!-- pull requests -->
-			<view class="cu-item arrow">
-				<view class="content">
-					<text class="list-left-icon cu-avatar round iconfont iconpullrequest" style="background-color: #5756d5;" />
-					<text class="padding-left-sm">Pull Requests</text>
-				</view>
-				<view class="action">
-					<view>{{reposPullRequests.length}}</view>
+			<view class="cu-list grid col-3 text-center no-border">
+				<view class="cu-item u-skeleton-rect" v-for="(value, key) in numInfo" :key="key">
+					<view class="badge text-xxl text-black">
+						<block>{{value}}</block>
+					</view>
+					<text class="text-xl">{{key}}</text>
 				</view>
 			</view>
 			<u-gap />
-			<!-- branches -->
-			<view class="cu-item arrow">
-				<view class="content">
-					<text class="list-left-icon cu-avatar round iconfont icon24gf-branches" style="background-color: #434955;" />
-					<text class="padding-left-sm">Branches</text>
-				</view>
-				<view class="action">
-					<view>{{ (!$_.isEmpty(reposBranches) ? reposBranches[0].name + ' · ' : '') + $_.toString(reposBranches.length)}}</view>
-				</view>
+			<view class="cu-progress radius u-skeleton-rect" @tap="clickLangPercent">
+				<view v-for="item in reposLanguages" :key="item.lang" :style="[{ width: item.percent, 'background-color': item.color}]"></view>
 			</view>
-			<!-- readme -->
-			<view class="cu-item">
-				<view class="content">
-					<text class="list-left-icon cu-avatar round iconfont iconreadme" style="background-color: #028fff;" />
-					<text class="padding-left-sm">Readme</text>
-				</view>
-				<view class="action">
-					<view @tap="getReposReadme" class="iconfont iconrefresh" style="color:#028fff"></view>
-				</view>
-			</view>
-		</view>
 
-		<view class="order" v-html="reposReadme"></view>
-
-		<u-popup v-model="modelLangPercent" mode="top">
-			<view class="cu-list menu card-menu margin-top">
-				<view class="cu-item" v-for="item in reposLanguages" :key="item.lang">
+			<view class="cu-list menu">
+				<!-- code -->
+				<view class="cu-item arrow u-skeleton-rect" @tap="tapCode">
 					<view class="content">
-						<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.color}"></text>
-						<text>{{item.lang}}</text>
+						<text class="list-left-icon cu-avatar round iconfont iconcode" :style="{'background-color':languageColor}" />
+						<text class="padding-left-sm">{{repo.language}}</text>
 					</view>
 					<view class="action">
-						<view>{{item.percent}}</view>
+						<view>{{(repo.license && repo.license.spdx_id ? $_.toString(repo.license.spdx_id) + ' · ' : '') + $_.toString($NP.round($NP.divide(repo.size, 1024), 1)) + 'MB'}}</view>
+					</view>
+				</view>
+				<!-- issues -->
+				<view class="cu-item arrow u-skeleton-rect">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round iconfont iconissue" style="background-color: #37cb75;" />
+						<text class="padding-left-sm">Issues</text>
+					</view>
+					<view class="action">
+						<view>{{repo.open_issues}}</view>
+					</view>
+				</view>
+				<!-- pull requests -->
+				<view class="cu-item arrow u-skeleton-rect">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round iconfont iconpullrequest" style="background-color: #5756d5;" />
+						<text class="padding-left-sm">Pull Requests</text>
+					</view>
+					<view class="action">
+						<view>{{reposPullRequests.length}}</view>
+					</view>
+				</view>
+				<u-gap />
+				<!-- branches -->
+				<view class="cu-item arrow u-skeleton-rect">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round iconfont icon24gf-branches" style="background-color: #434955;" />
+						<text class="padding-left-sm">Branches</text>
+					</view>
+					<view class="action">
+						<view>{{ (!$_.isEmpty(reposBranches) ? reposBranches[0].name + ' · ' : '') + $_.toString(reposBranches.length)}}</view>
+					</view>
+				</view>
+				<!-- readme -->
+				<view class="cu-item u-skeleton-rect">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round iconfont iconreadme" style="background-color: #028fff;" />
+						<text class="padding-left-sm">Readme</text>
+					</view>
+					<view class="action">
+						<view @tap="getReposReadme" class="iconfont iconrefresh" style="color:#028fff"></view>
 					</view>
 				</view>
 			</view>
-		</u-popup>
-	</scroll-view>
+
+			<view class="order u-skeleton-rect" v-html="reposReadme"></view>
+
+			<u-popup v-model="modelLangPercent" mode="top">
+				<view class="cu-list menu card-menu margin-top">
+					<view class="cu-item" v-for="item in reposLanguages" :key="item.lang">
+						<view class="content">
+							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.color}"></text>
+							<text>{{item.lang}}</text>
+						</view>
+						<view class="action">
+							<view>{{item.percent}}</view>
+						</view>
+					</view>
+				</view>
+			</u-popup>
+		</scroll-view>
+		<u-skeleton :loading="loading" :animation="true"></u-skeleton>
+	</view>
 </template>
 
 <script>
@@ -107,6 +110,7 @@
 	export default {
 		data() {
 			return {
+				loading: true,
 				owner: '',
 				repoName: '',
 				modelLangPercent: false,
@@ -167,6 +171,7 @@
 			},
 			async getReposReadme() {
 				this.reposReadme = await this.$minApi.getReposReadme(this.owner, this.repoName)
+				this.loading = false
 			},
 			clickLangPercent() {
 				this.modelLangPercent = true

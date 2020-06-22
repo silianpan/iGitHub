@@ -21,6 +21,7 @@
 
 <script>
 	import FileIcons from 'file-icons-js'
+	import { filePreview } from '@/utils/preview'
 	export default {
 		data() {
 			return {
@@ -73,10 +74,7 @@
 						this.getReposContent()
 						break
 					case 'file':
-						// show code
-						uni.navigateTo({
-							url: `/pages/repos/code/content?owner=${this.owner}&repo=${this.repo}&path=${item.path}`
-						})
+						filePreview(this.owner, this.repo, item.path)
 						break
 				}
 			},

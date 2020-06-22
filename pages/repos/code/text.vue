@@ -1,3 +1,4 @@
+<!-- 文本预览 -->
 <template>
 	<!-- #ifdef H5 -->
 	<view v-if="reposContent" v-highlight>

@@ -60,7 +60,7 @@
 			"navigationBarTitleText": "代码"
 		}
 	}, {
-		"path": "pages/repos/code/content",
+		"path": "pages/repos/code/text",
 		"style": {
 			"navigationBarTitleText": "代码"
 		}

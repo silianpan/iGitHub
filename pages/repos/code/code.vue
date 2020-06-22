@@ -2,14 +2,14 @@
 	<view>
 		<u-sticky>
 			<view class="primary-color u-font-xl" style="padding: 10rpx 30rpx;">
-				<block v-for="(item, index) in pathList" :key="index">
+				<block v-for="(item, index) in pathList" :key="`${item}${index}`">
 					<u-icon name="arrow-right" @tap="tapDir(index, item)"></u-icon>
 					<text @tap="tapDir(index + 1, item)">{{ item }}</text>
 				</block>
 			</view>
 		</u-sticky>
 		<view class="cu-list menu">
-			<view class="cu-item" v-for="item in fileList" :key="item.sha" @tap="tapFileOrDir(item)">
+			<view class="cu-item" v-for="(item, index) in fileList" :key="`${item.name}${index}`" @tap="tapFileOrDir(item)">
 				<view class="content">
 					<text :class="[getFileIconClass(item.type), FileIcons.getClassWithColor(item.name)]" class="margin-right-xs u-font-xl file-icon" />
 					<text class="u-font-xl">{{ item.name }}</text>

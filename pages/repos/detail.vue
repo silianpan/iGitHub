@@ -9,10 +9,11 @@
 					</view>
 					<view class="content">
 						<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
-							<view class="title u-line-2">{{ repo.full_name }}</view>
+							<view class="title u-line-2"><text selectable>{{ repo.full_name }}</text></view>
 						</view>
-						<view class="description">{{ repo.description }}</view>
-						<uni-link class="u-font-lg" v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
+						<view class="description"><text selectable>{{ repo.description }}</text></view>
+						<uni-link class="u-font-lg" v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage"
+						 showUnderLine="false" />
 						<view v-if="repo.updated_at" class="remark">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
 					</view>
 				</view>
@@ -83,8 +84,9 @@
 					</view>
 				</view>
 			</view>
-
-			<view class="order u-skeleton-rect" v-html="reposReadme"></view>
+			<view class="order u-skeleton-rect bg-white">
+				<text selectable v-html="reposReadme"></text>
+			</view>
 
 			<u-popup v-model="modelLangPercent" mode="top">
 				<view class="cu-list menu card-menu margin-top">

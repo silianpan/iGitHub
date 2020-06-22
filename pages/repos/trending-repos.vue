@@ -8,15 +8,15 @@
 				<!-- <u-avatar class="avatar" :src="item.avatar" mode="square" size="mini"/> -->
 				<view class="content">
 					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
-						<view class="title u-line-2">{{ item.author + ' / ' + item.name }}</view>
-						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="small" />
+						<view class="title u-line-2"><text selectable>{{ item.author + ' / ' + item.name }}</text></view>
+						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="normal" />
 					</view>
-					<view class="description">{{ item.description }}</view>
-					<view class="remark">今日{{ item.currentPeriodStars }}星</view>
+					<view class="description"><text selectable>{{ item.description }}</text></view>
+					<view class="remark"><text selectable>今日{{ item.currentPeriodStars }}星</text></view>
 					<u-row>
 						<u-col span="2.5">
 							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.languageColor}"></text>
-							<text class="u-font-lg">{{item.language}}</text>
+							<text selectable class="u-font-lg">{{item.language}}</text>
 						</u-col>
 						<u-col span="2.5">
 							<text class="iconfont icongithub-star margin-right-xs text-main"></text>

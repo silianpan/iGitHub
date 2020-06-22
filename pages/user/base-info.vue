@@ -8,9 +8,9 @@
 				</view>
 			</view>
 		</view>
-		<view class="padding flex flex-direction">
+		<!-- <view class="padding flex flex-direction">
 			<button class="cu-btn line-red margin-tb-sm" @tap="logoutTap">退出</button>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -23,11 +23,11 @@
 		},
 		onLoad(option) {
 			this.baseInfo = JSON.parse(decodeURIComponent(option.baseInfo))
-		},
-		methods: {
-			logoutTap() {
-				this.$store.dispatch('logoutAuth')
-			}
 		}
+		// methods: {
+		// 	logoutTap() {
+		// 		this.$store.dispatch('logoutAuth')
+		// 	}
+		// }
 	}
 </script>

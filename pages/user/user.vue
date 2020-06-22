@@ -32,7 +32,7 @@
 					 :key="index" :index="index">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]" />
-							<text selectable v-if="baseInfoIcon[index].arrow"><u-link :font-size="30" color="#8799a3" class="text-grey padding-left-sm" :href="value">{{ value }}</u-link></text>
+							<text class="link" selectable v-if="baseInfoIcon[index].arrow"><u-link :font-size="30" color="#8799a3" class="text-grey padding-left-sm" :href="value">{{ value }}</u-link></text>
 							<text v-else class="text-grey padding-left-sm">{{value}}</text>
 						</view>
 					</view>

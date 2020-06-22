@@ -1,10 +1,10 @@
 <template>
-	<view>
+	<view style="padding-top: 10vh;">
 		<view class="login-logo">
-			<image mode="aspectFit" src="../../assets/img/Octocat.png" />
+			<image mode="aspectFit" src="../../assets/img/logo.png" />
 		</view>
 		<view class="padding-lr-xl flex flex-direction text-center">
-			<button class="cu-btn bg-gradual-green margin-tb-sm lg" @click="loginAuth">安全登录</button>
+			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="loginAuth">安全登录</button>
 		</view>
 	</view>
 </template>

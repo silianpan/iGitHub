@@ -2,8 +2,8 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="u-skeleton">
-			<view class="order">
-				<view class="item u-skeleton-rect">
+			<view class="order u-skeleton-rect">
+				<view class="item">
 					<view class="left">
 						<image class="avatar" :src="repo.owner.avatar_url" mode="aspectFill"></image>
 					</view>
@@ -12,7 +12,7 @@
 							<view class="title u-line-2">{{ repo.full_name }}</view>
 						</view>
 						<view class="description">{{ repo.description }}</view>
-						<uni-link v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
+						<uni-link class="u-font-lg" v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage" showUnderLine="false" />
 						<view v-if="repo.updated_at" class="remark">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
 					</view>
 				</view>

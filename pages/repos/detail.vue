@@ -12,8 +12,7 @@
 							<view class="title u-line-2"><text selectable>{{ repo.full_name }}</text></view>
 						</view>
 						<view class="description"><text selectable>{{ repo.description }}</text></view>
-						<uni-link class="u-font-lg" v-if="repo.homepage" color="#0965d2" :href="repo.homepage" :text="repo.homepage"
-						 showUnderLine="false" />
+						<text selectable v-if="repo.homepage"><u-link :font-size="30" color="#0965d2" :href="repo.homepage">{{ repo.homepage }}</u-link></text>
 						<view v-if="repo.updated_at" class="remark">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
 					</view>
 				</view>

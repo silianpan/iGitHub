@@ -5,9 +5,9 @@
 				<view class="item align-center u-skeleton-rect">
 					<u-avatar class="avatar2" :src="authUser.avatar_url" mode="square" size="large" />
 					<view class="content">
-						<view v-if="authUser.name && authUser.login" class="title u-line-2">{{ authUser.name || '' }}<text class="sub-title">{{' (' + (authUser.login || '') + ')' }}</text></view>
-						<view class="remark2">{{ authUser.bio }}</view>
-						<view v-if="authUser.created_at" class="description">注册于{{ $u.timeFormat(new Date(authUser.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</view>
+						<view v-if="authUser.name && authUser.login" class="title u-line-2"><text selectable>{{ authUser.name || '' }}<text selectable class="sub-title">{{' (' + (authUser.login || '') + ')' }}</text></text></view>
+						<view class="remark2"><text selectable>{{ authUser.bio }}</text></view>
+						<view v-if="authUser.created_at" class="description"><text selectable>注册于{{ $u.timeFormat(new Date(authUser.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
 					</view>
 					<view class="right">
 						<u-icon name="arrow-right" color="#8799a3" @click="briefInfoClick" />
@@ -32,8 +32,7 @@
 					 :key="index" :index="index">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]" />
-							<uni-link class="text-grey padding-left-sm" v-if="baseInfoIcon[index].arrow" :href="value" :text="value"
-							 showUnderLine="false"></uni-link>
+							<text selectable v-if="baseInfoIcon[index].arrow"><u-link :font-size="30" color="#8799a3" class="text-grey padding-left-sm" :href="value">{{ value }}</u-link></text>
 							<text v-else class="text-grey padding-left-sm">{{value}}</text>
 						</view>
 					</view>

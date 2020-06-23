@@ -87,6 +87,10 @@ export default {
 		// get a tree
 		getATree(owner, repo, treeSha) {
 			return minRequest.get(`/repos/${owner}/${repo}/git/trees/${treeSha}`)
+		},
+		// list received_events
+		listAuthUserReceivedEvents(username, page, perPage) {
+			return minRequest.get(`/users/${username}/received_events?page=${page}&per_page=${perPage}`)
 		}
 	}
 }

@@ -179,7 +179,7 @@
 			},
 			tapCode() {
 				uni.navigateTo({
-					url: `/pages/repos/code/code?owner=${this.owner}&repo=${this.repoName}`
+					url: `/pages/repos/code/code?owner=${this.owner}&repo=${this.repoName}&defaultBranch=${this.repo.default_branch}`
 				})
 			}
 		}

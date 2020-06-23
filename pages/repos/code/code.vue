@@ -29,6 +29,7 @@
 				owner: '',
 				repo: '',
 				path: '',
+				defaultBranch: '',
 				fileList: []
 			}
 		},
@@ -42,6 +43,9 @@
 			this.repo = option.repo
 			if (option.path) {
 				this.path = option.path
+			}
+			if (option.defaultBranch) {
+				this.defaultBranch = option.defaultBranch
 			}
 			this.getReposContent()
 		},
@@ -74,7 +78,7 @@
 						this.getReposContent()
 						break
 					case 'file':
-						filePreview(this.owner, this.repo, item.path)
+						filePreview(this.owner, this.repo, item.path, this.defaultBranch)
 						break
 				}
 			},

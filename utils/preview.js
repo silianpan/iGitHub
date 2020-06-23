@@ -1,8 +1,8 @@
-import Vue from 'vue'
+import globalConfig from '@/config'
 /**
  * preview: text、image、other
  */
-export const filePreview = (owner, repo, path) => {
+export const filePreview = (owner, repo, path, defaultBranch = 'master') => {
 	// file type
 	if (path && typeof path === 'string') {
 		let index = path.lastIndexOf('.')
@@ -10,37 +10,18 @@ export const filePreview = (owner, repo, path) => {
 		if (suffix) {
 			suffix = suffix.toLowerCase()
 			switch (suffix) {
-				case 'pdf':
-				case 'doc':
-				case 'docx':
-				case 'xls':
-				case 'xlsx':
-				case 'ppt':
-				case 'pptx':
-					// TODO pdf preview
-					uni.showToast({
-						title: 'this file cannot preview!',
-						icon: none
-					})
-					break
 				case 'jpg':
 				case 'jpeg':
 				case 'png':
 				case 'bmp':
 				case 'gif':
-					Vue.prototype.$minApi.getReposContent(owner, repo, path).then(res => {
-						// image preview
-						if (res) {
-							uni.previewImage({
-								urls: ['data:image/png;base64,' + res.content]
-							})
-						}
+					uni.previewImage({
+						urls: [`${globalConfig.githubRawUrl}/${owner}/${repo}/${defaultBranch}/${path}`]
 					})
 					break
 				default:
-					// text preview
 					uni.navigateTo({
-						url: `/pages/repos/code/text?owner=${owner}&repo=${repo}&path=${path}`
+						url: `/pages/repos/code/text?owner=${owner}&repo=${repo}&path=${path}&defaultBranch=${defaultBranch}`
 					})
 			}
 		}

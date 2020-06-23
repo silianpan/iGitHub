@@ -1,4 +1,4 @@
-<!-- 文本预览 -->
+<!-- text preview -->
 <template>
 	<!-- #ifdef H5 -->
 	<view v-if="reposContent" v-highlight>
@@ -6,8 +6,8 @@
 	</view>
 	<!-- #endif -->
 	<!-- #ifndef H5 -->
-	<view v-if="owner && repo && path">
-		<web-view :src="`/hybrid/html/index.html?owner=${encodeURIComponent(owner)}&repo=${encodeURIComponent(repo)}&path=${encodeURIComponent(path)}`"></web-view>
+	<view v-if="owner && repo && path && defaultBranch">
+		<web-view :src="`/hybrid/html/index.html?owner=${encodeURIComponent(owner)}&repo=${encodeURIComponent(repo)}&path=${encodeURIComponent(path)}&defaultBranch=${encodeURIComponent(defaultBranch)}`"></web-view>
 	</view>
 	<!-- #endif -->
 </template>
@@ -24,6 +24,9 @@
 			this.repo = option.repo
 			if (option.path) {
 				this.path = option.path
+			}
+			if (option.defaultBranch) {
+				this.defaultBranch = option.defaultBranch
 			}
 			// #ifdef H5
 			this.getReposContent()

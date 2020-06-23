@@ -7,7 +7,9 @@
 	</head>
 
 	<body>
-		<pre><code id="hybrid-code" style="font-size: 32px;"></code></pre>
+		<button style="font-size:32px;color:#ffffff;background-color:#1890ff;" id="hybrid-download-file">下载</button>
+		<div id="hybrid-error-msg" style="font-size:48px;color:#fa541c;word-break:break-all;"></div>
+		<pre><code id="hybrid-code" style="font-size:32px;"></code></pre>
 		<!-- uni SDK -->
 		<!-- <script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script> -->
 		<!-- highlight.js SDK -->
@@ -53,6 +55,7 @@
 			const owner = getUrlParam('owner')
 			const repo = getUrlParam('repo')
 			const path = getUrlParam('path')
+			const defaultBranch = getUrlParam('defaultBranch')
 			axios({
 				method: 'get',
 				baseURL: 'https://api.github.com',
@@ -72,7 +75,13 @@
 						hljs.lineNumbersBlock(block);
 					});
 				}, 0);
+			}).catch(() => {
+				document.getElementById('hybrid-error-msg').innerHTML =
+					'Sorry about that, but we can’t show files that are this big right now.'
 			});
+			document.getElementById('hybrid-download-file').addEventListener('click', function(e) {
+				window.location.href = `https://raw.githubusercontent.com/${owner}/${repo}/${defaultBranch}/${path}`
+			}, false);
 		</script>
 	</body>
 </html>

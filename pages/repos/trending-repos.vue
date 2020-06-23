@@ -1,5 +1,5 @@
 <template>
-	<view class="page-box">
+	<view>
 		<view class="order" v-for="(item, index) in repos" :key="index">
 			<view class="item" @tap="clickRepoDetail(item)">
 				<view class="left">
@@ -12,6 +12,7 @@
 						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="normal" />
 					</view>
 					<view class="description"><text selectable>{{ item.description }}</text></view>
+					<text class="link" selectable><u-link :font-size="30" color="#0965d2" :href="item.url">{{ item.url }}</u-link></text>
 					<view class="remark"><text selectable>今日{{ item.currentPeriodStars }}星</text></view>
 					<u-row>
 						<u-col span="2.5">

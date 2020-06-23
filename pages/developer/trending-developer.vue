@@ -1,5 +1,5 @@
 <template>
-	<view class="page-box">
+	<view>
 		<view class="order" v-for="(item, index) in developers" :key="index">
 			<view class="item">
 				<view class="left">

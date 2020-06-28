@@ -4,11 +4,11 @@
 <script>
 	export default {
 		onLoad() {
-			this.listAuthUserEvents()
+			this.listAuthNotifications()
 		},
 		methods: {
-			async listAuthUserEvents() {
-				const res = await this.$minApi.listAuthUserEvents(this.username)
+			async listAuthNotifications() {
+				const res = await this.$minApi.listAuthNotifications()
 				console.log(res)
 			}
 		}

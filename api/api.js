@@ -84,21 +84,25 @@ export default {
 		getReposContent(owner, repo, path = '', options = {}) {
 			return minRequest.get(`/repos/${owner}/${repo}/contents/${path}`, null, options)
 		},
-		// get a tree
-		getATree(owner, repo, treeSha) {
-			return minRequest.get(`/repos/${owner}/${repo}/git/trees/${treeSha}`)
-		},
 		// list received_events
 		listAuthUserReceivedEvents(username, page = 1, perPage = 30) {
 			return minRequest.get(`/users/${username}/received_events?page=${page}&per_page=${perPage}`)
-		},
-		// list events
-		listAuthUserEvents(username, page = 1, perPage = 30) {
-			return minRequest.get(`/users/${username}/events?page=${page}&per_page=${perPage}`)
-		},
-		// list notifications
-		listAuthNotifications(params) {
-			return minRequest.get('/notifications', params)
 		}
+		// list events
+		// listAuthUserEvents(username, page = 1, perPage = 30) {
+		// 	return minRequest.get(`/users/${username}/events?page=${page}&per_page=${perPage}`)
+		// },
+		// list public received_events
+		// listPublicReceivedEvents(username, page = 1, perPage = 30) {
+		// 	return minRequest.get(`/users/${username}/received_events/public?page=${page}&per_page=${perPage}`)
+		// },
+		// list public events
+		// listPublicEvents() {
+		// 	return minRequest.get('/events')
+		// },
+		// list notifications
+		// listAuthNotifications(params) {
+		// 	return minRequest.get('/notifications', params)
+		// }
 	}
 }

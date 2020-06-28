@@ -97,8 +97,8 @@ export default {
 			return minRequest.get(`/users/${username}/events?page=${page}&per_page=${perPage}`)
 		},
 		// list notifications
-		listAuthNotifications() {
-			return minRequest.get('/notifications')
+		listAuthNotifications(params) {
+			return minRequest.get('/notifications', params)
 		}
 	}
 }

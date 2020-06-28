@@ -108,6 +108,9 @@ export const checkStatus = (response = {}) => {
 	if (response.error) {
 		showErrorMsg(response.error_description || response.error)
 	}
+	if (response.message) {
+		showErrorMsg(response.message)
+	}
 	return response
 }
 

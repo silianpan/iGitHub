@@ -3,13 +3,15 @@
 
 <script>
 	export default {
-		onLoad() {
+		onShow() {
 			this.listAuthNotifications()
 		},
 		methods: {
 			async listAuthNotifications() {
 				const res = await this.$minApi.listAuthNotifications()
-				console.log(res)
+				uni.showModal({
+					content: JSON.stringify(res)
+				})
 			}
 		}
 	}

@@ -12,7 +12,7 @@
 						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="normal" />
 					</view>
 					<view class="description"><text selectable>{{ item.description }}</text></view>
-					<text class="link" selectable><u-link :font-size="30" color="#0965d2" :href="item.url">{{ item.url }}</u-link></text>
+					<u-link class="link" :font-size="30" color="#0965d2" :href="item.url">{{ item.url }}</u-link>
 					<view class="remark"><text selectable>今日{{ item.currentPeriodStars }}星</text></view>
 					<u-row>
 						<u-col span="2.5">

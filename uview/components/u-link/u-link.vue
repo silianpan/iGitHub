@@ -1,5 +1,5 @@
 <template>
-	<text class="u-link" @tap.stop="openLink" :style="{
+	<text selectable class="u-link" @tap.stop="openLink" :style="{
 		color: color,
 		fontSize: fontSize + 'rpx',
 		borderBottom: underLine ? `1px solid ${lineColor ? lineColor : color}` : 'none',

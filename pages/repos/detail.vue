@@ -129,7 +129,6 @@
 			}
 		},
 		onLoad(option) {
-			this.languageColor = option.languageColor
 			this.owner = option.owner
 			this.repoName = option.repo
 			this.getRepos()
@@ -163,6 +162,9 @@
 					newRet.push(lang)
 				}
 				this.reposLanguages = newRet
+				if (!this.$_.isEmpty(newRet)) {
+					this.languageColor = newRet[0].color
+				}
 			},
 			async listPullRequests() {
 				this.reposPullRequests = await this.$minApi.listPullRequests(this.owner, this.repoName)

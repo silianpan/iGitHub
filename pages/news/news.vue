@@ -6,8 +6,14 @@
 					<image class="avatar" :src="item.actor.avatar_url" mode="aspectFill"></image>
 				</view>
 				<view class="content">
-					<view class="title u-line-2">{{ item.actor.login }}<text>{{ ' ' + item.payload.action + ' ' }}</text><text class="sub-title">{{ item.repo.name }}</text></view>
-					<view class="remark2"><text class="iconfont iconbook1 margin-right-xs" />{{ item.repo.name }}</view>
+					<block v-if="item.type === 'WatchEvent'">
+						<view class="title">
+							<text selectable>{{ item.actor.login }}</text>
+							<text class="text-black">{{ ' ' + item.payload.action + ' ' }}</text>
+							<text class="sub-title" style="color: #0965d2!important;" @tap="clickRepoDetail(item.repo.name)">{{ item.repo.name }}</text>
+						</view>
+						<view class="remark2"><text class="iconfont icongithub-star margin-right-xs" />{{ $u.timeFrom(new Date(item.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</view>
+					</block>
 				</view>
 			</view>
 		</view>
@@ -31,6 +37,12 @@
 		methods: {
 			async listAuthUserReceivedEvents() {
 				this.receivedEvents = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name)
+			},
+			clickRepoDetail(repoName) {
+				const tmp = _.split(repoName, '/')
+				uni.navigateTo({
+					url: `/pages/repos/detail?owner=${tmp[0]}&repo=${tmp[1]}`
+				})
 			}
 		}
 	}

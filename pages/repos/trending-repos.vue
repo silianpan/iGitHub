@@ -53,7 +53,7 @@
 			},
 			clickRepoDetail(item) {
 				uni.navigateTo({
-					url: `/pages/repos/detail?owner=${item.author}&repo=${item.name}&languageColor=${item.languageColor}`
+					url: `/pages/repos/detail?owner=${item.author}&repo=${item.name}`
 				})
 			}
 		}

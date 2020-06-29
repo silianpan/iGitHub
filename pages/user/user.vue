@@ -1,13 +1,13 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="u-skeleton">
-			<view class="order">
+			<view class="order" v-if="authUserInfo">
 				<view class="item align-center u-skeleton-rect">
-					<u-avatar class="avatar2" :src="authUser.avatar_url" mode="square" size="large" />
+					<u-avatar class="avatar2" v-if="authUserInfo.avatar_url" :src="authUserInfo.avatar_url" mode="square" size="large" />
 					<view class="content">
-						<view v-if="authUser.name && authUser.login" class="title u-line-2"><text selectable>{{ authUser.name || '' }}<text selectable class="sub-title">{{' (' + (authUser.login || '') + ')' }}</text></text></view>
-						<view class="remark2"><text selectable>{{ authUser.bio }}</text></view>
-						<view v-if="authUser.created_at" class="description"><text selectable>注册于{{ $u.timeFormat(new Date(authUser.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
+						<view v-if="authUserInfo.name && authUserInfo.login" class="title u-line-2"><text selectable>{{ authUserInfo.name || '' }}<text selectable class="sub-title">{{' (' + (authUserInfo.login || '') + ')' }}</text></text></view>
+						<view class="remark2"><text selectable>{{ authUserInfo.bio }}</text></view>
+						<view v-if="authUserInfo.created_at" class="description"><text selectable>注册于{{ $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
 					</view>
 					<view class="right">
 						<u-icon name="arrow-right" color="#8799a3" @click="briefInfoClick" />
@@ -69,14 +69,12 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
 				loading: true,
 				contriHtml: '',
-				authUser: {},
-				numInfo: {},
-				baseInfo: {},
 				baseInfoIcon: [{
 						key: 'company',
 						icon: 'iconteam',
@@ -101,8 +99,26 @@
 				]
 			}
 		},
+		computed: {
+			...mapGetters(['authUserInfo']),
+			numInfo() {
+				return this.authUserInfo ? {
+					public_repos: this.authUserInfo.public_repos,
+					followers: this.authUserInfo.followers,
+					following: this.authUserInfo.following
+				} : {}
+			},
+			baseInfo() {
+				return this.authUserInfo ? {
+					company: this.authUserInfo.company,
+					location: this.authUserInfo.location,
+					email: this.authUserInfo.email,
+					blog: this.authUserInfo.blog
+				} : {}
+			}
+		},
 		onReady() {
-			this.getAuthUser()
+			this.initContributions()
 		},
 		methods: {
 			tapLogout() {
@@ -110,8 +126,8 @@
 			},
 			briefInfoClick() {
 				const tmp = {
-					name: this.authUser.name,
-					bio: this.authUser.bio,
+					name: this.authUserInfo.name,
+					bio: this.authUserInfo.bio,
 					...this.baseInfo
 				}
 				uni.navigateTo({
@@ -125,21 +141,9 @@
 					this.contriHtml = (reg.exec(res)[1]).trim()
 				}
 			},
-			async getAuthUser() {
-				this.authUser = await this.$minApi.getAuthUser()
-				this.numInfo = {
-					public_repos: this.authUser.public_repos,
-					followers: this.authUser.followers,
-					following: this.authUser.following
-				}
-				this.baseInfo = {
-					company: this.authUser.company,
-					location: this.authUser.location,
-					email: this.authUser.email,
-					blog: this.authUser.blog
-				}
+			async initContributions() {
 				await this.getContributions({
-					name: this.authUser.name
+					name: this.authUserInfo.name
 				})
 				this.loading = false
 			}

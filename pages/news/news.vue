@@ -25,6 +25,8 @@
 		},
 		data() {
 			return {
+				page: 1,
+				perPage: 30,
 				_freshing: false,
 				triggered: false,
 				receivedEvents: []
@@ -40,7 +42,8 @@
 		},
 		methods: {
 			async listAuthUserReceivedEvents(triggered, freshing) {
-				this.receivedEvents = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name)
+				const res = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name, this.page, this.perPage)
+				this.receivedEvents.concat(res)
 				this.triggered = triggered
 				this._freshing = freshing
 			},
@@ -61,7 +64,10 @@
 			onRestore() {},
 			onAbort() {},
 			// scroll-view到底部加载更多
-			reachBottom() {}
+			reachBottom() {
+				this.page++
+				this.onRefresh()
+			}
 		}
 	}
 </script>

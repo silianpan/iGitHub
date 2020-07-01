@@ -6,14 +6,7 @@
 					<image class="avatar" :src="item.actor.avatar_url" mode="aspectFill"></image>
 				</view>
 				<view class="content">
-					<block v-if="item.type === 'WatchEvent'">
-						<view class="title">
-							<text selectable>{{ item.actor.login }}</text>
-							<text class="text-black">{{ ' ' + item.payload.action + ' ' }}</text>
-							<text class="sub-title" style="color: #0965d2!important;" @tap="clickRepoDetail(item.repo.name)">{{ item.repo.name }}</text>
-						</view>
-						<view class="remark2"><text class="iconfont icongithub-star margin-right-xs" />{{ $u.timeFrom(new Date(item.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</view>
-					</block>
+					<Event :item="item" />
 				</view>
 			</view>
 		</view>
@@ -22,7 +15,11 @@
 
 <script>
 	import { mapGetters } from 'vuex'
+	import Event from './event'
 	export default {
+		components: {
+			Event
+		},
 		data() {
 			return {
 				receivedEvents: []

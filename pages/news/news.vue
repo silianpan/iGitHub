@@ -43,7 +43,7 @@
 		methods: {
 			async listAuthUserReceivedEvents(triggered, freshing) {
 				const res = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name, this.page, this.perPage)
-				this.receivedEvents.concat(res)
+				this.receivedEvents = this.receivedEvents.concat(res)
 				this.triggered = triggered
 				this._freshing = freshing
 			},

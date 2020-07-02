@@ -20,14 +20,10 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				developers: []
-			}
-		},
-		methods: {
-			async listDeveloper() {
-				this.developers = await this.$minApi.listTrendingDeveloper()
+		props: {
+			developers: {
+				type: Array,
+				default: []
 			}
 		}
 	}

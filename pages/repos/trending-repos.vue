@@ -42,15 +42,13 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				repos: []
+		props: {
+			repos: {
+				type: Array,
+				default: []
 			}
 		},
 		methods: {
-			async listRepo() {
-				this.repos = await this.$minApi.listTrendingRepo()
-			},
 			clickRepoDetail(item) {
 				uni.navigateTo({
 					url: `/pages/repos/detail?owner=${item.author}&repo=${item.name}`

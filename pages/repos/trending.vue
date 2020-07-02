@@ -13,13 +13,13 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
-						<TrendingRepo ref="refTrendingRepo" />
+						<TrendingRepo :repos="trendingRepos" />
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
-						<TrendingDeveloper ref="refTrendingDeveloper" />
+						<TrendingDeveloper :developers="trendingDevelopers" />
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -37,6 +37,8 @@
 		},
 		data() {
 			return {
+				trendingRepos: [],
+				trendingDevelopers: [],
 				_freshing: false,
 				triggered: false,
 				list: [{
@@ -56,16 +58,11 @@
 			this.loadData(true, false)
 		},
 		methods: {
-			loadData(triggered, freshing) {
-				this.$refs.refTrendingRepo.listRepo().then(() => {
-					this.triggered = triggered
-					this._freshing = freshing
-				})
-
-				this.$refs.refTrendingDeveloper.listDeveloper().then(() => {
-					this.triggered = triggered
-					this._freshing = freshing
-				})
+			async loadData(triggered, freshing) {
+				this.trendingRepos = await this.$minApi.listTrendingRepo()
+				this.trendingDevelopers = await this.$minApi.listTrendingDeveloper()
+				this.triggered = triggered
+				this._freshing = freshing
 			},
 			onPulling(e) {},
 			onRefresh() {

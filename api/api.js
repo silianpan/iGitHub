@@ -87,7 +87,7 @@ export default {
 		// list received_events
 		listAuthUserReceivedEvents(username, page = 1, perPage = 30) {
 			return minRequest.get(`/users/${username}/received_events?page=${page}&per_page=${perPage}`)
-		}
+		},
 		// list events
 		// listAuthUserEvents(username, page = 1, perPage = 30) {
 		// 	return minRequest.get(`/users/${username}/events?page=${page}&per_page=${perPage}`)
@@ -104,5 +104,9 @@ export default {
 		// listAuthNotifications(params) {
 		// 	return minRequest.get('/notifications', params)
 		// }
+		// List repositories starred by the authenticated user
+		listAuthUserReposStarred(params) {
+			return minRequest.get('/user/starred', params)
+		}
 	}
 }

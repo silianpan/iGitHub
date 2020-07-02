@@ -15,9 +15,7 @@
 </template>
 
 <script>
-	import {
-		mapGetters
-	} from 'vuex'
+	import { mapGetters } from 'vuex'
 	import Event from './event'
 	export default {
 		components: {

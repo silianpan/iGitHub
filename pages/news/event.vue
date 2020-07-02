@@ -124,6 +124,14 @@
 				type: Object,
 				default: () => {}
 			}
+		},
+		methods: {
+			clickRepoDetail(repoName) {
+				const tmp = this.$_.split(repoName, '/')
+				uni.navigateTo({
+					url: `/pages/repos/detail?owner=${tmp[0]}&repo=${tmp[1]}`
+				})
+			}
 		}
 	}
 </script>

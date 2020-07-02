@@ -47,12 +47,6 @@
 				this.triggered = triggered
 				this._freshing = freshing
 			},
-			clickRepoDetail(repoName) {
-				const tmp = _.split(repoName, '/')
-				uni.navigateTo({
-					url: `/pages/repos/detail?owner=${tmp[0]}&repo=${tmp[1]}`
-				})
-			},
 			onPulling(e) {},
 			onRefresh() {
 				if (this._freshing) return

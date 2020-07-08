@@ -40,8 +40,7 @@
 		},
 		methods: {
 			getColor(key) {
-				console.log(typeof(languageColors))
-				return !this.$_.isNil(languageColors) && !this.$_.isEmpty(languageColors) ? languageColors[key].color : ''
+				return !this.$_.isNil(languageColors) && !this.$_.isEmpty(languageColors) && !this.$_.isNil(languageColors[key]) ? languageColors[key].color : ''
 			},
 			clickRepoDetail(item) {
 				uni.navigateTo({

@@ -10,15 +10,15 @@
 					<view class="description"><text selectable>{{ item.description }}</text></view>
 					<u-link class="link" :font-size="30" color="#0965d2" :href="item.homepage">{{ item.homepage }}</u-link>
 					<u-row>
-						<u-col span="3">
+						<u-col span="6">
 							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':getColor(item.language)}"></text>
 							<text selectable class="u-font-lg">{{item.language}}</text>
 						</u-col>
-						<u-col span="2">
+						<u-col span="3">
 							<text class="iconfont icongithub-star margin-right-xs text-main"></text>
 							<text class="text-main u-font-lg">{{item.stargazers_count}}</text>
 						</u-col>
-						<u-col span="2">
+						<u-col span="3">
 							<text class="iconfont iconcode-fork margin-right-xs text-main"></text>
 							<text class="text-main u-font-lg">{{item.forks_count}}</text>
 						</u-col>

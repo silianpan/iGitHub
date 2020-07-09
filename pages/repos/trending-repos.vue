@@ -5,7 +5,6 @@
 				<view class="left">
 					<image @error="imageError(item)" class="avatar" :src="item.avatar" mode="aspectFill"></image>
 				</view>
-				<!-- <u-avatar class="avatar" :src="item.avatar" mode="square" size="mini"/> -->
 				<view class="content">
 					<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
 						<view class="title u-line-2"><text selectable>{{ item.author + ' / ' + item.name }}</text></view>
@@ -29,8 +28,10 @@
 						</u-col>
 						<u-col span="4.5">
 							<view class="flex justify-end">
-								<u-avatar v-for="build in item.builtBy" :key="build.username" :src="build.avatar" mode="square" :size="42"
-								 style="padding-right:2rpx;"></u-avatar>
+								<!-- <u-avatar v-for="build in item.builtBy" :key="build.username" :src="build.avatar" mode="square" :size="42"
+								 style="padding-right:2rpx;"></u-avatar> -->
+								<image style="width: 42rpx;height: 42rpx;" @error="imageError(build)" v-for="build in item.builtBy" :key="build.username"
+								 :src="build.avatar" mode="aspectFill"></image>
 							</view>
 						</u-col>
 					</u-row>

@@ -8,7 +8,7 @@
 			</view>
 		</u-navbar>
 		<Repos :repos="reposList" />
-		<u-loadmore :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
+		<u-loadmore class="padding-bottom-lg padding-top-lg" :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
 	</view>
 </template>
 
@@ -21,8 +21,8 @@
 		data() {
 			return {
 				loadText: {
-					loadmore: '输入关键词搜索',
-					loading: '努力搜索中',
+					loadmore: 'Empty',
+					loading: '努力加载中',
 					nomore: '实在没有了'
 				},
 				loadMoreStatus: 'loadmore',

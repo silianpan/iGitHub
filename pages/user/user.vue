@@ -3,9 +3,12 @@
 		<scroll-view scroll-y class="u-skeleton">
 			<view class="order" v-if="authUserInfo">
 				<view class="item align-center u-skeleton-rect">
-					<u-avatar class="avatar2" v-if="authUserInfo.avatar_url" :src="authUserInfo.avatar_url" mode="square" size="large" />
+					<view class="left">
+						<image @error="imageError" class="avatar2" :src="userAvatar || authUserInfo.avatar_url" mode="aspectFill"></image>
+					</view>
 					<view class="content">
-						<view v-if="authUserInfo.name && authUserInfo.login" class="title u-line-2"><text selectable>{{ authUserInfo.name || '' }}<text selectable class="sub-title">{{' (' + (authUserInfo.login || '') + ')' }}</text></text></view>
+						<view v-if="authUserInfo.name && authUserInfo.login" class="title u-line-2"><text selectable>{{ authUserInfo.name || '' }}<text
+								 selectable class="sub-title">{{' (' + (authUserInfo.login || '') + ')' }}</text></text></view>
 						<view class="remark2"><text selectable>{{ authUserInfo.bio }}</text></view>
 						<view v-if="authUserInfo.created_at" class="description"><text selectable>注册于{{ $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
 					</view>
@@ -28,11 +31,12 @@
 			</view>
 			<view class="bg-white">
 				<view class="cu-list menu sm-border u-skeleton-rect">
-					<view class="cu-item" :class="baseInfoIcon[index].arrow?'arrow':''" v-for="(value, key, index) in baseInfo"
-					 :key="index" :index="index">
+					<view class="cu-item" :class="baseInfoIcon[index].arrow?'arrow':''" v-for="(value, key, index) in baseInfo" :key="index"
+					 :index="index">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]" />
-							<u-link v-if="baseInfoIcon[index].arrow" :font-size="30" color="#8799a3" class="link text-grey padding-left-sm" :href="value">{{ value }}</u-link>
+							<u-link v-if="baseInfoIcon[index].arrow" :font-size="30" color="#8799a3" class="link text-grey padding-left-sm"
+							 :href="value">{{ value }}</u-link>
 							<text v-else class="text-grey padding-left-sm">{{value}}</text>
 						</view>
 					</view>
@@ -61,18 +65,28 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="padding flex flex-direction">
+		<view class="padding flex flex-direction bg-white">
 			<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">退出</button>
+		</view>
+		<view v-if="appInfo.version" class="text-grey text-center padding-bottom-lg bg-white">
+			{{appInfo.name}} {{appInfo.version}}
 		</view>
 		<u-skeleton :loading="loading" :animation="true"></u-skeleton>
 	</view>
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
+	import {
+		mapGetters
+	} from 'vuex'
 	export default {
 		data() {
 			return {
+				appInfo: {
+					version: '',
+					name: ''
+				},
+				userAvatar: '',
 				loading: true,
 				contriHtml: '',
 				baseInfoIcon: [{
@@ -120,7 +134,18 @@
 		onReady() {
 			this.initContributions()
 		},
+		onLoad() {
+			//#ifdef APP-PLUS
+			plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {
+				this.appInfo.version = wgtinfo.version
+				this.appInfo.name = wgtinfo.name
+			})
+			//#endif
+		},
 		methods: {
+			imageError() {
+				this.repo.owner.avatar_url = '/static/img/60x60.png'
+			},
 			tapLogout() {
 				this.$store.dispatch('logoutAuth')
 			},
@@ -143,7 +168,7 @@
 					if (!this.$_.isEmpty(res)) {
 						res = res.replace(/class="wday" dx="-10"/g, 'class="wday" dx="10"')
 						res = res.replace(/\<text x="(\d+)" y="-8" class="month"\>(\S+)\<\/text\>/g, function(arg1, arg2, arg3) {
-							return '<text x="'+ (parseInt(arg2) + 10) + '" y="-8" class="month">' + arg3 + '</text>'
+							return '<text x="' + (parseInt(arg2) + 10) + '" y="-8" class="month">' + arg3 + '</text>'
 						})
 						this.contriHtml = res
 					}

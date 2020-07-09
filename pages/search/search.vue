@@ -7,10 +7,8 @@
 				</view>
 			</view>
 		</u-navbar>
-		<block v-if="!$_.isEmpty(reposList)">
-			<Repos :repos="reposList" />
-			<u-loadmore :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
-		</block>
+		<Repos :repos="reposList" />
+		<u-loadmore :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
 	</view>
 </template>
 

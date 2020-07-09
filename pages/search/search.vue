@@ -3,13 +3,14 @@
 		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:'#f24713'}">
 			<view class="slot-wrap">
 				<view class="search-wrap">
-					<!-- 如果使用u-search组件，必须要给v-model绑定一个变量 -->
 					<u-search @search="searchAction" v-model="keyword" :show-action="false"></u-search>
 				</view>
 			</view>
 		</u-navbar>
-		<Repos :repos="reposList" />
-		<u-loadmore :status="loadMoreStatus" icon-type="flower" />
+		<block v-if="!$_.isEmpty(reposList)">
+			<Repos :repos="reposList" />
+			<u-loadmore :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
+		</block>
 	</view>
 </template>
 
@@ -21,6 +22,11 @@
 		},
 		data() {
 			return {
+				loadText: {
+					loadmore: '输入关键词搜索',
+					loading: '努力搜索中',
+					nomore: '实在没有了'
+				},
 				loadMoreStatus: 'loadmore',
 				reposList: [],
 				keyword: '',
@@ -33,6 +39,7 @@
 				this.keyword && this.searchRepos()
 			},
 			async searchRepos() {
+				if (this.$_.isEmpty(this.keyword)) return
 				let params = {
 					q: this.keyword,
 					sort: 'stars',
@@ -42,12 +49,8 @@
 				}
 				this.loadMoreStatus = 'loading'
 				const res = await this.$minApi.searchRepos(params)
-				if (this.$_.isEmpty(res) || this.$_.isEmpty(res.items)) {
-					this.loadMoreStatus = 'nomore'
-				} else {
-					this.reposList = res.items
-					this.loadMoreStatus = 'loadmore'
-				}
+				this.loadMoreStatus = 'nomore'
+				this.reposList = res.items
 			}
 		}
 	}

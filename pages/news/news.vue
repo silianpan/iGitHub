@@ -11,11 +11,14 @@
 				</view>
 			</view>
 		</view>
+		<u-loadmore :status="loadMoreStatus" icon-type="flower" />
 	</scroll-view>
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
+	import {
+		mapGetters
+	} from 'vuex'
 	import Event from './event'
 	export default {
 		components: {
@@ -23,6 +26,7 @@
 		},
 		data() {
 			return {
+				loadMoreStatus: 'loadmore',
 				page: 1,
 				perPage: 30,
 				_freshing: false,
@@ -36,14 +40,37 @@
 		onLoad() {
 			this._freshing = false
 			// 触发onRefresh来加载自己的数据，如果不用这种方式，不要在此改变triggered的值
-			this.listAuthUserReceivedEvents(true, false)
+			this.listAuthUserReceivedEvents(true, false, res => {
+				this.receivedEvents = res
+			})
+		},
+		onReachBottom() {
+			// next page
+			this.page = ++this.page
+
+			if (this._freshing) return
+			this._freshing = true
+			if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
+				this.triggered = true
+			this.listAuthUserReceivedEvents(false, false, res => {
+				this.receivedEvents = this.receivedEvents.concat(res)
+			})
 		},
 		methods: {
-			async listAuthUserReceivedEvents(triggered, freshing) {
+			async listAuthUserReceivedEvents(triggered, freshing, callbackFunc) {
+				this.loadMoreStatus = 'loading'
 				const res = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name, this.page, this.perPage)
-				this.receivedEvents = this.receivedEvents.concat(res)
+				if (this.$_.isFunction(callbackFunc)) {
+					callbackFunc(res)
+				}
 				this.triggered = triggered
 				this._freshing = freshing
+
+				if (this.$_.isEmpty(res)) {
+					this.loadMoreStatus = 'nomore'
+				} else {
+					this.loadMoreStatus = 'loadmore'
+				}
 			},
 			onPulling(e) {},
 			onRefresh() {
@@ -51,15 +78,17 @@
 				this._freshing = true
 				if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
 					this.triggered = true
-				this.listAuthUserReceivedEvents(false, false)
+
+				this.page = 1
+				this.listAuthUserReceivedEvents(false, false, res => {
+					this.receivedEvents = res
+				})
 			},
-			onRestore() {},
+			onRestore() {
+				this.triggered = 'restore'
+			},
 			onAbort() {},
-			// scroll-view到底部加载更多
-			reachBottom() {
-				this.page++
-				this.onRefresh()
-			}
+			reachBottom() {}
 		}
 	}
 </script>

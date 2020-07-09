@@ -31,8 +31,8 @@
 		},
 		onReachBottom() {
 			// next page
-			this.page = ++ this.page
-			
+			this.page = ++this.page
+
 			if (this._freshing) return
 			this._freshing = true
 			if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
@@ -56,7 +56,7 @@
 				}
 				this.triggered = triggered
 				this._freshing = freshing
-				
+
 				if (this.$_.isEmpty(res)) {
 					this.loadMoreStatus = 'nomore'
 				} else {
@@ -65,11 +65,12 @@
 			},
 			onPulling(e) {},
 			onRefresh() {
-				this.page = 1
 				if (this._freshing) return
 				this._freshing = true
 				if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
 					this.triggered = true
+
+				this.page = 1
 				this.listAuthUserReposStarred(false, false, res => {
 					this.starredRepos = res
 				})
@@ -78,7 +79,6 @@
 				this.triggered = 'restore'
 			},
 			onAbort() {},
-			// scroll-view到底部加载更多
 			reachBottom() {}
 		}
 	}

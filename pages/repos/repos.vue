@@ -43,8 +43,9 @@
 				return !this.$_.isNil(languageColors) && !this.$_.isEmpty(languageColors) && !this.$_.isNil(languageColors[key]) ? languageColors[key].color : ''
 			},
 			clickRepoDetail(item) {
+				const owner = item.author ? item.author : item.owner.login
 				uni.navigateTo({
-					url: `/pages/repos/detail?owner=${item.author}&repo=${item.name}`
+					url: `/pages/repos/detail?owner=${owner}&repo=${item.name}`
 				})
 			}
 		}

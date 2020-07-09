@@ -2,7 +2,7 @@
 	<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 	 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 		<Repos :repos="starredRepos" />
-		<u-loadmore :status="loadMoreStatus" icon-type="flower" />
+		<u-loadmore class="padding-bottom padding-top" :status="loadMoreStatus" icon-type="flower" />
 	</scroll-view>
 </template>
 

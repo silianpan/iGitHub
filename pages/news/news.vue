@@ -11,7 +11,7 @@
 				</view>
 			</view>
 		</view>
-		<u-loadmore :status="loadMoreStatus" icon-type="flower" />
+		<u-loadmore class="padding-bottom padding-top" :status="loadMoreStatus" icon-type="flower" />
 	</scroll-view>
 </template>
 

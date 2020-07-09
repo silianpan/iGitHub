@@ -8,7 +8,7 @@
 			</view>
 		</u-navbar>
 		<Repos :repos="reposList" />
-		<u-loadmore class="padding-bottom-lg padding-top-lg" :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
+		<u-loadmore class="padding-bottom padding-top" :status="loadMoreStatus" :load-text="loadText" icon-type="flower" />
 	</view>
 </template>
 

@@ -135,10 +135,18 @@
 				})
 			},
 			async getContributions(params) {
-				const res = await this.$minApi.getContributions(params)
+				let res = await this.$minApi.getContributions(params)
 				const reg = /[\s\S]*(\<svg[\s\S]*\<\/svg\>)[\s\S]*/
 				if (res && res.match(reg)) {
-					this.contriHtml = (reg.exec(res)[1]).trim()
+					res = (reg.exec(res)[1]).trim()
+					// 横纵坐标位置修复
+					if (!this.$_.isEmpty(res)) {
+						res = res.replace(/class="wday" dx="-10"/g, 'class="wday" dx="10"')
+						res = res.replace(/\<text x="(\d+)" y="-8" class="month"\>(\S+)\<\/text\>/g, function(arg1, arg2, arg3) {
+							return '<text x="'+ (parseInt(arg2) + 10) + '" y="-8" class="month">' + arg3 + '</text>'
+						})
+						this.contriHtml = res
+					}
 				}
 			},
 			async initContributions() {

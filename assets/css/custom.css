@@ -17,9 +17,10 @@
 
 /* contributions start */
 .contri {
-	display: flex;
-	flex-direction: column!important;
-	align-items: flex-end!important;
+	/* display: flex; */
+	/* flex-direction: column!important; */
+	/* align-items: flex-end!important; */
+	direction: rtl;
 	overflow: auto;
 	padding: 20rpx;
 }
@@ -82,7 +83,7 @@
 }
 
 .flex-items-end {
-    align-items: flex-end!important;
+    /* align-items: flex-end!important; */
 }
 
 .flex-column {

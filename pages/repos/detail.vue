@@ -5,7 +5,7 @@
 			<view class="order u-skeleton-rect">
 				<view class="item">
 					<view class="left">
-						<image class="avatar" :src="repo.owner.avatar_url" mode="aspectFill"></image>
+						<image @error="imageError" class="avatar" :src="repo.owner.avatar_url" mode="aspectFill"></image>
 					</view>
 					<view class="content">
 						<view style="flex-flow: row wrap; justify-content: space-between; align-items: center; display: flex;">
@@ -138,6 +138,9 @@
 			this.getReposReadme()
 		},
 		methods: {
+			imageError() {
+				this.repo.owner.avatar_url = '/static/img/60x60.png'
+			},
 			async getRepos() {
 				this.repo = await this.$minApi.getRepos(this.owner, this.repoName)
 				this.numInfo = {

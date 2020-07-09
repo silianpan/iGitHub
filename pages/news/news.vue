@@ -4,7 +4,7 @@
 		<view class="order" v-for="(item, index) in receivedEvents" :key="index">
 			<view class="item">
 				<view class="left">
-					<image class="avatar" :src="item.actor.avatar_url" mode="aspectFill"></image>
+					<image @error="imageError(item)" class="avatar" :src="item.actor.avatar_url" mode="aspectFill"></image>
 				</view>
 				<view class="content">
 					<Event :item="item" />
@@ -57,6 +57,9 @@
 			})
 		},
 		methods: {
+			imageError(item) {
+				item.actor.avatar_url = '/static/img/60x60.png'
+			},
 			async listAuthUserReceivedEvents(triggered, freshing, callbackFunc) {
 				this.loadMoreStatus = 'loading'
 				const res = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name, this.page, this.perPage)

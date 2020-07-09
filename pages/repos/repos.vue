@@ -3,7 +3,7 @@
 		<view class="order" v-for="(item, index) in repos" :key="index">
 			<view class="item" @tap="clickRepoDetail(item)">
 				<view class="left">
-					<image class="avatar" :src="item.owner.avatar_url" mode="aspectFill"></image>
+					<image @error="imageError(item)" class="avatar" :src="item.owner.avatar_url" mode="aspectFill"></image>
 				</view>
 				<view class="content">
 					<view class="title u-line-2"><text selectable>{{ item.owner.login + ' / ' + item.name }}</text></view>
@@ -39,8 +39,12 @@
 			}
 		},
 		methods: {
+			imageError(item) {
+				item.owner.avatar_url = '/static/img/60x60.png'
+			},
 			getColor(key) {
-				return !this.$_.isNil(languageColors) && !this.$_.isEmpty(languageColors) && !this.$_.isNil(languageColors[key]) ? languageColors[key].color : ''
+				return !this.$_.isNil(languageColors) && !this.$_.isEmpty(languageColors) && !this.$_.isNil(languageColors[key]) ?
+					languageColors[key].color : ''
 			},
 			clickRepoDetail(item) {
 				const owner = item.author ? item.author : item.owner.login

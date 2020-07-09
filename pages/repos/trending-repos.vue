@@ -3,7 +3,7 @@
 		<view class="order" v-for="(item, index) in repos" :key="index">
 			<view class="item" @tap="clickRepoDetail(item)">
 				<view class="left">
-					<image class="avatar" :src="item.avatar" mode="aspectFill"></image>
+					<image @error="imageError(item)" class="avatar" :src="item.avatar" mode="aspectFill"></image>
 				</view>
 				<!-- <u-avatar class="avatar" :src="item.avatar" mode="square" size="mini"/> -->
 				<view class="content">
@@ -49,6 +49,9 @@
 			}
 		},
 		methods: {
+			imageError(item) {
+				item.avatar = '/static/img/60x60.png'
+			},
 			clickRepoDetail(item) {
 				uni.navigateTo({
 					url: `/pages/repos/detail?owner=${item.author}&repo=${item.name}`

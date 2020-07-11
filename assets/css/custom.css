@@ -170,8 +170,25 @@ svg:not(:root) {
 }
 
 .slot-wrap {
-	/* display: flex; */
+	display: flex;
 	align-items: center;
 	flex: 1;
 }
+
+.navbar-right {
+	margin-right: 24rpx;
+	display: flex;
+}
+
+.right-item {
+	margin: 0 12rpx;
+	position: relative;
+	color: #ffffff;
+	display: flex;
+}
+
+.custom-tab-swiper-cur {
+	border-bottom: 2px solid;
+}
+
 /* search bar end */

@@ -1,43 +1,81 @@
 <template>
-	<u-index-list :scrollTop="scrollTop" :index-list="indexList">
-		<view v-for="(item, index) in list" :key="index">
-			<!-- <u-index-anchor :index="item.letter" /> -->
-			<view class="list-cell u-border-bottom" v-for="(item1, index) in item.data" :key="index">
-				{{item1.name}}
-			</view>
-		</view>
-	</u-index-list>
+	<view>
+		<uni-indexed-list :options="langList" :show-select="false" @click="bindClick" />
+	</view>
 </template>
 
 <script>
-	import indexList from "./index.list.js";
-	const letterArr = indexList.list.map(val => {
-		return val.letter;
-	})
 	export default {
 		data() {
 			return {
-				scrollTop: 0,
-				indexList: letterArr,
-				list: indexList.list
+				langList: [],
+				langNameCodeMap: {},
+				langMap: {
+					A: [],
+					B: [],
+					C: [],
+					D: [],
+					E: [],
+					F: [],
+					G: [],
+					H: [],
+					I: [],
+					J: [],
+					K: [],
+					L: [],
+					M: [],
+					N: [],
+					O: [],
+					P: [],
+					Q: [],
+					R: [],
+					S: [],
+					T: [],
+					U: [],
+					V: [],
+					W: [],
+					X: [],
+					Y: [],
+					Z: [],
+					'#': []
+				}
 			}
 		},
-		onPageScroll(e) {
-			this.scrollTop = e.scrollTop;
+		mounted() {
+			this.listLanguages()
+		},
+		methods: {
+			bindClick(e) {
+				const urlParam = this.langNameCodeMap[e.item.name]
+				this.$emit('filtParams', {
+					language: urlParam
+				})
+			},
+			async listLanguages() {
+				const res = await this.$minApi.listLanguages()
+				if (!this.$_.isEmpty(res)) {
+					res.forEach(item => {
+						if (item.name && item.urlParam) {
+							this.langNameCodeMap[item.name] = item.urlParam
+							const letter = item.name.substring(0, 1).toUpperCase()
+							if (this.langMap.hasOwnProperty(letter)) {
+								this.langMap[letter].push(item.name)
+							} else {
+								this.langMap['#'].push(item.name)
+							}
+						}
+					})
+				}
+				let langList = []
+				for (let key in this.langMap) {
+					let newLangMap = {
+						letter: key,
+						data: this.langMap[key]
+					}
+					langList.push(newLangMap)
+				}
+				this.langList = langList
+			}
 		}
 	}
 </script>
-
-<style lang="scss" scoped>
-	.list-cell {
-		display: flex;
-		box-sizing: border-box;
-		width: 100%;
-		padding: 10px 24rpx;
-		overflow: hidden;
-		color: $u-content-color;
-		font-size: 14px;
-		line-height: 24px;
-		background-color: #fff;
-	}
-</style>

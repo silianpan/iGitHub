@@ -23,13 +23,15 @@
 		</u-navbar>
 		<RepoTrending :catchtouchmove="false" ref="repoTrending" @tabsTransition="tabsTransition" @animationfinish="animationfinish" />
 
-		<uni-drawer :visible="filtLangDrawer" mode="right" @close="closeFiltLangDrawer" @touchmove.stop.prevent="moveHandle">
-			<view class="scroll-view">
-				<scroll-view class="scroll-view-box" scroll-y>
-					<FiltLanguage></FiltLanguage>
-				</scroll-view>
+		<view class="cu-modal drawer-modal justify-end" style="text-align: left!important;" :class="filtLangDrawer" @tap="closeFiltLangDrawer">
+			<view class="cu-dialog basis-lg" @touchmove.stop.prevent="moveHandle" @tap.stop="" :style="[{top:CustomBar+'px',height:'calc(100vh - ' + CustomBar + 'px)'}]">
+				<view class="scroll-view">
+					<scroll-view class="scroll-view-box" scroll-y>
+						<FiltLanguage @filtParams="filtParams"></FiltLanguage>
+					</scroll-view>
+				</view>
 			</view>
-		</uni-drawer>
+		</view>
 	</view>
 </template>
 
@@ -46,7 +48,7 @@
 		},
 		data() {
 			return {
-				filtLangDrawer: false,
+				filtLangDrawer: null,
 				current: 0,
 				list: [{
 						name: '仓库'
@@ -71,10 +73,17 @@
 				this.current = current
 			},
 			closeFiltLangDrawer() {
-				this.filtLangDrawer = false
+				// this.$refs.langDrawerRef.close()
+				this.filtLangDrawer = null
 			},
 			filtLangTap() {
-				this.filtLangDrawer = true
+				// this.$refs.langDrawerRef.open()
+				this.filtLangDrawer = 'show'
+			},
+			filtParams(urlParams) {
+				this.closeFiltLangDrawer()
+				this.$store.dispatch('updateLangParams', urlParams)
+				this.$refs.repoTrending.loadData(true, false)
 			}
 		}
 	}

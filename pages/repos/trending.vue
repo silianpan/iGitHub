@@ -19,22 +19,20 @@
 				</swiper-item>
 			</swiper>
 		</view>
-
-		<!-- <view class="cu-modal drawer-modal justify-start" :class="filtLangDrawer" @tap="hidefiltLangDrawer">
-			<view class="cu-dialog basis-lg" @tap.stop="" :style="[{top:CustomBar+'px',height:'calc(100vh - ' + CustomBar + 'px)'}]">
-				<FiltLanguage></FiltLanguage>
-			</view>
-		</view> -->
 	</view>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	import TrendingRepo from './trending-repos'
 	import TrendingDeveloper from '@/pages/developer/trending-developer'
 	export default {
 		components: {
 			TrendingRepo,
 			TrendingDeveloper
+		},
+		computed: {
+			...mapGetters(['langParams'])
 		},
 		data() {
 			return {
@@ -60,8 +58,8 @@
 		},
 		methods: {
 			async loadData(triggered, freshing) {
-				this.trendingRepos = await this.$minApi.listTrendingRepo()
-				this.trendingDevelopers = await this.$minApi.listTrendingDeveloper()
+				this.trendingRepos = await this.$minApi.listTrendingRepo(this.langParams)
+				this.trendingDevelopers = await this.$minApi.listTrendingDeveloper(this.langParams)
 				this.triggered = triggered
 				this._freshing = freshing
 			},

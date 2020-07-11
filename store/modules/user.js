@@ -42,6 +42,7 @@ export default {
 	actions: {
 		logoutAuth({ commit }) {
 			commit('logoutSuccess')
+			commit('clearLangParams')
 			uni.reLaunch({
 				url: '/pages/login/login'
 			})

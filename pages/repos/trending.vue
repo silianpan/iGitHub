@@ -1,20 +1,22 @@
 <template>
 	<view>
 		<view class="wrap">
-			<view class="bg-white text-black padding-xs">
-				<text>所有语言 | 今日</text>
+			<view class="bg-white text-black padding-xs" v-if="langParams">
+				<text>{{ (langParams.langName || '所有语言') + ' | ' + (langParams.sinceName || '今日') }}</text>
 			</view>
 			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 						<TrendingRepo :repos="trendingRepos" />
+						<u-empty v-if="$_.isEmpty(trendingRepos)" mode="list"></u-empty>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 						<TrendingDeveloper :developers="trendingDevelopers" />
+						<u-empty v-if="$_.isEmpty(trendingDevelopers)" mode="list"></u-empty>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -23,7 +25,9 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
+	import {
+		mapGetters
+	} from 'vuex'
 	import TrendingRepo from './trending-repos'
 	import TrendingDeveloper from '@/pages/developer/trending-developer'
 	export default {

@@ -36,9 +36,7 @@
 </template>
 
 <script>
-	import {
-		getQueryString
-	} from '@/utils/href'
+	import { getQueryString } from '@/utils/href'
 	import RepoTrending from '@/pages/repos/trending'
 	import FiltLanguage from '@/pages/repos/filt-language'
 	export default {

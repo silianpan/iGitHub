@@ -1,13 +1,42 @@
 <template>
 	<view>
-		<uni-indexed-list :options="langList" :show-select="false" @click="bindClick" />
+		<view class="padding-top-sm padding-right-sm bg-white" style="text-align: right;">
+			<button class="cu-btn sm text-white" style="background-color: #f24713" @tap="okTap">确认</button>
+		</view>
+		<u-radio-group class="padding-left-sm" v-model="currentTime" :size="30">
+			<u-radio v-for="(value, key) in timeMap" :key="key" :name="key">{{value}}</u-radio>
+		</u-radio-group>
+		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
+		<u-search class="padding-left-sm" v-model="keyword" clearabled :show-action="false" :shape="'square'" @search="searchAction" />
+		<!-- 搜索历史 -->
+		<view class="padding-top-sm padding-right-sm bg-white" style="text-align: right;">
+			<button class="cu-btn sm bg-blue" @tap="clearSearchHistoryTap">清空搜索历史</button>
+		</view>
+		<view @tap="historyLangTap(item)" v-for="(item, index) in langParamsHistory" :key="index" class="padding-left-sm">{{item.langName}}</view>
+		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
+		<view @tap="allLangTap" class="padding-left-sm">所有语言</view>
+		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
+		<uni-indexed-list :style="'top:' + (180 + langParamsHistory.length * 32) + 'px!important'" :options="langList" show-select @click="bindClick" />
 	</view>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
+		computed: {
+			...mapGetters(['langParamsHistory'])
+		},
 		data() {
 			return {
+				keyword: '',
+				currentTime: 'daily',
+				timeMap: {
+					daily: '今日',
+					weekly: '本周',
+					monthly: '本月'
+				},
+				langCode: null,
+				langName: null,
 				langList: [],
 				langNameCodeMap: {},
 				langMap: {
@@ -45,11 +74,54 @@
 			this.listLanguages()
 		},
 		methods: {
-			bindClick(e) {
-				const urlParam = this.langNameCodeMap[e.item.name]
+			searchAction() {
+				// search language
+				if (!this.$_.isEmpty(this.keyword)) {
+					let langList = []
+					for (let key in this.langMap) {
+						let newLangList = []
+						if (!this.$_.isEmpty(this.langMap[key])) {
+							this.langMap[key].forEach(lang => {
+								if (lang.toLowerCase().indexOf(this.keyword.toLowerCase()) !== -1) {
+									newLangList.push(lang)
+								}
+							})
+						}
+						if (!this.$_.isEmpty(newLangList)) {
+							let newLangMap = {
+								letter: key,
+								data: newLangList
+							}
+							langList.push(newLangMap)
+						}
+					}
+					this.langList = langList
+				} else {
+					this.listLanguages()
+				}
+			},
+			okTap() {
 				this.$emit('filtParams', {
-					language: urlParam
+					language: this.langCode,
+					langName: this.langName,
+					since: this.currentTime,
+					sinceName: this.timeMap[this.currentTime]
 				})
+			},
+			bindClick(e) {
+				this.langName = e.item.name
+				this.langCode = this.langNameCodeMap[e.item.name]
+			},
+			historyLangTap(item) {
+				this.langName = item.langName
+				this.langCode = item.langCode
+			},
+			allLangTap() {
+				this.langName = '所有语言'
+				this.langCode = null
+			},
+			clearSearchHistoryTap() {
+				this.$store.dispatch('clearLangParams')
 			},
 			async listLanguages() {
 				const res = await this.$minApi.listLanguages()

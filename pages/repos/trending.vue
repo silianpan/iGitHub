@@ -4,7 +4,7 @@
 			<view class="u-tabs-box">
 				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#f24713" activeColor="#ffffb8" ref="uTabs" :list="list"
 				 :current="current" @change="tabsChange" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
-				<view class="primary-color padding-xs">
+				<view class="primary-color padding-xs" @tap="filtLangTap">
 					<text class="iconfont iconguolv margin-right-xs"></text>
 					<text>所有语言 | 今日</text>
 				</view>
@@ -24,19 +24,32 @@
 				</swiper-item>
 			</swiper>
 		</view>
+
+		<!-- <view class="cu-modal drawer-modal justify-start" :class="filtLangDrawer" @tap="hidefiltLangDrawer">
+			<view class="cu-dialog basis-lg" @tap.stop="" :style="[{top:CustomBar+'px',height:'calc(100vh - ' + CustomBar + 'px)'}]">
+				<FiltLanguage></FiltLanguage>
+			</view>
+		</view> -->
+
+		<uni-drawer :visible="filtLangDrawer" mode="right" @close="closeFiltLangDrawer">
+			<FiltLanguage></FiltLanguage>
+		</uni-drawer>
 	</view>
 </template>
 
 <script>
 	import TrendingRepo from './trending-repos'
 	import TrendingDeveloper from '@/pages/developer/trending-developer'
+	import FiltLanguage from './filt-language'
 	export default {
 		components: {
 			TrendingRepo,
-			TrendingDeveloper
+			TrendingDeveloper,
+			FiltLanguage
 		},
 		data() {
 			return {
+				filtLangDrawer: false,
 				trendingRepos: [],
 				trendingDevelopers: [],
 				_freshing: false,
@@ -100,6 +113,12 @@
 				this.current = current
 				// 执行更新方法，不用每次都加载
 				// this.onRefresh()
+			},
+			closeFiltLangDrawer() {
+				this.filtLangDrawer = false
+			},
+			filtLangTap() {
+				this.filtLangDrawer = true
 			}
 		}
 	}

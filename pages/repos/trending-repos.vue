@@ -30,7 +30,7 @@
 							<view class="flex justify-end">
 								<!-- <u-avatar v-for="build in item.builtBy" :key="build.username" :src="build.avatar" mode="square" :size="42"
 								 style="padding-right:2rpx;"></u-avatar> -->
-								<image style="width: 42rpx;height: 42rpx;" @error="imageError(build)" v-for="build in item.builtBy" :key="build.username"
+								<image style="width: 42rpx;height: 42rpx;border-radius: 5rpx;margin-right: 2rpx;" @error="imageError(build)" v-for="build in item.builtBy" :key="build.username"
 								 :src="build.avatar" mode="aspectFill"></image>
 							</view>
 						</u-col>

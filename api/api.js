@@ -53,6 +53,11 @@ export default {
 				baseURL: globalConfig.baseUrlTrending
 			})
 		},
+		listLanguages() {
+			return minRequest.get('/languages', null, {
+				baseURL: globalConfig.baseUrlTrending
+			})
+		},
 		getAuthUser() {
 			return minRequest.get('/user')
 		},

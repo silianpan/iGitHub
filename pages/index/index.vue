@@ -21,9 +21,14 @@
 				</view>
 			</view>
 		</u-navbar>
-		<RepoTrending ref="repoTrending" @tabsTransition="tabsTransition" @animationfinish="animationfinish" />
-		<uni-drawer :visible="filtLangDrawer" mode="right" @close="closeFiltLangDrawer">
-			<FiltLanguage></FiltLanguage>
+		<RepoTrending :catchtouchmove="false" ref="repoTrending" @tabsTransition="tabsTransition" @animationfinish="animationfinish" />
+
+		<uni-drawer :visible="filtLangDrawer" mode="right" @close="closeFiltLangDrawer" @touchmove.stop.prevent="moveHandle">
+			<view class="scroll-view">
+				<scroll-view class="scroll-view-box" scroll-y>
+					<FiltLanguage></FiltLanguage>
+				</scroll-view>
+			</view>
 		</uni-drawer>
 	</view>
 </template>
@@ -53,6 +58,7 @@
 			}
 		},
 		methods: {
+			moveHandle() {},
 			// tabs通知swiper切换
 			tabsChange(index) {
 				this.$refs.repoTrending.tabsChange(index)

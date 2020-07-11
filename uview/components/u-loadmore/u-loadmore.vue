@@ -2,7 +2,8 @@
 	<view class="u-load-more-wrap" :style="{
 		backgroundColor: bgColor,
 		marginBottom: marginBottom + 'rpx',
-		marginTop: marginTop + 'rpx'
+		marginTop: marginTop + 'rpx',
+		height: $u.addUnit(height)
 	}">
 		<!-- 加载中和没有更多的状态才显示两边的横线 -->
 		<view :class="status == 'loadmore' || status == 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
@@ -38,7 +39,7 @@
 			//当前页面背景颜色，如果背景为非白色的时候，需要把此值设置为背景的颜色
 			bgColor: {
 				type: String,
-				default: '#fff'
+				default: '#ffffff'
 			},
 			// 是否显示加载中的图标
 			icon: {
@@ -96,6 +97,11 @@
 				type: [String, Number],
 				default: 0
 			},
+			// 高度，单位rpx
+			height: {
+				type: [String, Number],
+				default: 'auto'
+			}
 		},
 		data() {
 			return {
@@ -148,6 +154,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-load-more-wrap {
 		width: 100%;
 		display: flex;

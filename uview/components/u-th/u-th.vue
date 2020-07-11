@@ -30,7 +30,7 @@
 		computed: {
 			thStyle() {
 				let style = {};
-				if (this.width) style.flex = `0 0 ${this.width}%`;
+				if (this.width) style.flex = `0 0 ${this.width}`;
 				style.textAlign = this.uTable.align;
 				style.padding = this.uTable.padding;
 				style.borderBottom = `solid 1px ${this.uTable.borderColor}`;
@@ -43,6 +43,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-th {
 		display: flex;
 		flex-direction: column;

@@ -3,7 +3,10 @@
 		<view class="u-section-title" :style="{
 			fontWeight: bold ? 'bold' : 'normal',
 			color: color,
-			fontSize: fontSize + 'rpx'
+			fontSize: fontSize + 'rpx',
+			paddingLeft: showLine ? '10rpx' : 0
+		}" :class="{
+			'u-section--line': showLine
 		}">
 			{{title}}
 		</view>
@@ -12,7 +15,7 @@
 		}" @tap="rightClick">
 			{{subTitle}}
 			<view class="u-icon-arrow">
-				<u-icon name="arrow-right" size="22" :color="subColor"></u-icon>
+				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
 			</view>
 		</view>
 	</view>
@@ -26,6 +29,7 @@
 	 * @property {String} title 左边主标题
 	 * @property {String} sub-title 右边副标题（默认更多）
 	 * @property {Boolean} right 是否显示右边的内容（默认true）
+	 * @property {Boolean} showLine 是否显示左边的竖条（默认true）
 	 * @property {String Number} font-size 主标题的字体大小（默认28）
 	 * @property {Boolean} bold 主标题是否加粗（默认true）
 	 * @property {String} color 主标题颜色（默认#303133）
@@ -68,6 +72,11 @@
 			subColor: {
 				type: String,
 				default: '#909399'
+			},
+			// 是否显示左边的竖条
+			showLine: {
+				type: Boolean,
+				default: true
 			}
 		},
 		data() {
@@ -84,6 +93,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-section {
 		display: flex;
 		justify-content: space-between;
@@ -94,15 +105,13 @@
 	.u-section-title {
 		position: relative;
 		font-size: 28rpx;
-		padding-left: 10px;
 		line-height: 1;
 	}
 	
-	.u-section-title:after {
+	.u-section--line:after {
 		position: absolute;
 		width: 4px;
-		top: -1px;
-		height: 16px;
+		height: 100%;
 		content: '';
 		left: 0;
 		border-radius: 10px;

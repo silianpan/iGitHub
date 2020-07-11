@@ -93,7 +93,7 @@ function rgbToHex(rgb) {
 	}
 }
 
-module.exports = {
+export default {
 	colorGradient,
 	hexToRgb,
 	rgbToHex

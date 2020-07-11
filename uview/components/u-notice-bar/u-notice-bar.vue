@@ -10,6 +10,7 @@
 				:list="list"
 				:volumeIcon="volumeIcon"
 				:moreIcon="moreIcon"
+				:volumeSize="volumeSize"
 				:closeIcon="closeIcon"
 				:mode="mode"
 				:fontSize="fontSize"
@@ -31,6 +32,7 @@
 				:moreIcon="moreIcon"
 				:closeIcon="closeIcon"
 				:mode="mode"
+				:volumeSize="volumeSize"
 				:disable-touch="disableTouch"
 				:fontSize="fontSize"
 				:duration="duration"
@@ -60,6 +62,7 @@
  * @property {String} mode 滚动模式（默认horizontal）
  * @property {Boolean} show 是否显示（默认true）
  * @property {String Number} font-size 字体大小，单位rpx（默认28）
+ * @property {String Number} volume-size 左边喇叭的大小（默认34）
  * @property {String Number} duration 滚动周期时长，只对步进模式有效，横向衔接模式无效，单位ms（默认2000）
  * @property {String Number} speed 水平滚动时的滚动速度，即每秒移动多少距离，只对水平衔接方式有效，单位rpx（默认160）
  * @property {String Number} font-size 字体大小，单位rpx（默认28）
@@ -94,6 +97,11 @@ export default {
 		volumeIcon: {
 			type: Boolean,
 			default: true
+		},
+		// 音量喇叭的大小
+		volumeSize: {
+			type: [Number, String],
+			default: 34
 		},
 		// 是否显示右侧的右箭头图标
 		moreIcon: {
@@ -207,6 +215,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-notice-bar-wrap {
 	overflow: hidden;
 }

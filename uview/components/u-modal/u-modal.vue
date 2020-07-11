@@ -1,14 +1,22 @@
 <template>
 	<view>
-		<u-popup :zoom="zoom" mode="center" :z-index="uZIndex" v-model="value" :length="width" :mask-close-able="false" :border-radius="borderRadius">
+		<u-popup :zoom="zoom"
+			mode="center" :popup="false"
+			:z-index="uZIndex" v-model="value"
+			:length="width" :mask-close-able="maskCloseAble"
+			:border-radius="borderRadius"
+			@close="popupClose"
+			:negative-top="negativeTop"
+		>
 			<view class="u-model">
 				<view v-if="showTitle" class="u-model-title u-line-1" :style="[titleStyle]">{{ title }}</view>
 				<view class="u-model-content">
-					<slot v-if="contentSlot">
-					</slot>
-					<view v-else class="u-model-content-meeeage" :style="[contentStyle]">{{ content }}</view>
+					<view :style="[contentStyle]" v-if="$slots.default">
+						<slot />
+					</view>
+					<view v-else class="u-model-content-message" :style="[contentStyle]">{{ content }}</view>
 				</view>
-				<view class="u-model-footer u-border-top">
+				<view class="u-model-footer u-border-top" v-if="showCancelButton || showConfirmButton">
 					<view
 						v-if="showCancelButton"
 						:hover-stay-time="100"
@@ -23,12 +31,15 @@
 					<view
 						v-if="showConfirmButton"
 						:hover-stay-time="100"
-						hover-class="btn-hover"
+						:hover-class="asyncClose ? 'none' : 'btn-hover'"
 						class="u-model-footer-button hairline-left"
 						:style="[confirmBtnStyle]"
 						@tap="confirm"
 					>
-						{{confirmText}}
+						<u-loading mode="circle" :color="confirmColor" v-if="loading"></u-loading>
+						<block v-else>
+							{{confirmText}}
+						</block>
 					</view>
 				</view>
 			</view>
@@ -47,8 +58,11 @@
  * @property {String | Number} width 模态框宽度（默认600）
  * @property {String} content 模态框内容（默认"内容"）
  * @property {Boolean} show-title 是否显示标题（默认true）
+ * @property {Boolean} async-close 是否异步关闭，只对确定按钮有效（默认false）
  * @property {Boolean} show-confirm-button 是否显示确认按钮（默认true）
+ * @property {Stringr | Number} negative-top modal往上偏移的值
  * @property {Boolean} show-cancel-button 是否显示取消按钮（默认false）
+ * @property {Boolean} mask-close-able 是否允许点击遮罩关闭modal（默认false）
  * @property {String} confirm-text 确认按钮的文字内容（默认"确认"）
  * @property {String} cancel-text 取消按钮的文字内容（默认"取消"）
  * @property {String} cancel-color 取消按钮的颜色（默认"#606266"）
@@ -59,14 +73,13 @@
  * @property {Object} cancel-style 自定义取消按钮样式，对象形式
  * @property {Object} confirm-style 自定义确认按钮样式，对象形式
  * @property {Boolean} zoom 是否开启缩放模式（默认true）
- * @property {Boolean} contentSlot 是否传入自定义的slot内容（默认false）
  * @event {Function} confirm 确认按钮被点击
  * @event {Function} cancel 取消按钮被点击
  * @example <u-modal :src="title" :content="content"></u-modal>
  */
 export default {
+	name: 'u-modal',
 	props: {
-		name: 'u-modal',
 		// 是否显示Modal
 		value: {
 			type: Boolean,
@@ -165,12 +178,26 @@ export default {
 			type: Boolean,
 			default: true
 		},
-		// 是否传入自定义的slot内容，因为微信小程序无法在<slot></slot>中插入内容
-		contentSlot: {
+		// 是否异步关闭，只对确定按钮有效
+		asyncClose: {
 			type: Boolean,
 			default: false
+		},
+		// 是否允许点击遮罩关闭modal
+		maskCloseAble: {
+			type: Boolean,
+			default: false
+		},
+		// 给一个负的margin-top，往上偏移，避免和键盘重合的情况
+		negativeTop: {
+			type: [String, Number],
+			default: 0
 		}
-		
+	},
+	data() {
+		return {
+			loading: false, // 确认按钮是否正在加载中
+		}
 	},
 	computed: {
 		cancelBtnStyle() {
@@ -183,37 +210,49 @@ export default {
 			return this.zIndex ? this.zIndex : this.$u.zIndex.popup;
 		}
 	},
+	watch: {
+		// 如果是异步关闭时，外部修改v-model的值为false时，重置内部的loading状态
+		// 避免下次打开的时候，状态混乱
+		value(n) {
+			if(n === true) this.loading = false;
+		}
+	},
 	methods: {
 		confirm() {
 			this.$emit('confirm');
-			this.$emit('input', false);
+			// 异步关闭
+			if(this.asyncClose) {
+				this.loading = true;
+			} else {
+				this.$emit('input', false);
+			}
 		},
 		cancel() {
 			this.$emit('cancel');
 			this.$emit('input', false);
+			// 目前popup弹窗关闭有一个延时操作，此处做一个延时
+			// 避免确认按钮文字变成了"确定"字样，modal还没消失，造成视觉不好的效果
+			setTimeout(() => {
+				this.loading = false;
+			}, 300);
+		},
+		// 点击遮罩关闭modal，设置v-model的值为false，否则无法第二次弹起modal
+		popupClose() {
+			this.$emit('input', false);
+		},
+		// 清除加载中的状态
+		clearLoading() {
+			this.loading = false;
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-.u-mask {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	opacity: 0;
-	visibility: hidden;
-}
+@import "../../libs/css/style.components.scss";
 
 .btn-hover {
 	background-color: rgb(230, 230, 230);
-}
-
-.u-mask-show {
-	opacity: 1;
-	visibility: visible;
 }
 
 .u-model {
@@ -230,7 +269,7 @@ export default {
 	}
 
 	&-content {
-		&-meeeage {
+		&-message {
 			padding: 48rpx;
 			font-size: 30rpx;
 			text-align: center;

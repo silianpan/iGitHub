@@ -1,5 +1,5 @@
 <template>
-	<text selectable class="u-link" @tap.stop="openLink" :style="{
+	<text class="u-link" @tap.stop="openLink" :style="{
 		color: color,
 		fontSize: fontSize + 'rpx',
 		borderBottom: underLine ? `1px solid ${lineColor ? lineColor : color}` : 'none',
@@ -66,11 +66,13 @@
 				// #endif
 				// #ifdef MP
 				uni.setClipboardData({
-					data: this.href
+					data: this.href,
+					success() {
+						uni.hideToast();
+					}
 				});
-				uni.showToast({
-					title: this.mpTips,
-					icon: 'none'
+				this.$nextTick(() => {
+					this.$u.toast(this.mpTips);
 				})
 				// #endif
 			}
@@ -79,6 +81,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-link {
 		line-height: 1;
 	}

@@ -1,42 +1,44 @@
 <template>
-	<view class="u-field" :class="{'u-field-border': itemIndex > 0 }">
+	<view class="u-field" :class="{'u-border-top': borderTop, 'u-border-bottom': borderBottom }">
 		<view class="u-field-inner" :class="[type == 'textarea' ? 'u-textarea-inner' : '', 'u-label-postion-' + labelPosition]">
 			<view class="u-label" :class="[required ? 'u-required' : '']" :style="{
 				justifyContent: justifyContent, 
 				flex: labelPosition == 'left' ? `0 0 ${labelWidth}rpx` : '1'
 			}">
 				<view class="u-icon-wrap" v-if="icon">
-					<u-icon size="32" :name="icon" :color="iconColor" class="u-icon"></u-icon>
+					<u-icon size="32" :custom-style="iconStyle" :name="icon" :color="iconColor" class="u-icon"></u-icon>
 				</view>
 				<slot name="icon"></slot>
 				<text class="u-label-text" :class="[this.$slots.icon || icon ? 'u-label-left-gap' : '']">{{ label }}</text>
 			</view>
 			<view class="fild-body">
-				<textarea v-if="type == 'textarea'" class="u-input-class u-textarea-class" :style="[inputStyle]" :value="value"
-				 :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength"
-				 :focus="focus" :autoHeight="autoHeight" :fixed="fixed" @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm"
-				 @tap="fieldClick" />
-				<input
-					v-else
-					:style="[inputStyle]"
-					class="u-input-class"
-					:type="type"
-					:value="value"
-					:password="password || type === 'password'"
-					:placeholder="placeholder"
-					:placeholderStyle="placeholderStyle"
-					:disabled="disabled"
-					:maxlength="inputMaxlength"
-					:focus="focus"
-					:confirmType="confirmType"
-					@focus="onFocus"
-					@blur="onBlur"
-					@input="onInput"
-					@confirm="onConfirm"
-					@tap="fieldClick"
-				/>
-				<u-icon v-if="clearable && value && focused" name="close-circle-fill" color="#c0c4cc" class="u-clear-icon" @touchstart="onClear"/>
-				<view class="u-button-wrap"><slot name="button" /></view>
+				<view class="u-flex-1 u-flex" :style="[inputWrapStyle]">
+					<textarea v-if="type == 'textarea'" class="u-flex-1 u-textarea-class" :style="[fieldStyle]" :value="value"
+					 :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength"
+					 :focus="focus" :autoHeight="autoHeight" :fixed="fixed" @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm"
+					 @tap="fieldClick" />
+					<input
+						v-else
+						:style="[fieldStyle]"
+						:type="type"
+						class="u-flex-1 u-field__input-wrap"
+						:value="value"
+						:password="type === 'password' ? 'text' : type"
+						:placeholder="placeholder"
+						:placeholderStyle="placeholderStyle"
+						:disabled="disabled"
+						:maxlength="inputMaxlength"
+						:focus="focus"
+						:confirmType="confirmType"
+						@focus="onFocus"
+						@blur="onBlur"
+						@input="onInput"
+						@confirm="onConfirm"
+						@tap="fieldClick"
+					/>
+				</view>
+				<u-icon :size="clearSize" v-if="clearable && value != '' && focused" name="close-circle-fill" color="#c0c4cc" class="u-clear-icon" @touchstart="onClear"/>
+				<view class="u-button-wrap"><slot name="right" /></view>
 				<u-icon v-if="rightIcon" @click="rightIconClick" :name="rightIcon" color="#c0c4cc" :style="[rightIconStyle]" size="26" class="u-arror-right" />
 			</view>
 		</view>
@@ -53,14 +55,19 @@
  * @tutorial https://www.uviewui.com/components/field.html
  * @property {String} type 输入框的类型（默认text）
  * @property {String} icon label左边的图标，限uView的图标名称
- * @property {Boolean} right-icon 输入框右边的（默认false）
+ * @property {Object} icon-style 左边图标的样式，对象形式
+ * @property {Boolean} right-icon 输入框右边的图标名称，限uView的图标名称（默认false）
  * @property {Boolean} required 是否必填，左边您显示红色"*"号（默认false）
  * @property {String} label 输入框左边的文字提示
  * @property {Boolean} password 是否密码输入方式(用点替换文字)，type为text时有效（默认false）
  * @property {Boolean} clearable 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容（默认true）
  * @property {Number String} label-width label的宽度，单位rpx（默认130）
  * @property {String} label-align label的文字对齐方式（默认left）
+ * @property {Object} field-style 自定义输入框的样式，对象形式
+ * @property {Number | String} clear-size 清除图标的大小，单位rpx（默认30）
  * @property {String} input-align 输入框内容对齐方式（默认left）
+ * @property {Boolean} border-bottom 是否显示field的下边框（默认true）
+ * @property {Boolean} border-top 是否显示field的上边框（默认false）
  * @property {String} icon-color 左边通过icon配置的图标的颜色（默认#606266）
  * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效（默认true）
  * @property {String Boolean} error-message 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
@@ -146,22 +153,45 @@ export default {
 		labelPosition: {
 			type: String,
 			default: 'left'
-		}
+		},
+		// 输入框的自定义样式
+		fieldStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
+		// 清除按钮的大小
+		clearSize: {
+			type: [Number, String],
+			default: 30
+		},
+		// lable左边的图标样式，对象形式
+		iconStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
+		// 是否显示上边框
+		borderTop: {
+			type: Boolean,
+			default: false
+		},
+		// 是否显示下边框
+		borderBottom: {
+			type: Boolean,
+			default: true
+		},
 	},
-	inject: ['uCellGroup'],
 	data() {
 		return {
 			focused: false,
 			itemIndex: 0,
 		};
 	},
-	created() {
-		if(this.uCellGroup) {
-			this.itemIndex = this.uCellGroup.index++;
-		}
-	},
 	computed: {
-		inputStyle() {
+		inputWrapStyle() {
 			let style = {};
 			style.textAlign = this.inputAlign;
 			// 判断lable的位置，如果是left的话，让input左边两边有间隙
@@ -239,6 +269,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+	
 .u-field {
 	font-size: 28rpx;
 	padding: 20rpx 28rpx;
@@ -258,6 +290,8 @@ export default {
 
 .u-textarea-class {
 	min-height: 96rpx;
+	width: auto;
+	font-size: 28rpx;
 }
 
 .fild-body {
@@ -302,7 +336,7 @@ export default {
 	line-height: 1;
 }
 
-.u-input-class {
+.u-field__input-wrap {
 	position: relative;
 	overflow: hidden;
 	font-size: 28rpx;
@@ -316,19 +350,6 @@ export default {
 	align-items: center;
 }
 
-.u-field-border:after {
-	left: 32rpx!important;
-	position: absolute;
-	box-sizing: border-box;
-	content: ' ';
-	pointer-events: none;
-	right: 0;
-	top: 0;
-	border-bottom: 1px solid $u-border-color;
-	-webkit-transform: scaleY(0.5);
-	transform: scaleY(0.5);
-}
-
 .u-error-message {
 	color: $u-type-error;
 	font-size: 26rpx;
@@ -337,5 +358,9 @@ export default {
 
 .placeholder-style {
 	color: rgb(150, 151, 153);
+}
+
+.u-input-class {
+	font-size: 28rpx;
 }
 </style>

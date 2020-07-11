@@ -1,28 +1,25 @@
 <template>
-	<u-index-list :scrollTop="scrollTop">
-		<view v-for="(item, index) in indexList" :key="index">
-			<u-index-anchor :index="item" />
-			<view class="list-cell">
-				列表1
-			</view>
-			<view class="list-cell">
-				列表2
-			</view>
-			<view class="list-cell">
-				列表3
+	<u-index-list :scrollTop="scrollTop" :index-list="indexList">
+		<view v-for="(item, index) in list" :key="index">
+			<!-- <u-index-anchor :index="item.letter" /> -->
+			<view class="list-cell u-border-bottom" v-for="(item1, index) in item.data" :key="index">
+				{{item1.name}}
 			</view>
 		</view>
 	</u-index-list>
 </template>
 
 <script>
+	import indexList from "./index.list.js";
+	const letterArr = indexList.list.map(val => {
+		return val.letter;
+	})
 	export default {
 		data() {
 			return {
 				scrollTop: 0,
-				indexList: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
-					"V", "W", "X", "Y", "Z"
-				]
+				indexList: letterArr,
+				list: indexList.list
 			}
 		},
 		onPageScroll(e) {
@@ -38,7 +35,7 @@
 		width: 100%;
 		padding: 10px 24rpx;
 		overflow: hidden;
-		color: #323233;
+		color: $u-content-color;
 		font-size: 14px;
 		line-height: 24px;
 		background-color: #fff;

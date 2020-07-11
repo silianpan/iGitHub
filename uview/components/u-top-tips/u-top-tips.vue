@@ -12,7 +12,7 @@
 	 * @tutorial https://www.uviewui.com/components/topTips.html
 	 * @property {String Number} navbar-height 导航栏高度(包含状态栏高度在内)，单位PX
 	 * @property {String Number} z-index z-index值（默认975）
-	 * @example <u-top-tips ref="uTips" type="success" duration="1500"></u-top-tips>
+	 * @example <u-top-tips ref="uTips"></u-top-tips>
 	 */
 	export default {
 		name: "u-top-tips",
@@ -68,6 +68,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	view {
 		box-sizing: border-box;
 	}

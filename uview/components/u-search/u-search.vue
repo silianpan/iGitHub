@@ -1,5 +1,7 @@
 <template>
-	<view class="u-search">
+	<view class="u-search" :style="{
+		margin: margin,
+	}">
 		<view
 			class="u-content"
 			:style="{
@@ -9,7 +11,9 @@
 				height: height + 'rpx'
 			}"
 		>
-			<view class="u-icon-wrap"><u-icon class="u-clear-icon" :size="30" name="search" color="#909399"></u-icon></view>
+			<view class="u-icon-wrap">
+				<u-icon class="u-clear-icon" :size="30" :name="searchIcon" :color="searchIconColor ? searchIconColor : color"></u-icon>
+			</view>
 			<input
 				confirm-type="search"
 				@blur="blur"
@@ -18,17 +22,21 @@
 				@input="inputChange"
 				:disabled="disabled"
 				@focus="getFocus"
+				:maxlength="getMaxlength"
 				:focus="focus"
 				placeholder-class="u-placeholder-class"
 				:placeholder="placeholder"
+				:placeholder-style="`color: ${placeholderColor}`"
 				class="u-input"
 				type="text"
 				:style="[{
-					textAlign: inputAlign
+					textAlign: inputAlign,
+					color: color,
+					backgroundColor: bgColor,
 				}, inputStyle]"
 			/>
 			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @touchstart="clear">
-				<u-icon class="u-clear-icon" name="close" :size="16" color="#fff" @touchstart="clear"></u-icon>
+				<u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
 			</view>
 		</view>
 		<view :style="[actionStyle]" class="u-action" 
@@ -53,14 +61,22 @@
  * @property {String} action-text 右侧控件文字（默认“搜索”）
  * @property {Object} action-style 右侧控件的样式，对象形式
  * @property {String} input-align 输入框内容水平对齐方式（默认left）
+ * @property {Object} input-style 自定义输入框样式，对象形式
  * @property {Boolean} disabled 是否启用输入框（默认false）
+ * @property {String} search-icon-color 搜索图标的颜色，默认同输入框字体颜色
+ * @property {String} color 输入框字体颜色（默认#606266）
+ * @property {String} placeholder-color placeholder的颜色（默认#909399）
+ * @property {String} search-icon 输入框左边的图标，可以为uView图标名称或图片路径
+ * @property {String} margin 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"
  * @property {Boolean} animation 是否开启动画，见上方说明（默认false）
  * @property {String} value 输入框初始值
+ * @property {String | Number} maxlength 输入框最大能输入的长度，-1为不限制长度
  * @property {Boolean} input-style input输入框的样式，可以定义文字颜色，大小等，对象形式
- * @property {String Number} height 输入框高度，单位rpx（默认64）
+ * @property {String | Number} height 输入框高度，单位rpx（默认64）
  * @event {Function} change 输入框内容发生变化时触发
  * @event {Function} search 用户确定搜索时触发，用户按回车键，或者手机键盘右下角的"搜索"键时触发
  * @event {Function} custom 用户点击右侧控件时触发
+ * @event {Function} clear 用户点击清除按钮时触发
  * @example <u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
  */
 export default {
@@ -144,6 +160,36 @@ export default {
 			default() {
 				return {}
 			}
+		},
+		// 输入框最大能输入的长度，-1为不限制长度(来自uniapp文档)
+		maxlength: {
+			type: [Number, String],
+			default: -1
+		},
+		// 搜索图标的颜色，默认同输入框字体颜色
+		searchIconColor: {
+			type: String,
+			default: ''
+		},
+		// 输入框字体颜色
+		color: {
+			type: String,
+			default: '#606266'
+		},
+		// placeholder的颜色
+		placeholderColor: {
+			type: String,
+			default: '#909399'
+		},
+		// 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"、"30rpx 20rpx"等写法
+		margin: {
+			type: String,
+			default: '0'
+		},
+		// 左边输入框的图标，可以为uView图标名称或图片路径
+		searchIcon: {
+			type: String,
+			default: 'search'
 		}
 	},
 	data() {
@@ -180,6 +226,10 @@ export default {
 		borderStyle() {
 			if (this.borderColor) return `1px solid ${this.borderColor}`;
 			else return 'none';
+		},
+		// 将maxlength转为数值
+		getMaxlength() {
+			return Number(this.maxlength);
 		}
 	},
 	methods: {
@@ -191,10 +241,14 @@ export default {
 		// 也可以作为用户通过this.$refs形式调用清空输入框内容
 		clear() {
 			this.keyword = '';
+			// 延后发出事件，避免在父组件监听clear事件时，value为更新前的值(不为空)
+			this.$nextTick(() => {
+				this.$emit('clear');
+			})
 		},
 		// 确定搜索
-		search() {
-			this.$emit('search', this.keyword);
+		search(e) {
+			this.$emit('search', e.detail.value);
 			// 收起键盘
 			uni.hideKeyboard();
 		},
@@ -222,6 +276,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-search {
 	display: flex;
 	align-items: center;
@@ -249,12 +305,11 @@ export default {
 }
 
 .u-close-wrap {
-	width: 34rpx;
-	height: 34rpx;
+	width: 40rpx;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: rgb(200, 203, 204);
 	border-radius: 50%;
 }
 

@@ -1,7 +1,7 @@
 // 引入全局mixin
 import mixin from './libs/mixin/mixin.js'
 // 引入关于是否mixin集成小程序分享的配置
-import wxshare from './libs/mixin/mpShare.js'
+// import wxshare from './libs/mixin/mpShare.js'
 // 全局挂载引入http相关请求拦截插件
 import http from './libs/request'
 
@@ -24,58 +24,43 @@ function wranning(str) {
 // }
 
 // post类型对象参数转为get类型url参数
-import {
-	queryParams
-} from './libs/function/queryParams.js'
+import queryParams from './libs/function/queryParams.js'
 // 路由封装
-import {
-	route
-} from './libs/function/route.js'
+import route from './libs/function/route.js'
 // 时间格式化
-import {
-	timeFormat
-} from './libs/function/timeFormat.js'
+import timeFormat from './libs/function/timeFormat.js'
 // 时间戳格式化,返回多久之前
-import {
-	timeFrom
-} from './libs/function/timeFrom.js'
+import timeFrom from './libs/function/timeFrom.js'
 // 颜色渐变相关,colorGradient-颜色渐变,hexToRgb-十六进制颜色转rgb颜色,rgbToHex-rgb转十六进制
-import {
-	colorGradient,
-	hexToRgb,
-	rgbToHex
-} from './libs/function/colorGradient.js'
+import colorGradient from './libs/function/colorGradient.js'
 // 生成全局唯一guid字符串
-import {
-	guid
-} from './libs/function/guid.js'
+import guid from './libs/function/guid.js'
 // 主题相关颜色,info|success|warning|primary|default|error,此颜色已在uview.scss中定义,但是为js中也能使用,故也定义一份
-import {
-	color
-} from './libs/function/color.js'
+import color from './libs/function/color.js'
 // 根据type获取图标名称
-import {
-	type2icon
-} from './libs/function/type2icon.js'
+import type2icon from './libs/function/type2icon.js'
 // 打乱数组的顺序
-import {
-	randomArray
-} from './libs/function/randomArray.js'
+import randomArray from './libs/function/randomArray.js'
+// 对象和数组的深度克隆
+import deepClone from './libs/function/deepClone.js'
+// 对象深度拷贝
+import deepMerge from './libs/function/deepMerge.js'
+// 添加单位
+import addUnit from './libs/function/addUnit.js'
 
 // 规则检验
 import test from './libs/function/test.js'
 // 随机数
-import {
-	random
-} from './libs/function/random.js'
+import random from './libs/function/random.js'
 // 去除空格
-import {
-	trim
-} from './libs/function/trim.js'
+import trim from './libs/function/trim.js'
 // toast提示，对uni.showToast的封装
-import {
-	toast
-} from './libs/function/toast.js'
+import toast from './libs/function/toast.js'
+// 获取父组件参数
+import getParent from './libs/function/getParent.js'
+// 获取整个父组件
+import $parent from './libs/function/$parent.js'
+
 
 // 配置信息
 import config from './libs/config/config.js'
@@ -83,12 +68,12 @@ import config from './libs/config/config.js'
 import zIndex from './libs/config/zIndex.js'
 
 const $u = {
-	queryParams,
-	route,
-	timeFormat,
+	queryParams: queryParams,
+	route: route,
+	timeFormat: timeFormat,
 	date: timeFormat, // 另名date
 	timeFrom,
-	colorGradient,
+	colorGradient: colorGradient.colorGradient,
 	guid,
 	color,
 	type2icon,
@@ -98,10 +83,15 @@ const $u = {
 	post: http.post,
 	put: http.put,
 	'delete': http.delete,
-	hexToRgb,
-	rgbToHex,
+	hexToRgb: colorGradient.hexToRgb,
+	rgbToHex: colorGradient.rgbToHex,
 	test,
 	random,
+	deepClone,
+	deepMerge,
+	getParent,
+	$parent,
+	addUnit,
 	trim,
 	type: ['primary', 'success', 'error', 'warning', 'info'],
 	http,

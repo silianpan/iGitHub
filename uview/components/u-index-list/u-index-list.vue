@@ -76,6 +76,9 @@
 			// #ifndef H5
 			this.stickyOffsetTop = this.offsetTop ? uni.upx2px(this.offsetTop) : 0;
 			// #endif
+			// 只能在created生命周期定义children，如果在data定义，会因为在子组件中通过provide/inject
+			// 进行push时而导致的莫名其妙的错误
+			this.children = [];
 		},
 		provide() {
 			return {
@@ -86,7 +89,7 @@
 			return {
 				activeAnchorIndex: 0,
 				showSidebar: true,
-				children: [],
+				// children: [],
 				touchmove: false,
 				touchmoveIndex: 0,
 			}
@@ -214,7 +217,7 @@
 							const anchorStyle = {
 								position: 'relative',
 								transform: `translate3d(0, ${translateY}px, 0)`,
-								zIndex: `${zIndex}`,
+								zIndex: `${zIndex ? zIndex : this.$u.zIndex.indexListSticky}`,
 								color: `${activeColor}`
 							};
 							item.active = active;
@@ -266,6 +269,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-index-bar {
 		position: relative
 	}

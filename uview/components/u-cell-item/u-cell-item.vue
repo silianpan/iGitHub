@@ -1,227 +1,300 @@
 <template>
-	<view @tap="click" class="u-cell-item-box" :class="{'u-cell-border': itemIndex > 0 }" hover-stay-time="150"
-	 :hover-class="hover ? 'u-hover-class' : ''" :style="{
-		backgroundColor: bgColor
-	}">
-		<view class="u-cell-content">
-			<view class="u-icon-wrap" v-if="icon">
-				<u-icon size="32" :name="icon" class="u-icon"></u-icon>
-			</view>
-			<view class="u-icon-wrap">
-				<slot name="icon"></slot>
-			</view>
-			<view class="u-cell-title" :style="[titleStyle]">
-				<text class="u-title-text" v-if="title">{{title}}</text>
-				<slot name="left"></slot>
-			</view>
-			<view class="u-cell-value" v-if="value">
-				<text class="u-value-text" :style="[valueStyle]" v-if="value">{{value}}</text>
-			</view>
-			<view v-else class="u-slot-wrap">
-				<slot name="right"></slot>
-			</view>
-			<view :style="[arrowStyle]" class="u-icon-wrap">
-				<u-icon v-if="arrow" size="26" class="u-arror-right" color="#969799" name="arrow-right"></u-icon>
+	<view
+		@tap="click"
+		class="u-cell"
+		:class="{ 'u-border-bottom': borderBottom, 'u-border-top': borderTop, 'u-col-center': center, 'u-cell--required': required }"
+		hover-stay-time="150"
+		:hover-class="hoverClass"
+		:style="{
+			backgroundColor: bgColor
+		}"
+	>
+		<u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" class="u-cell__left-icon-wrap"></u-icon>
+		<view class="u-flex" v-else>
+			<slot name="icon"></slot>
+		</view>
+		<view
+			class="u-cell_title"
+			:style="[
+				{
+					width: titleWidth ? titleWidth + 'rpx' : 'auto'
+				},
+				titleStyle
+			]"
+		>
+			<block v-if="title">{{ title }}</block>
+			<slot name="title" v-else></slot>
+
+			<view class="u-cell__label" v-if="label || $slots.label" :style="[labelStyle]">
+				<block v-if="label">{{ label }}</block>
+				<slot name="label" v-else></slot>
 			</view>
 		</view>
-		<view class="u-cell-label" v-if="label" :style="[labelStyle]">
-			{{label}}
+
+		<view class="u-cell__value" :style="[valueStyle]">
+			<block class="u-cell__value" v-if="value">{{ value }}</block>
+			<slot v-else></slot>
+		</view>
+		<u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
+		<view class="u-flex" v-if="$slots['right-icon']">
+			<slot name="right-icon"></slot>
 		</view>
 	</view>
 </template>
 
 <script>
-	/**
-	 * cellItem 单元格Item
-	 * @description cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。搭配u-cell-group使用
-	 * @tutorial https://www.uviewui.com/components/cell.html
-	 * @property {String} title 左侧标题
-	 * @property {String} icon 左侧图标名，只支持uView内置图标，见Icon 图标
-	 * @property {String} value 右侧内容
-	 * @property {String} label 标题下方的描述信息
-	 * @property {Boolean} border 是否显示每个cell的下边框（默认true）
-	 * @property {Boolean} hover 是否开启点击反馈，hover-class形式，如果右侧通过slot传递switch进去的话，可以将此值设置为false（默认true）
-	 * @property {Boolean} arrow 是否显示右侧箭头（默认true）
-	 * @property {Boolean} arrow-direction 箭头方向，可选值（默认right）
-	 * @property {Object} title-style 标题样式，对象形式
-	 * @property {Object} value-style 右侧内容样式，对象形式
-	 * @property {Object} label-style 标题下方描述信息的样式，对象形式
-	 * @property {String} bg-color 背景颜色（默认#ffffff）
-	 * @property {String Number} index 用于在click事件回调中返回，标识当前是第几个Item
-	 * @example <u-cell-item icon="integral-fill" title="会员等级" value="新版本"></u-cell-item>
-	 */
-	export default {
-		name: "u-cell-item",
-		props: {
-			// 左侧图标名称(只能uView内置图标)，或者图标src
-			icon: {
-				type: String,
-				default: ''
-			},
-			// 左侧标题
-			title: {
-				type: String,
-				default: ''
-			},
-			// 右侧内容
-			value: {
-				type: String,
-				default: ''
-			},
-			// 标题下方的描述信息
-			label: {
-				type: String,
-				default: ''
-			},
-			// 是否显示内边框
-			border: {
-				type: Boolean,
-				default: true
-			},
-			// 是否开启点击反馈，即点击是cell背景为灰色
-			hover: {
-				type: Boolean,
-				default: true
-			},
-			// 是否显示右侧箭头
-			arrow: {
-				type: Boolean,
-				default: true
-			},
-			// 右侧箭头方向，可选值：right|up|down，默认为right
-			arrowDirection: {
-				type: String,
-				default: 'right'
-			},
-			// 控制标题的样式
-			titleStyle: {
-				type: Object,
-				default () {
-					return {};
-				}
-			},
-			// 右侧显示内容的样式
-			valueStyle: {
-				type: Object,
-				default () {
-					return {};
-				}
-			},
-			// 描述信息的样式
-			labelStyle: {
-				type: Object,
-				default () {
-					return {};
-				}
-			},
-			// 背景颜色
-			bgColor: {
-				type: String,
-				default: '#ffffff'
-			},
-			// 用于识别被点击的是第几个cell
-			index: {
-				type: [String, Number],
-				default: ''
+/**
+ * cellItem 单元格Item
+ * @description cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。搭配u-cell-group使用
+ * @tutorial https://www.uviewui.com/components/cell.html
+ * @property {String} title 左侧标题
+ * @property {String} icon 左侧图标名，只支持uView内置图标，见Icon 图标
+ * @property {Object} icon-style 左边图标的样式，对象形式
+ * @property {String} value 右侧内容
+ * @property {String} label 标题下方的描述信息
+ * @property {Boolean} border-bottom 是否显示cell的下边框（默认true）
+ * @property {Boolean} border-top 是否显示cell的上边框（默认false）
+ * @property {Boolean} center 是否使内容垂直居中（默认false）
+ * @property {String} hover-class 是否开启点击反馈，none为无效果（默认true）
+ * // @property {Boolean} border-gap border-bottom为true时，Cell列表中间的条目的下边框是否与左边有一个间隔（默认true）
+ * @property {Boolean} arrow 是否显示右侧箭头（默认true）
+ * @property {Boolean} required 箭头方向，可选值（默认right）
+ * @property {Boolean} arrow-direction 是否显示左边表示必填的星号（默认false）
+ * @property {Object} title-style 标题样式，对象形式
+ * @property {Object} value-style 右侧内容样式，对象形式
+ * @property {Object} label-style 标题下方描述信息的样式，对象形式
+ * @property {String} bg-color 背景颜色（默认transparent）
+ * @property {String Number} index 用于在click事件回调中返回，标识当前是第几个Item
+ * @property {String Number} title-width 标题的宽度，单位rpx
+ * @example <u-cell-item icon="integral-fill" title="会员等级" value="新版本"></u-cell-item>
+ */
+export default {
+	name: 'u-cell-item',
+	props: {
+		// 左侧图标名称(只能uView内置图标)，或者图标src
+		icon: {
+			type: String,
+			default: ''
+		},
+		// 左侧标题
+		title: {
+			type: [String, Number],
+			default: ''
+		},
+		// 右侧内容
+		value: {
+			type: [String, Number],
+			default: ''
+		},
+		// 标题下方的描述信息
+		label: {
+			type: [String, Number],
+			default: ''
+		},
+		// 是否显示下边框
+		borderBottom: {
+			type: Boolean,
+			default: true
+		},
+		// 是否显示上边框
+		borderTop: {
+			type: Boolean,
+			default: false
+		},
+		// 多个cell中，中间的cell显示下划线时，下划线是否给一个到左边的距离
+		// 1.4.0版本废除此参数，默认边框由border-top和border-bottom提供，此参数会造成干扰
+		// borderGap: {
+		// 	type: Boolean,
+		// 	default: true
+		// },
+		// 是否开启点击反馈，即点击时cell背景为灰色，none为无效果
+		hoverClass: {
+			type: String,
+			default: 'u-cell-hover'
+		},
+		// 是否显示右侧箭头
+		arrow: {
+			type: Boolean,
+			default: true
+		},
+		// 内容是否垂直居中
+		center: {
+			type: Boolean,
+			default: false
+		},
+		// 是否显示左边表示必填的星号
+		required: {
+			type: Boolean,
+			default: false
+		},
+		// 标题的宽度，单位rpx
+		titleWidth: {
+			type: [Number, String],
+			default: ''
+		},
+		// 右侧箭头方向，可选值：right|up|down，默认为right
+		arrowDirection: {
+			type: String,
+			default: 'right'
+		},
+		// 控制标题的样式
+		titleStyle: {
+			type: Object,
+			default() {
+				return {};
 			}
 		},
-		inject: ['uCellGroup'],
-		data() {
-			return {
-				itemIndex: 0,
+		// 右侧显示内容的样式
+		valueStyle: {
+			type: Object,
+			default() {
+				return {};
 			}
 		},
-		created() {
-			this.itemIndex = this.uCellGroup.index++;
-		},
-		computed: {
-			arrowStyle() {
-				let style = {};
-				if (this.arrowDirection == 'top') style.transform = 'rotate(-90deg)';
-				else if (this.arrowDirection == 'bottom') style.transform = 'rotate(90deg)';
-				else style.transform = 'rotate(0deg)';
-				return style;
+		// 描述信息的样式
+		labelStyle: {
+			type: Object,
+			default() {
+				return {};
 			}
 		},
-		methods: {
-			click() {
-				this.$emit('click', this.index);
+		// 背景颜色
+		bgColor: {
+			type: String,
+			default: 'transparent'
+		},
+		// 用于识别被点击的是第几个cell
+		index: {
+			type: [String, Number],
+			default: ''
+		},
+		// 是否使用lable插槽
+		useLabelSlot: {
+			type: Boolean,
+			default: false
+		},
+		// 左边图标的大小，单位rpx，只对传入icon字段时有效
+		iconSize: {
+			type: [Number, String],
+			default: 34
+		},
+		// 左边图标的样式，对象形式
+		iconStyle: {
+			type: Object,
+			default() {
+				return {}
 			}
+		},
+	},
+	data() {
+		return {
+
+		};
+	},
+	computed: {
+		arrowStyle() {
+			let style = {};
+			if (this.arrowDirection == 'up') style.transform = 'rotate(-90deg)';
+			else if (this.arrowDirection == 'down') style.transform = 'rotate(90deg)';
+			else style.transform = 'rotate(0deg)';
+			return style;
+		}
+	},
+	methods: {
+		click() {
+			this.$emit('click', this.index);
 		}
 	}
+};
 </script>
 
 <style lang="scss" scoped>
-	.u-cell-item-box {
-		padding: 28rpx 32rpx;
-		position: relative;
-	}
+@import "../../libs/css/style.components.scss";
+.u-cell {
+	position: relative;
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 20rpx 32rpx;
+	font-size: 28rpx;
+	line-height: 48rpx;
+	color: $u-content-color;
+	background-color: #fff;
+	text-align: left;
+}
 
-	.u-cell-border:after {
-		left: 32rpx !important;
-		position: absolute;
-		box-sizing: border-box;
-		content: ' ';
-		pointer-events: none;
-		right: 0;
-		top: 0;
-		border-bottom: 1px solid $u-border-color;
-		-webkit-transform: scaleY(0.5);
-		transform: scaleY(0.5);
-	}
+.u-cell_title {
+	font-size: 28rpx;
+}
 
-	.u-cell-content {
-		display: flex;
-		align-items: center;
-	}
+.u-cell__left-icon-wrap {
+	margin-right: 10rpx;
+	font-size: 32rpx;
+}
 
-	.u-cell-title {
-		color: #323233;
-		font-size: 30rpx;
-		flex: 1;
-		margin-left: 6rpx;
-		text-align: left;
-	}
+.u-cell__right-icon-wrap {
+	margin-left: 10rpx;
+	color: #969799;
+	font-size: 28rpx;
+}
 
-	.u-cell-value {
-		flex: 1;
-		font-size: 26rpx;
-		color: #969799;
-		text-align: right;
-	}
+.u-cell__left-icon-wrap,
+.u-cell__right-icon-wrap {
+	display: flex;
+	align-items: center;
+	height: 48rpx;
+}
 
-	.u-cell-label {
-		color: #969799;
-		font-size: 26rpx;
-		margin-top: 10rpx;
-		text-align: left;
-	}
+.u-cell-border:after {
+	position: absolute;
+	box-sizing: border-box;
+	content: ' ';
+	pointer-events: none;
+	right: 0;
+	left: 0;
+	top: 0;
+	border-bottom: 1px solid $u-border-color;
+	-webkit-transform: scaleY(0.5);
+	transform: scaleY(0.5);
+}
 
-	.u-slot-wrap {
-		display: flex;
-		align-items: center;
-	}
+.u-cell-border {
+	position: relative;
+}
 
-	// 微信小程序需要额外处理可能通过slot传入badge和switch的问题
-	// 否则无法垂直居中
-	/* #ifdef MP-WEIXIN */
-	.u-slot-wrap /deep/ u-badge,
-	.u-slot-wrap /deep/ u-switch {
-		display: flex;
-		align-items: center;
-	}
+.u-cell__label {
+	margin-top: 6rpx;
+	font-size: 26rpx;
+	line-height: 36rpx;
+	color: $u-tips-color;
+	word-wrap: break-word;
+}
 
-	/* #endif */
+.u-cell__value {
+	overflow: hidden;
+	text-align: right;
+	vertical-align: middle;
+	color: $u-tips-color;
+	font-size: 26rpx;
+}
 
-	.u-icon {
-		margin-right: 6rpx;
-	}
+.u-cell__title,
+.u-cell__value {
+	flex: 1;
+}
 
-	.u-value-text {
-		margin-right: 10rpx;
-	}
+.u-cell--required {
+	overflow: visible;
+	display: flex;
+	align-items: center;
+}
 
-	.u-title-text {
-		margin-right: 10rpx;
-	}
+.u-cell--required:before {
+	position: absolute;
+	content: '*';
+	left: 8px;
+	margin-top: 4rpx;
+	font-size: 14px;
+	color: $u-type-error;
+}
 </style>

@@ -177,6 +177,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-no-network {
 		background-color: #fff;
 		position: fixed;
@@ -187,10 +189,12 @@
 	}
 
 	.u-inner {
-		padding-top: 200rpx;
+		height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
+		margin-top: -15%;
 	}
 
 	.u-tips {

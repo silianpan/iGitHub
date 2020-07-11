@@ -24,7 +24,7 @@
 		<RepoTrending :catchtouchmove="false" ref="repoTrending" @tabsTransition="tabsTransition" @animationfinish="animationfinish" />
 
 		<view class="cu-modal drawer-modal justify-end" style="text-align: left!important;" :class="filtLangDrawer" @tap="closeFiltLangDrawer">
-			<view class="cu-dialog basis-lg" @touchmove.stop.prevent="moveHandle" @tap.stop="" :style="[{top:CustomBar+'px',height:'calc(100vh - ' + CustomBar + 'px)'}]">
+			<view class="cu-dialog basis-xl" @touchmove.stop.prevent="moveHandle" @tap.stop="" :style="[{top:CustomBar+'px',height:'calc(100vh - ' + CustomBar + 'px)'}]">
 				<view class="scroll-view">
 					<scroll-view class="scroll-view-box" scroll-y>
 						<FiltLanguage @filtParams="filtParams"></FiltLanguage>

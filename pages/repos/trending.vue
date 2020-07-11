@@ -1,14 +1,14 @@
 <template>
 	<view>
 		<view class="wrap">
-			<view class="u-tabs-box">
+			<!-- <view class="u-tabs-box">
 				<u-tabs-swiper inactive-color="#ffffff" :bold="false" bg-color="#f24713" activeColor="#ffffb8" ref="uTabs" :list="list"
 				 :current="current" @change="tabsChange" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
 				<view class="primary-color padding-xs" @tap="filtLangTap">
 					<text class="iconfont iconguolv margin-right-xs"></text>
 					<text>所有语言 | 今日</text>
 				</view>
-			</view>
+			</view> -->
 			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
@@ -99,7 +99,7 @@
 					dx
 				}
 			}) {
-				this.$refs.uTabs.setDx(dx)
+				this.$emit('tabsTransition', dx)
 			},
 			// 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
 			// swiper滑动结束，分别设置tabs和swiper的状态
@@ -108,9 +108,8 @@
 					current
 				}
 			}) {
-				this.$refs.uTabs.setFinishCurrent(current)
 				this.swiperCurrent = current
-				this.current = current
+				this.$emit('animationfinish', current)
 				// 执行更新方法，不用每次都加载
 				// this.onRefresh()
 			},

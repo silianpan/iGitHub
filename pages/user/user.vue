@@ -44,7 +44,7 @@
 			</view>
 			<view class="bg-white margin-top-xs">
 				<view class="cu-list menu sm-border u-skeleton-rect">
-					<view class="cu-item arrow">
+					<view class="cu-item arrow" @tap="tapSetting">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
 							<text class="text-grey padding-left-sm">设置</text>
@@ -76,7 +76,9 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
+	import {
+		mapGetters
+	} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -177,6 +179,11 @@
 					name: this.authUserInfo.name
 				})
 				this.loading = false
+			},
+			tapSetting() {
+				uni.navigateTo({
+					url: '/pages/user/setting'
+				})
 			}
 		}
 	}

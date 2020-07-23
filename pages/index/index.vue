@@ -49,12 +49,10 @@
 				filtLangDrawer: null,
 				current: 0,
 				list: [{
-						// name: $t('Repos')
-						name: 'Repos'
+						name: this.$t('Repos')
 					},
 					{
-						// name: $t('Developers')
-						name: 'Developers'
+						name: this.$t('Developers')
 					}
 				]
 			}

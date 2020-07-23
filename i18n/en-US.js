@@ -1,4 +1,5 @@
 export default {
 	'Repos': 'Repositories',
-	'Developers': 'Developers'
+	'Developers': 'Developers',
+	'Language': 'Language'
 }

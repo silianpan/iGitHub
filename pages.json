@@ -65,7 +65,11 @@
 		"style": {
 			"navigationBarTitleText": "代码"
 		}
-	}],
+	}    ,{
+            "path" : "pages/user/setting",
+            "style" : {}
+        }
+    ],
 	"tabBar": {
 		"color": "#8699a7",
 		"selectedColor": "#f24713",

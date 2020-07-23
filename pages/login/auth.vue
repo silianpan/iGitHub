@@ -20,6 +20,9 @@
 			}
 		},
 		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('SecureLogin')
+			})
 			// #ifdef APP-PLUS
 			uni.showLoading({
 				title: '努力加载中...'

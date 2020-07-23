@@ -16,6 +16,11 @@
 
 <script>
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('BasicInfo')
+			})
+		},
 		data() {
 			return {
 				baseInfo: {}

@@ -109,6 +109,11 @@
 	import marked from 'marked'
 	import languageColors from '@/static/colors.json'
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('Repos')
+			})
+		},
 		data() {
 			return {
 				loading: true,

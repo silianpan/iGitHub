@@ -3,7 +3,6 @@ import VueI18n from 'vue-i18n'
 import enUS from './en-US'
 import zhCN from './zh-CN'
 Vue.use(VueI18n)
-Vue.prototype._i18n = i18n
 
 const i18n = new VueI18n({
 	locale: 'en-US',

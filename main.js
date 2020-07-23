@@ -22,6 +22,7 @@ Vue.prototype.$NP = NP
 
 Vue.config.productionTip = false
 App.mpType = 'app'
+Vue.prototype._i18n = i18n
 
 const app = new Vue({
 	store,

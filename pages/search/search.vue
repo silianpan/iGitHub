@@ -21,9 +21,9 @@
 		data() {
 			return {
 				loadText: {
-					loadmore: 'Empty',
-					loading: '努力加载中',
-					nomore: '实在没有了'
+					loadmore: this.$t('Empty'),
+					loading: this.$t('HardLoading'),
+					nomore: this.$t('NoMore')
 				},
 				loadMoreStatus: 'loadmore',
 				reposList: [],

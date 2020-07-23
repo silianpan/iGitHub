@@ -23,6 +23,11 @@
 	import FileIcons from 'file-icons-js'
 	import { filePreview } from '@/utils/preview'
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('Code')
+			})
+		},
 		data() {
 			return {
 				FileIcons,

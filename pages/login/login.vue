@@ -4,7 +4,7 @@
 			<image mode="aspectFit" src="../../assets/img/logo.png" />
 		</view>
 		<view class="padding-lr-xl flex flex-direction text-center">
-			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="loginAuth">安全登录</button>
+			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="loginAuth">{{$t('SecureLogin')}}</button>
 		</view>
 	</view>
 </template>

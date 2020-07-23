@@ -9,6 +9,11 @@
 <script>
 	import Repos from '@/pages/repos/repos'
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('Stars')
+			})
+		},
 		components: {
 			Repos
 		},

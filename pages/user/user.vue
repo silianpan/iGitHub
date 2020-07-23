@@ -132,6 +132,9 @@
 			}
 		},
 		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('Profile')
+			})
 			this.initContributions()
 		},
 		onLoad() {

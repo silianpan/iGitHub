@@ -21,6 +21,11 @@
 	} from 'vuex'
 	import Event from './event'
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('News')
+			})
+		},
 		components: {
 			Event
 		},

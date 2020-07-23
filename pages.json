@@ -15,25 +15,13 @@
 			"titleNView": false
 		}
 	}, {
-		"path": "pages/login/auth",
-		"style": {
-			"navigationBarTitleText": "安全登录"
-		}
+		"path": "pages/login/auth"
 	}, {
-		"path": "pages/login/auth-h5-callback",
-		"style": {
-			"navigationBarTitleText": "安全登录中..."
-		}
+		"path": "pages/login/auth-h5-callback"
 	}, {
-		"path": "pages/news/news",
-		"style": {
-			"navigationBarTitleText": "通知"
-		}
+		"path": "pages/news/news"
 	}, {
-		"path": "pages/star/star",
-		"style": {
-			"navigationBarTitleText": "星"
-		}
+		"path": "pages/star/star"
 	}, {
 		"path": "pages/search/search",
 		"style": {
@@ -41,35 +29,19 @@
 			"navigationBarTextStyle": "white"
 		}
 	}, {
-		"path": "pages/user/user",
-		"style": {
-			"navigationBarTitleText": "我的"
-		}
+		"path": "pages/user/user"
 	}, {
-		"path": "pages/user/base-info",
-		"style": {
-			"navigationBarTitleText": "基本信息"
-		}
+		"path": "pages/user/base-info"
 	}, {
-		"path": "pages/repos/detail",
-		"style": {
-			"navigationBarTitleText": "仓库"
-		}
+		"path": "pages/repos/detail"
 	}, {
-		"path": "pages/repos/code/code",
-		"style": {
-			"navigationBarTitleText": "代码"
-		}
+		"path": "pages/repos/code/code"
 	}, {
-		"path": "pages/repos/code/text",
-		"style": {
-			"navigationBarTitleText": "代码"
-		}
-	}    ,{
-            "path" : "pages/user/setting",
-            "style" : {}
-        }
-    ],
+		"path": "pages/repos/code/text"
+	}, {
+		"path": "pages/user/setting",
+		"style": {}
+	}],
 	"tabBar": {
 		"color": "#8699a7",
 		"selectedColor": "#f24713",

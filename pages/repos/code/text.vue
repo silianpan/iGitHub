@@ -14,6 +14,11 @@
 
 <script>
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('Code')
+			})
+		},
 		data() {
 			return {
 				reposContent: ''

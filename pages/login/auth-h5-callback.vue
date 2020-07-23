@@ -8,6 +8,11 @@
 <script>
 	import { getQueryString } from '@/utils/href'
 	export default {
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('SecureLogin')
+			})
+		},
 		onLoad(option) {
 			// #ifdef H5
 			const code = getQueryString('code')

@@ -10,6 +10,7 @@
     "highlight.js": "^10.1.1",
     "lodash": "^4.17.15",
     "marked": "^1.1.0",
-    "number-precision": "^1.4.0"
+    "number-precision": "^1.4.0",
+    "vue-i18n": "^8.18.2"
   }
 }

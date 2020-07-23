@@ -9,22 +9,24 @@ import NP from 'number-precision'
 import uView from '@/uview'
 // highlight.js代码高亮插件
 import Highlight from '@/utils/highlight'
+import i18n from './i18n'
 
 Vue.use(uView)
 Vue.use(MinRequest)
 Vue.use(MinCache)
 Vue.use(Highlight)
 
-Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.$_ = _
 Vue.prototype.$NP = NP
 
+Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
 	store,
 	minApi,
+	i18n,
 	...App
 })
 app.$mount()

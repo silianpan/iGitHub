@@ -49,10 +49,12 @@
 				filtLangDrawer: null,
 				current: 0,
 				list: [{
-						name: '仓库'
+						// name: $t('Repos')
+						name: 'Repos'
 					},
 					{
-						name: '开发者'
+						// name: $t('Developers')
+						name: 'Developers'
 					}
 				]
 			}

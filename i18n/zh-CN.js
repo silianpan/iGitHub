@@ -17,5 +17,10 @@ export default {
 	'Monthly': '本月',
 	'AllLanguage': '所有语言',
 	'Ok': '确认',
-	'ClearSearchHistory': '清空搜索历史'
+	'ClearSearchHistory': '清空搜索历史',
+	'Settings': '设置',
+	'About': '关于',
+	'Feedback': '反馈',
+	'SignOut': '退出登录',
+	'JoinedOn': '注册于'
 }

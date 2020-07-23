@@ -17,5 +17,10 @@ export default {
 	'Monthly': 'Monthly',
 	'AllLanguage': 'All language',
 	'Ok': 'Ok',
-	'ClearSearchHistory': 'Clear search history'
+	'ClearSearchHistory': 'Clear search history',
+	'Settings': 'Settings',
+	'About': 'About',
+	'Feedback': 'Feedback',
+	'SignOut': 'Sign out',
+	'JoinedOn': 'Joined on'
 }

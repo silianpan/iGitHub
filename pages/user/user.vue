@@ -10,7 +10,7 @@
 						<view v-if="authUserInfo.name && authUserInfo.login" class="title u-line-2"><text selectable>{{ authUserInfo.name || '' }}<text
 								 selectable class="sub-title">{{' (' + (authUserInfo.login || '') + ')' }}</text></text></view>
 						<view class="remark2"><text selectable>{{ authUserInfo.bio }}</text></view>
-						<view v-if="authUserInfo.created_at" class="description"><text selectable>注册于{{ $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
+						<view v-if="authUserInfo.created_at" class="description"><text selectable>{{ $t('JoinedOn') + ' ' + $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
 					</view>
 					<view class="right">
 						<u-icon name="arrow-right" color="#8799a3" @click="briefInfoClick" />
@@ -47,26 +47,26 @@
 					<view class="cu-item arrow" @tap="tapSetting">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
-							<text class="text-grey padding-left-sm">设置</text>
+							<text class="text-grey padding-left-sm">{{$t('Settings')}}</text>
 						</view>
 					</view>
 					<view class="cu-item arrow">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-mauve iconfont iconguanyu1" />
-							<text class="text-grey padding-left-sm">关于</text>
+							<text class="text-grey padding-left-sm">{{$t('About')}}</text>
 						</view>
 					</view>
 					<view class="cu-item arrow">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-red iconfont iconfankui1" />
-							<text class="text-grey padding-left-sm">反馈</text>
+							<text class="text-grey padding-left-sm">{{$t('Feedback')}}</text>
 						</view>
 					</view>
 				</view>
 			</view>
 		</scroll-view>
 		<view class="padding flex flex-direction bg-white">
-			<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">退出</button>
+			<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">{{$t('SignOut')}}</button>
 		</view>
 		<view v-if="appInfo.version" class="text-grey text-center padding-bottom-lg bg-white">
 			{{appInfo.name}} {{appInfo.version}}
@@ -167,7 +167,7 @@
 				const reg = /[\s\S]*(\<svg[\s\S]*\<\/svg\>)[\s\S]*/
 				if (res && res.match(reg)) {
 					res = (reg.exec(res)[1]).trim()
-					// 横纵坐标位置修复
+					// fix: Horizontal and vertical position
 					if (!this.$_.isEmpty(res)) {
 						res = res.replace(/class="wday" dx="-10"/g, 'class="wday" dx="10"')
 						res = res.replace(/\<text x="(\d+)" y="-8" class="month"\>(\S+)\<\/text\>/g, function(arg1, arg2, arg3) {

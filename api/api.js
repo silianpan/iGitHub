@@ -4,7 +4,7 @@ import globalConfig from '@/config'
 
 const minRequest = new MinRequest()
 
-// 请求拦截器
+// intercept request
 minRequest.interceptors.request((request) => {
 	const accessToken = Vue.prototype.$store.getters.accessToken
 	if (accessToken) {
@@ -13,20 +13,19 @@ minRequest.interceptors.request((request) => {
 	return request
 })
 
-// 响应拦截器
+// intercept response
 minRequest.interceptors.response((response) => {
 	return response.data
 })
 
-// 设置默认配置
+// default configure
 minRequest.setConfig((config) => {
-	// 默认为授权后的Api的baseUrl
+	// default: baseUrl after authorized
 	config.baseURL = globalConfig.baseUrl
 	return config
 })
 
 export default {
-	// 这里统一管理api请求
 	apis: {
 		loginAuth(params = {}) {
 			return minRequest.post('/login/oauth/access_token?client_id=' + globalConfig.githubClientId + '&client_secret=' +
@@ -61,23 +60,23 @@ export default {
 		getAuthUser() {
 			return minRequest.get('/user')
 		},
-		// 获取repo明细
+		// repos detail
 		getRepos(owner, repo) {
 			return minRequest.get(`/repos/${owner}/${repo}`)
 		},
-		// 获取repo语言
+		// repo languages
 		listReposLanguages(owner, repo) {
 			return minRequest.get(`/repos/${owner}/${repo}/languages`)
 		},
-		// 获取pull requests
+		// pull requests
 		listPullRequests(owner, repo) {
 			return minRequest.get(`/repos/${owner}/${repo}/pulls`)
 		},
-		// 获取分支
+		// branches
 		listBranches(owner, repo) {
 			return minRequest.get(`/repos/${owner}/${repo}/branches`)
 		},
-		// 获取readme
+		// readme
 		getReposReadme(owner, repo) {
 			return minRequest.get(`/repos/${owner}/${repo}/readme`, null, {
 				header: {

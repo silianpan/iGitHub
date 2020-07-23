@@ -59,7 +59,7 @@
 		},
 		methods: {
 			moveHandle() {},
-			// tabs通知swiper切换
+			// tabs change -> swiper change
 			tabsChange(index) {
 				this.$refs.repoTrending.tabsChange(index)
 			},

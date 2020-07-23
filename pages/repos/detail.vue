@@ -13,7 +13,7 @@
 						</view>
 						<view class="description"><text selectable>{{ repo.description }}</text></view>
 						<u-link v-if="repo.homepage" class="link" :font-size="30" color="#0965d2" :href="repo.homepage">{{ repo.homepage }}</u-link>
-						<view v-if="repo.updated_at" class="remark">最近更新：{{ $u.timeFormat(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
+						<view v-if="repo.updated_at" class="remark">{{ $t('Updated') + ' ' + $u.timeFrom(new Date(repo.updated_at).getTime(), 'yyyy-mm-dd hh:MM') }}</view>
 					</view>
 				</view>
 			</view>

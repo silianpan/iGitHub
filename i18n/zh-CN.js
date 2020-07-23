@@ -10,5 +10,12 @@ export default {
 	'NoMore': '没有了',
 	'Profile': '我的',
 	'BasicInfo': '基本信息',
-	'Code': '代码'
+	'Code': '代码',
+	'Updated': '最近更新',
+	'Daily': '今日',
+	'Weekly': '本周',
+	'Monthly': '本月',
+	'AllLanguage': '所有语言',
+	'Ok': '确认',
+	'ClearSearchHistory': '清空搜索历史'
 }

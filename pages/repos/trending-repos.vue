@@ -12,7 +12,7 @@
 					</view>
 					<view class="description"><text selectable>{{ item.description }}</text></view>
 					<u-link class="link" :font-size="30" color="#0965d2" :href="item.url">{{ item.url }}</u-link>
-					<view class="remark"><text selectable>今日{{ item.currentPeriodStars }}星</text></view>
+					<view class="remark"><text selectable>{{ item.currentPeriodStars + $t('Stars') + ' ' + $t('Daily') }}</text></view>
 					<u-row>
 						<u-col span="2.5">
 							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.languageColor}"></text>

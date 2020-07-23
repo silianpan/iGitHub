@@ -44,7 +44,7 @@
 		},
 		onLoad() {
 			this._freshing = false
-			// 触发onRefresh来加载自己的数据，如果不用这种方式，不要在此改变triggered的值
+			// load data
 			this.listAuthUserReceivedEvents(true, false, res => {
 				this.receivedEvents = res
 			})
@@ -55,7 +55,8 @@
 
 			if (this._freshing) return
 			this._freshing = true
-			if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
+			// set triggered = true
+			if (!this.triggered)
 				this.triggered = true
 			this.listAuthUserReceivedEvents(false, false, res => {
 				this.receivedEvents = this.receivedEvents.concat(res)
@@ -84,7 +85,7 @@
 			onRefresh() {
 				if (this._freshing) return
 				this._freshing = true
-				if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
+				if (!this.triggered)
 					this.triggered = true
 
 				this.page = 1

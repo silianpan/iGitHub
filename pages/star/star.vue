@@ -29,7 +29,7 @@
 		},
 		onLoad() {
 			this._freshing = false
-			// 触发onRefresh来加载自己的数据，如果不用这种方式，不要在此改变triggered的值
+			// load data
 			this.listAuthUserReposStarred(true, false, res => {
 				this.starredRepos = res
 			})
@@ -40,7 +40,7 @@
 
 			if (this._freshing) return
 			this._freshing = true
-			if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
+			if (!this.triggered)
 				this.triggered = true
 			this.listAuthUserReposStarred(false, false, res => {
 				this.starredRepos = this.starredRepos.concat(res)
@@ -72,7 +72,7 @@
 			onRefresh() {
 				if (this._freshing) return
 				this._freshing = true
-				if (!this.triggered) // 界面下拉触发，triggered可能不是true，要设为true  
+				if (!this.triggered)
 					this.triggered = true
 
 				this.page = 1

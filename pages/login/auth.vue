@@ -25,9 +25,11 @@
 			})
 			// #ifdef APP-PLUS
 			uni.showLoading({
-				title: '努力加载中...'
+				title: this.$t('HardLoading')
 			})
-			var currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
+			// webview object
+			var currentWebview = this.$mp.page.$getAppWebview()
+			// timeout
 			setTimeout(() => {
 				wv = currentWebview.children()[0]
 				wv.setStyle({
@@ -35,7 +37,7 @@
 				})
 				wv.addEventListener('loading', e => {
 					uni.showLoading({
-						title: '努力加载中...'
+						title: this.$t('HardLoading')
 					})
 				})
 				wv.addEventListener('loaded', e => {
@@ -49,7 +51,7 @@
 					const state = getQueryString4Url(event.url, 'state')
 					this.$store.dispatch('authLogin', { code, state })
 				})
-			}, 1000) //如果是页面初始化调用时，需要延时一下
+			}, 1000)
 			// #endif
 		}
 	}

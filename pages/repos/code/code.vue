@@ -57,7 +57,7 @@
 		methods: {
 			async getReposContent() {
 				const res = await this.$minApi.getReposContent(this.owner, this.repo, this.path)
-				// 排序
+				// sort
 				let dirList = this.$_.filter(res, {
 					'type': 'dir'
 				})

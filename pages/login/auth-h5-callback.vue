@@ -1,4 +1,4 @@
-<!-- h5安全登录回调页面 -->
+<!-- callback page of h5 -->
 <template>
 	<view class="text-center">
 		<u-loading mode="circle" :size="40" color="#0081ff"></u-loading>

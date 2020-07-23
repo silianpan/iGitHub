@@ -10,5 +10,12 @@ export default {
 	'NoMore': 'No more',
 	'Profile': 'Profile',
 	'BasicInfo': 'Basic information',
-	'Code': 'Code'
+	'Code': 'Code',
+	'Updated': 'Updated',
+	'Daily': 'Daily',
+	'Weekly': 'Weekly',
+	'Monthly': 'Monthly',
+	'AllLanguage': 'All language',
+	'Ok': 'Ok',
+	'ClearSearchHistory': 'Clear search history'
 }

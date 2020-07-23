@@ -1,20 +1,20 @@
 <template>
 	<view>
 		<view class="padding-top-sm padding-right-sm bg-white" style="text-align: right;">
-			<button class="cu-btn sm text-white" style="background-color: #f24713" @tap="okTap">确认</button>
+			<button class="cu-btn sm text-white" style="background-color: #f24713" @tap="okTap">{{$t('Ok')}}</button>
 		</view>
 		<u-radio-group class="padding-left-sm" v-model="currentTime" :size="30">
 			<u-radio v-for="(value, key) in timeMap" :key="key" :name="key">{{value}}</u-radio>
 		</u-radio-group>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
 		<u-search class="padding-left-sm" v-model="keyword" clearabled :show-action="false" :shape="'square'" @search="searchAction" />
-		<!-- 搜索历史 -->
+		<!-- search history -->
 		<view class="padding-top-sm padding-right-sm bg-white" style="text-align: right;">
-			<button class="cu-btn sm bg-blue" @tap="clearSearchHistoryTap">清空搜索历史</button>
+			<button class="cu-btn sm bg-blue" @tap="clearSearchHistoryTap">{{$t('ClearSearchHistory')}}</button>
 		</view>
 		<view @tap="historyLangTap(item)" v-for="(item, index) in langParamsHistory" :key="index" class="padding-left-sm">{{item.langName}}</view>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
-		<view @tap="allLangTap" class="padding-left-sm">所有语言</view>
+		<view @tap="allLangTap" class="padding-left-sm">{{$t('AllLanguage')}}</view>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
 		<uni-indexed-list :style="'top:' + (180 + langParamsHistory.length * 32) + 'px!important'" :options="langList" show-select @click="bindClick" />
 	</view>
@@ -31,9 +31,9 @@
 				keyword: '',
 				currentTime: 'daily',
 				timeMap: {
-					daily: '今日',
-					weekly: '本周',
-					monthly: '本月'
+					daily: this.$t('Daily'),
+					weekly: this.$t('Weekly'),
+					monthly: this.$t('Monthly')
 				},
 				langCode: null,
 				langName: null,
@@ -117,7 +117,7 @@
 				this.langCode = item.langCode
 			},
 			allLangTap() {
-				this.langName = '所有语言'
+				this.langName = this.$t('AllLanguage')
 				this.langCode = null
 			},
 			clearSearchHistoryTap() {

@@ -1,5 +1,5 @@
 {
-	// 此为需要加入的内容，如果不是把uView放在根目录，请根据情况修改路径
+	// uView
 	"easycom": {
 		"^u-(.*)": "@/uview/components/u-$1/u-$1.vue"
 	},

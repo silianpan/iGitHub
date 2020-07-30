@@ -147,8 +147,9 @@
 		},
 		methods: {
 			imageError() {
-				this.repo.owner = this.repo.owner || {}
-				this.repo.owner.avatar_url = '/static/img/60x60.png'
+				if (this.repo && this.repo.owner) {
+					this.repo.owner.avatar_url = '/static/img/60x60.png'
+				}
 			},
 			tapLogout() {
 				this.$store.dispatch('logoutAuth')

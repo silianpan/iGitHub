@@ -8,6 +8,9 @@
 						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
 						<text class="text-grey padding-left-sm">{{ $t('Language') }}</text>
 					</view>
+					<view class="action">
+						<view>{{ $t(currentLang) }}</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -17,14 +20,24 @@
 
 <script>
 	export default {
+		computed: {
+			currentLang() {
+				let lang = uni.getStorageSync('_lang')
+				if (!lang || lang === 'System') {
+					const res = uni.getSystemInfoSync()
+					lang = res.language
+				}
+				return lang
+			},
+			listLang() {
+				return [{ text: 'System' },
+					{ text: 'English' },
+					{ text: '中文' }]
+			}
+		},
 		data() {
 			return {
-				showLang: false,
-				listLang: [
-					{ text: this.$t('System') },
-					{ text: this.$t('English') },
-					{ text: this.$t('Chinese') }
-				]
+				showLang: false
 			}
 		},
 		methods: {
@@ -34,8 +47,8 @@
 			clickLang(index) {
 				if (index === 0) {
 					const res = uni.getSystemInfoSync()
-					this.$cache.set('_lang', res.language, 0)
 					this.$i18n.locale = res.language
+					this.$cache.set('_lang', 'System', 0)
 				} else if (index === 1) {
 					this.$cache.set('_lang', 'en', 0)
 					this.$i18n.locale = 'en'

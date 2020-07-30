@@ -25,5 +25,7 @@ export default {
 	'JoinedOn': 'Joined on',
 	'System': 'System',
 	'English': 'English',
-	'Chinese': 'Chinese'
+	'Chinese': 'Chinese',
+	'en': 'English',
+	'zh-CN': 'Chinese'
 }

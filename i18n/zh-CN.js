@@ -23,7 +23,9 @@ export default {
 	'Feedback': '反馈',
 	'SignOut': '退出登录',
 	'JoinedOn': '注册于',
-	'System': '系统',
+	'System': '跟随系统',
 	'English': '英文',
-	'Chinese': '中文'
+	'Chinese': '中文',
+	'en': '英文',
+	'zh-CN': '中文'
 }

@@ -5,10 +5,10 @@ import zhCN from './zh-CN'
 Vue.use(VueI18n)
 
 let lang = uni.getStorageSync('_lang')
-if (!lang) {
+if (!lang || lang === 'System') {
 	const res = uni.getSystemInfoSync()
-	uni.setStorageSync('_lang', res.language)
 	lang = res.language
+	uni.setStorageSync('_lang', 'System')
 }
 
 const i18n = new VueI18n({

@@ -11,7 +11,7 @@
 						<uni-badge class="uni-badge-left-margin" :text="index+1" type="primary" size="small" />
 					</view>
 					<block v-if="!$_.isEmpty(item.repo)">
-						<view class="remark2"><text class="iconfont iconbook1 margin-right-xs" />{{ item.repo.name }}</view>
+						<view v-if="item.repo.name" class="remark2"><text class="iconfont iconbook1 margin-right-xs" />{{ item.repo.name }}</view>
 						<view class="description">{{ item.repo.description }}</view>
 					</block>
 				</view>

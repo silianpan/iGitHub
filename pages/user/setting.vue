@@ -21,14 +21,6 @@
 <script>
 	export default {
 		computed: {
-			currentLang() {
-				let lang = uni.getStorageSync('_lang').data
-				if (!lang || lang === 'System') {
-					const res = uni.getSystemInfoSync()
-					lang = res.language
-				}
-				return lang
-			},
 			listLang() {
 				return [{ text: 'System' },
 					{ text: 'English' },
@@ -37,10 +29,22 @@
 		},
 		data() {
 			return {
+				currentLang: '',
 				showLang: false
 			}
 		},
+		mounted() {
+			this.getCurrentLang()
+		},
 		methods: {
+			getCurrentLang() {
+				let lang = uni.getStorageSync('_lang').data
+				if (!lang || lang === 'System') {
+					const res = uni.getSystemInfoSync()
+					lang = res.language
+				}
+				this.currentLang = lang
+			},
 			tapLang() {
 				this.showLang = true
 			},
@@ -56,6 +60,7 @@
 					this.$cache.set('_lang', 'zh-CN', 0)
 					this.$i18n.locale = 'zh-CN'
 				}
+				this.getCurrentLang()
 			}
 		}
 	}

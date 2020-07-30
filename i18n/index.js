@@ -4,7 +4,7 @@ import enUS from './en-US'
 import zhCN from './zh-CN'
 Vue.use(VueI18n)
 
-let lang = uni.getStorageSync('_lang')
+let lang = uni.getStorageSync('_lang').data
 if (!lang || lang === 'System') {
 	const res = uni.getSystemInfoSync()
 	lang = res.language

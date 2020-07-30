@@ -22,7 +22,7 @@
 	export default {
 		computed: {
 			currentLang() {
-				let lang = uni.getStorageSync('_lang')
+				let lang = uni.getStorageSync('_lang').data
 				if (!lang || lang === 'System') {
 					const res = uni.getSystemInfoSync()
 					lang = res.language

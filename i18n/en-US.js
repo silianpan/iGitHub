@@ -22,5 +22,8 @@ export default {
 	'About': 'About',
 	'Feedback': 'Feedback',
 	'SignOut': 'Sign out',
-	'JoinedOn': 'Joined on'
+	'JoinedOn': 'Joined on',
+	'System': 'System',
+	'English': 'English',
+	'Chinese': 'Chinese'
 }

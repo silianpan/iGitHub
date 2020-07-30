@@ -3,7 +3,7 @@
 	<scroll-view scroll-y>
 		<view class="bg-white margin-top-xs">
 			<view class="cu-list menu sm-border u-skeleton-rect">
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="tapLang">
 					<view class="content">
 						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
 						<text class="text-grey padding-left-sm">{{ $t('Language') }}</text>
@@ -11,6 +11,7 @@
 				</view>
 			</view>
 		</view>
+		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang"></u-action-sheet>
 	</scroll-view>
 </template>
 
@@ -18,11 +19,31 @@
 	export default {
 		data() {
 			return {
-
+				showLang: false,
+				listLang: [
+					{ text: this.$t('System') },
+					{ text: this.$t('English') },
+					{ text: this.$t('Chinese') }
+				]
 			}
 		},
 		methods: {
-
+			tapLang() {
+				this.showLang = true
+			},
+			clickLang(index) {
+				if (index === 0) {
+					const res = uni.getSystemInfoSync()
+					this.$cache.set('_lang', res.language, 0)
+					this.$i18n.locale = res.language
+				} else if (index === 1) {
+					this.$cache.set('_lang', 'en', 0)
+					this.$i18n.locale = 'en'
+				} else if (index === 2) {
+					this.$cache.set('_lang', 'zh-CN', 0)
+					this.$i18n.locale = 'zh-CN'
+				}
+			}
 		}
 	}
 </script>

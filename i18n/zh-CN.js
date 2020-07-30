@@ -22,5 +22,8 @@ export default {
 	'About': '关于',
 	'Feedback': '反馈',
 	'SignOut': '退出登录',
-	'JoinedOn': '注册于'
+	'JoinedOn': '注册于',
+	'System': '系统',
+	'English': '英文',
+	'Chinese': '中文'
 }

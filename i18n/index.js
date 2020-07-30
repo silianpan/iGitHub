@@ -13,6 +13,8 @@ if (!lang) {
 
 const i18n = new VueI18n({
 	locale: lang,
+	fallbackLocale: 'en',
+	silentFallbackWarn: true,
 	messages: {
 		'en': enUS,
 		'zh-CN': zhCN

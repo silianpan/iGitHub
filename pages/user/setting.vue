@@ -12,9 +12,19 @@
 						<view>{{ $t(currentLang) }}</view>
 					</view>
 				</view>
+				<view class="cu-item arrow" @tap="tapTheme">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
+						<text class="text-grey padding-left-sm">{{ $t('Language') }}</text>
+					</view>
+					<view class="action">
+						<view>{{ $t(currentLang) }}</view>
+					</view>
+				</view>
 			</view>
 		</view>
-		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang"></u-action-sheet>
+		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang" :cancel-btn="false"></u-action-sheet>
+		<u-action-sheet @click="clickTheme" :list="listLang" v-model="showLang"></u-action-sheet>
 	</scroll-view>
 </template>
 
@@ -25,12 +35,16 @@
 				return [{ text: 'System' },
 					{ text: 'English' },
 					{ text: '中文' }]
+			},
+			listTheme() {
+				return [{ text: ''}]
 			}
 		},
 		data() {
 			return {
 				currentLang: '',
-				showLang: false
+				showLang: false,
+				showTheme: false
 			}
 		},
 		mounted() {
@@ -56,6 +70,9 @@
 					this.$i18n.locale = 'zh-CN'
 				}
 				this.getCurrentLang()
+			},
+			tapTheme() {
+				
 			}
 		}
 	}

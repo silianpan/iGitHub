@@ -38,12 +38,7 @@
 		},
 		methods: {
 			getCurrentLang() {
-				let lang = uni.getStorageSync('_lang').data
-				if (!lang || lang === 'System') {
-					const res = uni.getSystemInfoSync()
-					lang = res.language
-				}
-				this.currentLang = lang
+				this.currentLang = uni.getStorageSync('_lang').data || 'System'
 			},
 			tapLang() {
 				this.showLang = true

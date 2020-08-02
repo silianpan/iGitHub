@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<u-sticky>
-			<view class="primary-color u-font-xl" style="padding: 10rpx 30rpx;">
+			<view class="u-font-xl text-white" :style="{backgroundColor:themeBgColor}" style="padding: 10rpx 30rpx;">
 				<block v-for="(item, index) in pathList" :key="`${item}${index}`">
 					<u-icon name="arrow-right" @tap="tapDir(index, item)"></u-icon>
 					<text @tap="tapDir(index + 1, item)">{{ item }}</text>
@@ -20,12 +20,22 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	import FileIcons from 'file-icons-js'
 	import { filePreview } from '@/utils/preview'
 	export default {
 		onReady() {
 			uni.setNavigationBarTitle({
 			    title: this.$t('Code')
+			})
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
 			})
 		},
 		data() {
@@ -39,6 +49,7 @@
 			}
 		},
 		computed: {
+			...mapGetters(['themeBgColor']),
 			pathList() {
 				return this.$_.split(this.path, '/')
 			}

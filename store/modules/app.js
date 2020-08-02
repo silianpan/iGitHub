@@ -1,7 +1,7 @@
 import Vue from 'vue'
 export default {
 	state: {
-		themeBgColor: '#f24713'
+		themeBgColor: '#fa541c'
 	},
 	getters: {
 		themeBgColor: state => {

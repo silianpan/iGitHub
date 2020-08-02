@@ -2,21 +2,24 @@
 	import Vue from 'vue'
 	export default {
 		onLaunch() {
-			// 初始化系统
+			// init system
 			this.initSystem()
-			// 自动登录
+			// auto login
 			// this.autoLogin()
+			this.listenSystemTheme()
 		},
 		methods: {
-			/**
-			 * 自动登录
-			 */
+			// listen system theme: dark or light
+			listenSystemTheme() {
+				uni.onUIStyleChange(function (res) {
+				    console.log(res.style)
+				})
+			},
+			// auto login
 			autoLogin() {
 				this.$store.dispatch('autoLogin')
 			},
-			/**
-			 * 初始化系统
-			 */
+			// init system
 			initSystem() {
 				uni.getSystemInfo({
 					success: e => {
@@ -51,7 +54,7 @@
 </script>
 
 <style lang="scss">
-	/* 解决头条小程序组件内引入字体不生效的问题 */
+	/* fix: toutiao mini-program font is invalid */
 	/* #ifdef MP-TOUTIAO */
 	@font-face {
 		font-family: uniicons;

@@ -97,7 +97,7 @@
 		methods: {
 			getCurrentTheme() {
 				const tmp = this.listTheme.filter(item => item.color === this.themeBgColor)
-				this.currentTheme = tmp.text
+				this.currentTheme = tmp[0].text
 			},
 			getCurrentLang() {
 				this.currentLang = uni.getStorageSync('_lang').data || 'System'

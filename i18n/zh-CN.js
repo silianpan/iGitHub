@@ -29,5 +29,18 @@ export default {
 	'en': '英文',
 	'zh-CN': '中文',
 	'Theme': '主题',
-	'BluishGreen': '青碧'
+	'BluishGreen': '青碧',
+	'Blush': '酡颜',
+	'Volcano': '火山',
+	'Orange': '橘黄',
+	'IndigoBlue': '靛青',
+	'Verdant': '苍翠',
+	'Water': '水色',
+	'Grey': '灰色',
+	'PinkGold': '赤金',
+	'Dim': '黯',
+	'Verdigris': '铜绿',
+	'DeepBlack': '玄青',
+	'AgateGreen': '湖绿',
+	'DarkGreen': '苍色'
 }

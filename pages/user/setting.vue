@@ -37,7 +37,22 @@
 					{ text: '中文' }]
 			},
 			listTheme() {
-				return [{ text: this.$t('BluishGreen'), color: '#48c0a3' }]
+				return [
+					{ text: this.$t('Volcano'), color: '#fa541c' },
+					{ text: this.$t('BluishGreen'), color: '#48c0a3' },
+					{ text: this.$t('Blush'), color: '#f9906f' },
+					{ text: this.$t('Orange'), color: '#ff8936' },
+					{ text: this.$t('IndigoBlue'), color: '#177cb0' },
+					{ text: this.$t('Verdant'), color: '#519a73' },
+					{ text: this.$t('Water'), color: '#88ada6' },
+					{ text: this.$t('Grey'), color: '#808080' },
+					{ text: this.$t('PinkGold'), color: '#f2be45' },
+					{ text: this.$t('Dim'), color: '#41555d' },
+					{ text: this.$t('Verdigris'), color: '#549688' },
+					{ text: this.$t('DeepBlack'), color: '#3d3b4f' },
+					{ text: this.$t('AgateGreen'), color: '#25f8cb' },
+					{ text: this.$t('DarkGreen'), color: '#75878a' }
+				]
 			}
 		},
 		data() {

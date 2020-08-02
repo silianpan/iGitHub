@@ -29,5 +29,18 @@ export default {
 	'en': 'English',
 	'zh-CN': 'Chinese',
 	'Theme': 'Theme',
-	'BluishGreen': 'bluish green'
+	'BluishGreen': 'bluish green',
+	'Blush': 'blush',
+	'Volcano': 'volcano',
+	'Orange': 'Orange',
+	'IndigoBlue': 'indigo-blue',
+	'Verdant': 'verdant',
+	'Water': 'water',
+	'Grey': 'grey',
+	'PinkGold': 'pink gold',
+	'Dim': 'dim',
+	'Verdigris': 'verdigris',
+	'DeepBlack': 'deep black',
+	'AgateGreen': 'agate green',
+	'DarkGreen': 'dark green'
 }

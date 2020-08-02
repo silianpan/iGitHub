@@ -4,13 +4,17 @@
 			<image mode="aspectFit" src="../../assets/img/logo.png" />
 		</view>
 		<view class="padding-lr-xl flex flex-direction text-center">
-			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="loginAuth">{{$t('SecureLogin')}}</button>
+			<button class="cu-btn margin-tb-sm lg text-white" :style="{backgroundColor:themeBgColor}" @click="loginAuth">{{$t('SecureLogin')}}</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
+		computed: {
+			...mapGetters(['themeBgColor'])
+		},
 		methods: {
 			loginAuth() {
 				this.$store.dispatch('loginAuth')

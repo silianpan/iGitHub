@@ -27,5 +27,7 @@ export default {
 	'English': '英文',
 	'Chinese': '中文',
 	'en': '英文',
-	'zh-CN': '中文'
+	'zh-CN': '中文',
+	'Theme': '主题',
+	'BluishGreen': '青碧'
 }

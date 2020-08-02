@@ -36,6 +36,7 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	import { getQueryString } from '@/utils/href'
 	import RepoTrending from '@/pages/repos/trending'
 	import FiltLanguage from '@/pages/repos/filt-language'
@@ -43,6 +44,14 @@
 		components: {
 			RepoTrending,
 			FiltLanguage
+		},
+		computed: {
+			...mapGetters(['themeBgColor']),
+		},
+		onReady() {
+			uni.setNavigationBarColor({
+			    backgroundColor: this.themeBgColor
+			})
 		},
 		data() {
 			return {

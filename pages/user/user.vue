@@ -76,9 +76,7 @@
 </template>
 
 <script>
-	import {
-		mapGetters
-	} from 'vuex'
+	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -114,7 +112,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['authUserInfo']),
+			...mapGetters(['authUserInfo', 'themeBgColor']),
 			numInfo() {
 				return this.authUserInfo ? {
 					public_repos: this.authUserInfo.public_repos,
@@ -135,6 +133,11 @@
 			uni.setNavigationBarTitle({
 			    title: this.$t('Profile')
 			})
+			setTimeout(() => {
+				uni.setNavigationBarColor({
+				    backgroundColor: this.themeBgColor
+				})
+			}, 1000)
 			this.initContributions()
 		},
 		onLoad() {

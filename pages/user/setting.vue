@@ -15,16 +15,16 @@
 				<view class="cu-item arrow" @tap="tapTheme">
 					<view class="content">
 						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
-						<text class="text-grey padding-left-sm">{{ $t('Language') }}</text>
+						<text class="text-grey padding-left-sm">{{ $t('Theme') }}</text>
 					</view>
 					<view class="action">
-						<view>{{ $t(currentLang) }}</view>
+						<view>{{ $t(currentTheme) }}</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang" :cancel-btn="false"></u-action-sheet>
-		<u-action-sheet @click="clickTheme" :list="listLang" v-model="showLang"></u-action-sheet>
+		<u-action-sheet @click="clickTheme" :list="listTheme" v-model="showTheme" :cancel-btn="false"></u-action-sheet>
 	</scroll-view>
 </template>
 
@@ -37,12 +37,13 @@
 					{ text: '中文' }]
 			},
 			listTheme() {
-				return [{ text: ''}]
+				return [{ text: this.$t('BluishGreen'), color: '#48c0a3' }]
 			}
 		},
 		data() {
 			return {
 				currentLang: '',
+				currentTheme: '',
 				showLang: false,
 				showTheme: false
 			}
@@ -72,7 +73,15 @@
 				this.getCurrentLang()
 			},
 			tapTheme() {
-				
+				this.showTheme = true
+			},
+			clickTheme(index) {
+				const color = this.listTheme[index].color
+				this.$store.dispatch('initThemeBgColor', color)
+				// set navBar color
+				uni.setNavigationBarColor({
+				    backgroundColor: color
+				})
 			}
 		}
 	}

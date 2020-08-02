@@ -16,14 +16,21 @@
 </template>
 
 <script>
-	import {
-		mapGetters
-	} from 'vuex'
+	import { mapGetters } from 'vuex'
 	import Event from './event'
 	export default {
 		onReady() {
 			uni.setNavigationBarTitle({
 			    title: this.$t('News')
+			})
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
 			})
 		},
 		components: {
@@ -40,7 +47,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['authUserInfo'])
+			...mapGetters(['authUserInfo', 'themeBgColor'])
 		},
 		onLoad() {
 			this._freshing = false

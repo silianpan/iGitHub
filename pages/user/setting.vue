@@ -78,9 +78,14 @@
 			clickTheme(index) {
 				const color = this.listTheme[index].color
 				this.$store.dispatch('initThemeBgColor', color)
-				// set navBar color
+				// navBar-bg-color
 				uni.setNavigationBarColor({
-				    backgroundColor: color
+				    frontColor: '#ffffff',
+				    backgroundColor: color,
+				    animation: {
+				        duration: 400,
+				        timingFunc: 'easeIn'
+				    }
 				})
 			}
 		}

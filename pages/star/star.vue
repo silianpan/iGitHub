@@ -7,12 +7,25 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	import Repos from '@/pages/repos/repos'
 	export default {
 		onReady() {
 			uni.setNavigationBarTitle({
 			    title: this.$t('Stars')
 			})
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
+			})
+		},
+		computed: {
+			...mapGetters(['themeBgColor'])
 		},
 		components: {
 			Repos

@@ -133,11 +133,15 @@
 			uni.setNavigationBarTitle({
 			    title: this.$t('Profile')
 			})
-			setTimeout(() => {
-				uni.setNavigationBarColor({
-				    backgroundColor: this.themeBgColor
-				})
-			}, 1000)
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
+			})
 			this.initContributions()
 		},
 		onLoad() {

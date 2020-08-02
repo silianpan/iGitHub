@@ -15,10 +15,23 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
+		computed: {
+			...mapGetters(['themeBgColor'])
+		},
 		onReady() {
 			uni.setNavigationBarTitle({
 			    title: this.$t('BasicInfo')
+			})
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
 			})
 		},
 		data() {

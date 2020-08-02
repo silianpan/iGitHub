@@ -106,12 +106,25 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	import marked from 'marked'
 	import languageColors from '@/static/colors.json'
 	export default {
+		computed: {
+			...mapGetters(['themeBgColor'])
+		},
 		onReady() {
 			uni.setNavigationBarTitle({
 			    title: this.$t('Repos')
+			})
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
 			})
 		},
 		data() {

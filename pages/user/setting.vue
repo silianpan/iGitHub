@@ -65,6 +65,20 @@
 				showTheme: false
 			}
 		},
+		onReady() {
+			uni.setNavigationBarTitle({
+			    title: this.$t('Settings')
+			})
+			// navBar-bg-color
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: this.themeBgColor,
+			    animation: {
+			        duration: 400,
+			        timingFunc: 'easeIn'
+			    }
+			})
+		},
 		mounted() {
 			this.getCurrentLang()
 			this.getCurrentTheme()

@@ -133,16 +133,11 @@
 			uni.setNavigationBarTitle({
 			    title: this.$t('Profile')
 			})
-			// navBar-bg-color
-			uni.setNavigationBarColor({
-			    frontColor: '#ffffff',
-			    backgroundColor: this.themeBgColor,
-			    animation: {
-			        duration: 400,
-			        timingFunc: 'easeIn'
-			    }
-			})
+			this.initTheme()
 			this.initContributions()
+		},
+		onShow() {
+			this.initTheme()
 		},
 		onLoad() {
 			//#ifdef APP-PLUS
@@ -153,6 +148,17 @@
 			//#endif
 		},
 		methods: {
+			initTheme() {
+				// navBar-bg-color
+				uni.setNavigationBarColor({
+				    frontColor: '#ffffff',
+				    backgroundColor: this.themeBgColor,
+				    animation: {
+				        duration: 400,
+				        timingFunc: 'easeIn'
+				    }
+				})
+			},
 			imageError() {
 				if (this.repo && this.repo.owner) {
 					this.repo.owner.avatar_url = '/static/img/60x60.png'

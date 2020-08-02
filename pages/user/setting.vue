@@ -29,8 +29,10 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
 		computed: {
+			...mapGetters(['themeBgColor']),
 			listLang() {
 				return [{ text: 'System' },
 					{ text: 'English' },
@@ -65,8 +67,13 @@
 		},
 		mounted() {
 			this.getCurrentLang()
+			this.getCurrentTheme()
 		},
 		methods: {
+			getCurrentTheme() {
+				const tmp = this.listTheme.filter(item => item.color === this.themeBgColor)
+				this.currentTheme = tmp.text
+			},
 			getCurrentLang() {
 				this.currentLang = uni.getStorageSync('_lang').data || 'System'
 			},

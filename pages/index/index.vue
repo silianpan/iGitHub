@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:'#f24713'}">
+		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:themeBgColor}">
 			<view class="slot-wrap">
 				<view class="search-wrap">
-					<!-- <u-tabs-swiper :height="CustomBar" inactive-color="#ffffff" :bold="false" bg-color="#f24713" activeColor="#ffffb8"
+					<!-- <u-tabs-swiper :height="CustomBar" inactive-color="#ffffff" :bold="false" :bg-color="themeBgColor" activeColor="#ffffb8"
 					 ref="uTabs" :list="list" :current="current" @change="tabsChange" :is-scroll="false" swiperWidth="750"></u-tabs-swiper> -->
-					<scroll-view scroll-with-animation scroll-x class="nav text-center" style="background-color:#f24713; color:#ffffff"
-					 :style="{'height': CustomBar + 'rpx'}">
+					<scroll-view scroll-with-animation scroll-x class="nav text-center" style="color:#ffffff"
+					 :style="{'height': CustomBar + 'rpx', 'background-color':themeBgColor}">
 						<view :style="{color: index==current?'#ffffb8':'#ffffff', height:'50rpx', padding: '0 12rpx', display: 'inline-block'}"
 						 :class="index==current?'custom-tab-swiper-cur':''" v-for="(item,index) in list" :key="index" @tap="tabsChange(index)"
 						 :data-id="index">
@@ -47,11 +47,6 @@
 		},
 		computed: {
 			...mapGetters(['themeBgColor']),
-		},
-		onReady() {
-			uni.setNavigationBarColor({
-			    backgroundColor: this.themeBgColor
-			})
 		},
 		data() {
 			return {

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:'#f24713'}">
+		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:themeBgColor}">
 			<view class="slot-wrap">
 				<view class="search-wrap">
 					<u-search @search="searchAction" v-model="keyword" :show-action="false"></u-search>
@@ -13,10 +13,14 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	import Repos from '@/pages/repos/repos'
 	export default {
 		components: {
 			Repos
+		},
+		computed: {
+			...mapGetters(['themeBgColor']),
 		},
 		data() {
 			return {

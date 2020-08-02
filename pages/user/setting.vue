@@ -18,7 +18,7 @@
 						<text class="text-grey padding-left-sm">{{ $t('Theme') }}</text>
 					</view>
 					<view class="action">
-						<view>{{ $t(currentTheme) }}</view>
+						<view>{{ currentTheme }}</view>
 					</view>
 				</view>
 			</view>
@@ -91,6 +91,7 @@
 				this.showTheme = true
 			},
 			clickTheme(index) {
+				this.currentTheme = this.listTheme[index].text
 				const color = this.listTheme[index].color
 				this.$store.dispatch('initThemeBgColor', color)
 				// navBar-bg-color

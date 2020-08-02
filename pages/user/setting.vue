@@ -18,7 +18,7 @@
 						<text class="text-grey padding-left-sm">{{ $t('Theme') }}</text>
 					</view>
 					<view class="action">
-						<view>{{ currentTheme }}</view>
+						<view class="cu-tag round light text-white" :style="{backgroundColor:themeBgColor}">{{ currentTheme }}</view>
 					</view>
 				</view>
 			</view>

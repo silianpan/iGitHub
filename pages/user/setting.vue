@@ -24,7 +24,18 @@
 			</view>
 		</view>
 		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang" :cancel-btn="false"></u-action-sheet>
-		<u-action-sheet @click="clickTheme" :list="listTheme" v-model="showTheme" :cancel-btn="false"></u-action-sheet>
+		<!-- <u-action-sheet @click="clickTheme" :list="listTheme" v-model="showTheme" :cancel-btn="false"></u-action-sheet> -->
+		<view class="cu-modal bottom-modal" :class="modalTheme" @tap="hideThemeModal">
+			<view class="cu-dialog">
+				<view class="grid col-3 padding-sm">
+					<view class="padding-sm" v-for="(item,index) in listTheme" :key="`theme-${index}`" @tap="clickTheme(item)">
+						<view class="padding radius text-center shadow-blur" :style="{backgroundColor: item.color}">
+							<view class="text-lg text-white">{{item.text}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
 	</scroll-view>
 </template>
 
@@ -59,10 +70,10 @@
 		},
 		data() {
 			return {
+				modalTheme: null,
 				currentLang: '',
 				currentTheme: '',
-				showLang: false,
-				showTheme: false
+				showLang: false
 			}
 		},
 		onReady() {
@@ -109,11 +120,14 @@
 				this.getCurrentLang()
 			},
 			tapTheme() {
-				this.showTheme = true
+				this.modalTheme = 'show'
 			},
-			clickTheme(index) {
-				this.currentTheme = this.listTheme[index].text
-				const color = this.listTheme[index].color
+			hideThemeModal() {
+				this.modalTheme = null
+			},
+			clickTheme(item) {
+				this.currentTheme = item.text
+				const color = item.color
 				this.$store.dispatch('initThemeBgColor', color)
 				// navBar-bg-color
 				uni.setNavigationBarColor({

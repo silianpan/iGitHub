@@ -1,19 +1,32 @@
 <script>
 	import Vue from 'vue'
+	import { mapGetters } from 'vuex'
 	export default {
+		computed: {
+			...mapGetters(['darkMode'])
+		},
 		onLaunch() {
 			// init system
 			this.initSystem()
 			// auto login
 			// this.autoLogin()
+		},
+		beforeCreate: function() {
 			this.listenSystemTheme()
 		},
 		methods: {
+			setDarkMode() {
+				document.getElementsByTagName('body')[0].className = 'custom-dark'
+			},
+			setLightMode() {
+				document.body.removeAttribute('class', 'custom-dark')
+			},
 			// listen system theme: dark or light
 			listenSystemTheme() {
-				uni.onUIStyleChange(function (res) {
-				    console.log(res.style)
+				uni.onUIStyleChange(res => {
+					res.style === 'dark' ? this.setDarkMode() : this.setLightMode()
 				})
+				this.darkMode ? this.setDarkMode() : this.setLightMode()
 			},
 			// auto login
 			autoLogin() {
@@ -60,6 +73,7 @@
 		font-family: uniicons;
 		src: url('/static/uni.ttf');
 	}
+
 	/* #endif */
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
@@ -68,6 +82,7 @@
 	@import '@/uview/index.scss';
 	@import 'assets/css/custom.css';
 	@import 'assets/css/custom.less';
+	@import 'assets/css/custom-dark.less';
 	@import 'assets/css/file-icons/style.css';
 	@import 'highlight.js/styles/github.css';
 </style>

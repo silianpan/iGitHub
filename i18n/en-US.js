@@ -42,5 +42,6 @@ export default {
 	'Verdigris': 'verdigris',
 	'DeepBlack': 'deep black',
 	'AgateGreen': 'agate green',
-	'DarkGreen': 'dark green'
+	'DarkGreen': 'dark green',
+	'DarkMode': 'dark mode'
 }

@@ -21,6 +21,15 @@
 						<view class="cu-tag round light text-white" :style="{backgroundColor:themeBgColor}">{{ currentTheme }}</view>
 					</view>
 				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
+						<text class="text-grey padding-left-sm">{{ $t('DarkMode') }}</text>
+					</view>
+					<view class="action">
+						<u-switch v-model="darkMode" @change="changeDarkMode" />
+					</view>
+				</view>
 			</view>
 		</view>
 		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang" :cancel-btn="false"></u-action-sheet>
@@ -43,7 +52,7 @@
 	import { mapGetters } from 'vuex'
 	export default {
 		computed: {
-			...mapGetters(['themeBgColor']),
+			...mapGetters(['themeBgColor', 'darkMode']),
 			listLang() {
 				return [{ text: 'System' },
 					{ text: 'English' },
@@ -138,6 +147,14 @@
 				        timingFunc: 'easeIn'
 				    }
 				})
+			},
+			changeDarkMode(status) {
+				if (status) {
+					document.getElementsByTagName('body')[0].className = 'custom-dark'
+				} else {
+					document.body.removeAttribute('class', 'custom-dark')
+				}
+				this.$store.dispatch('initDarkMode', status)
 			}
 		}
 	}

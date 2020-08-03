@@ -42,5 +42,6 @@ export default {
 	'Verdigris': '铜绿',
 	'DeepBlack': '玄青',
 	'AgateGreen': '湖绿',
-	'DarkGreen': '苍色'
+	'DarkGreen': '苍色',
+	'DarkMode': '深色模式'
 }

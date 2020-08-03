@@ -2,7 +2,7 @@ import Vue from 'vue'
 export default {
 	state: {
 		themeBgColor: '',
-		darkMode: false
+		darkMode: null
 	},
 	getters: {
 		themeBgColor: state => {
@@ -14,7 +14,10 @@ export default {
 		},
 		darkMode: state => {
 			const dark = Vue.prototype.$cache.get('_darkMode')
-			return dark !== undefined && dark !== null ? dark : state.darkMode
+			if (_.isNil(dark) && _.isNil(state.darkMode)) {
+				return false
+			}
+			return !_.isNil(state.darkMode) ? state.darkMode : dark
 		}
 	},
 	mutations: {

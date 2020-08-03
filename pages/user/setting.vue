@@ -27,7 +27,7 @@
 						<text class="text-grey padding-left-sm">{{ $t('DarkMode') }}</text>
 					</view>
 					<view class="action">
-						<u-switch v-model="darkMode" @change="changeDarkMode" />
+						<u-switch v-model="darkModeChecked" @change="changeDarkMode" />
 					</view>
 				</view>
 			</view>
@@ -79,6 +79,7 @@
 		},
 		data() {
 			return {
+				darkModeChecked: false,
 				modalTheme: null,
 				currentLang: '',
 				currentTheme: '',
@@ -102,6 +103,7 @@
 		mounted() {
 			this.getCurrentLang()
 			this.getCurrentTheme()
+			this.darkModeChecked = this.darkMode
 		},
 		methods: {
 			getCurrentTheme() {
@@ -149,11 +151,6 @@
 				})
 			},
 			changeDarkMode(status) {
-				if (status) {
-					document.getElementsByTagName('body')[0].className = 'custom-dark'
-				} else {
-					document.body.removeAttribute('class', 'custom-dark')
-				}
 				this.$store.dispatch('initDarkMode', status)
 			}
 		}

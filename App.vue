@@ -10,23 +10,14 @@
 			this.initSystem()
 			// auto login
 			// this.autoLogin()
-		},
-		beforeCreate: function() {
 			this.listenSystemTheme()
 		},
 		methods: {
-			setDarkMode() {
-				document.getElementsByTagName('body')[0].className = 'custom-dark'
-			},
-			setLightMode() {
-				document.body.removeAttribute('class', 'custom-dark')
-			},
 			// listen system theme: dark or light
 			listenSystemTheme() {
 				uni.onUIStyleChange(res => {
-					res.style === 'dark' ? this.setDarkMode() : this.setLightMode()
+					this.$store.dispatch('initDarkMode', res.style === 'dark')
 				})
-				this.darkMode ? this.setDarkMode() : this.setLightMode()
 			},
 			// auto login
 			autoLogin() {

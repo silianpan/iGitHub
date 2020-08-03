@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view :class="darkMode?'custom-dark':''">
 		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:themeBgColor}">
 			<view class="slot-wrap">
 				<view class="search-wrap">
@@ -46,7 +46,7 @@
 			FiltLanguage
 		},
 		computed: {
-			...mapGetters(['themeBgColor']),
+			...mapGetters(['themeBgColor', 'darkMode']),
 		},
 		data() {
 			return {

@@ -13,7 +13,7 @@
 					<view class="description"><text selectable>{{ item.description }}</text></view>
 					<u-link class="link" :font-size="30" color="#0965d2" :href="item.url">{{ item.url }}</u-link>
 					<view class="remark"><text selectable>{{ item.currentPeriodStars + $t('Stars') + ' ' + $t('Daily') }}</text></view>
-					<u-row>
+					<u-row class="foot">
 						<u-col span="2.5">
 							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':item.languageColor}"></text>
 							<text selectable class="u-font-lg">{{item.language}}</text>

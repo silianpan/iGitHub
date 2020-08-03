@@ -73,12 +73,12 @@
 	@import '@/uview/index.scss';
 	@import 'assets/css/custom.css';
 	@import 'assets/css/custom.less';
-	@import 'assets/css/custom-dark.less';
-	@import 'assets/css/custom-light.less';
 	@import 'assets/css/file-icons/style.css';
 	@import 'highlight.js/styles/github.css';
 </style>
 
 <style lang="less">
 	@import 'assets/css/style.less';
+	@import 'assets/css/custom-dark.less';
+	@import 'assets/css/custom-light.less';
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="wrap">
-			<view class="bg-white text-black padding-xs" v-if="langParams">
+			<view class="bg-white text-black padding-xs lang-day" v-if="langParams">
 				<text>{{ (langParams.langName || $t('AllLanguage')) + ' | ' + (langParams.sinceName || $t('Daily')) }}</text>
 			</view>
 			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">

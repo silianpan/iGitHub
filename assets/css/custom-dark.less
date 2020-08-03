@@ -1,5 +1,25 @@
+@dark_bg: #161823;
+@dark_text_main: #d3e0f3;
+@dark_text_sub: #8c8c8c;
+
 .custom-dark {
 	.order {
-		background-color: #000000;
+		background-color: @dark_bg;
+		.item {
+			.content {
+				.description {
+					color: @dark_text_main;
+				}
+				
+				.foot .u-font-lg, .text-main {
+					color: @dark_text_sub;
+				}
+			}
+		}
+	}
+	
+	.lang-day {
+		background-color: @dark_bg;
+		color: @dark_text_main;
 	}
 }

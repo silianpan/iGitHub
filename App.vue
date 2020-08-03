@@ -74,6 +74,7 @@
 	@import 'assets/css/custom.css';
 	@import 'assets/css/custom.less';
 	@import 'assets/css/custom-dark.less';
+	@import 'assets/css/custom-light.less';
 	@import 'assets/css/file-icons/style.css';
 	@import 'highlight.js/styles/github.css';
 </style>

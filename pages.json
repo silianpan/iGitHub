@@ -43,9 +43,9 @@
 		"style": {}
 	}],
 	"tabBar": {
-		"color": "#8699a7",
+		// "color": "#8699a7",
 		// "selectedColor": "#fa541c",
-		"backgroundColor": "#ffffff",
+		// "backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/index/index",
 			"iconPath": "static/img/tabbar/trending.png",

@@ -48,6 +48,13 @@
 		computed: {
 			...mapGetters(['themeBgColor', 'darkMode']),
 		},
+		onReady() {
+			this.darkMode ? uni.setTabBarStyle({
+			  backgroundColor: '#2a2b2d'
+			}) : uni.setTabBarStyle({
+				backgroundColor: '#ffffff'
+			})
+		},
 		data() {
 			return {
 				filtLangDrawer: null,

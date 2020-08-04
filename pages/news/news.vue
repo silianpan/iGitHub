@@ -1,5 +1,5 @@
 <template>
-	<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
+	<scroll-view :class="darkMode?'custom-dark':'custom-light'" scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
 	 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 		<view class="order" v-for="(item, index) in receivedEvents" :key="index">
 			<view class="item">
@@ -47,7 +47,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['authUserInfo', 'themeBgColor'])
+			...mapGetters(['authUserInfo', 'themeBgColor', 'darkMode'])
 		},
 		onLoad() {
 			this._freshing = false

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view :class="darkMode?'custom-dark':'custom-light'">
 		<scroll-view scroll-y class="u-skeleton">
 			<view class="order" v-if="authUserInfo">
 				<view class="item align-center u-skeleton-rect">
@@ -17,7 +17,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-list grid col-3 text-center no-border u-skeleton-rect">
+			<view class="cu-list grid col-3 text-center no-border">
 				<view class="cu-item" v-for="(value, key) in numInfo" :key="key">
 					<view class="badge text-xxl text-black">
 						<block>{{value}}</block>
@@ -26,11 +26,11 @@
 					<text class="text-xl">{{key}}</text>
 				</view>
 			</view>
-			<view class="bg-white">
+			<view class="user-bg">
 				<view class="contri u-skeleton-rect" v-html="contriHtml"></view>
 			</view>
-			<view class="bg-white">
-				<view class="cu-list menu sm-border u-skeleton-rect">
+			<view class="user-bg">
+				<view class="cu-list menu sm-border">
 					<view class="cu-item" :class="baseInfoIcon[index].arrow?'arrow':''" v-for="(value, key, index) in baseInfo" :key="index"
 					 :index="index">
 						<view class="content">
@@ -42,8 +42,8 @@
 					</view>
 				</view>
 			</view>
-			<view class="bg-white margin-top-xs">
-				<view class="cu-list menu sm-border u-skeleton-rect">
+			<view class="user-bg margin-top-xs">
+				<view class="cu-list menu sm-border">
 					<view class="cu-item arrow" @tap="tapSetting">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
@@ -65,10 +65,10 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="padding flex flex-direction bg-white">
+		<view class="padding flex flex-direction user-bg">
 			<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">{{$t('SignOut')}}</button>
 		</view>
-		<view v-if="appInfo.version" class="text-grey text-center padding-bottom-lg bg-white">
+		<view v-if="appInfo.version" class="text-grey text-center padding-bottom-lg user-bg">
 			{{appInfo.name}} {{appInfo.version}}
 		</view>
 		<u-skeleton :loading="loading" :animation="true"></u-skeleton>
@@ -112,7 +112,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['authUserInfo', 'themeBgColor']),
+			...mapGetters(['authUserInfo', 'themeBgColor', 'darkMode']),
 			numInfo() {
 				return this.authUserInfo ? {
 					public_repos: this.authUserInfo.public_repos,

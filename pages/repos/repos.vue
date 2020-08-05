@@ -9,7 +9,7 @@
 					<view class="title u-line-2"><text selectable>{{ item.owner.login + ' / ' + item.name }}</text></view>
 					<view class="description"><text selectable>{{ item.description }}</text></view>
 					<u-link class="link" :font-size="30" color="#0965d2" :href="item.homepage">{{ item.homepage }}</u-link>
-					<u-row>
+					<u-row class="foot">
 						<u-col span="6">
 							<text class="iconfont iconyuandianzhong margin-right-xs" :style="{'color':getColor(item.language)}"></text>
 							<text selectable class="u-font-lg">{{item.language}}</text>

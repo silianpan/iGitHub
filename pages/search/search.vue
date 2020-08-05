@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view :class="darkMode?'custom-dark':'custom-light'">
 		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:themeBgColor}">
 			<view class="slot-wrap">
 				<view class="search-wrap">
@@ -20,7 +20,7 @@
 			Repos
 		},
 		computed: {
-			...mapGetters(['themeBgColor']),
+			...mapGetters(['themeBgColor', 'darkMode']),
 		},
 		data() {
 			return {

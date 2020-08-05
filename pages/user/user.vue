@@ -9,8 +9,8 @@
 					<view class="content">
 						<view v-if="authUserInfo.name && authUserInfo.login" class="title u-line-2"><text selectable>{{ authUserInfo.name || '' }}<text
 								 selectable class="sub-title">{{' (' + (authUserInfo.login || '') + ')' }}</text></text></view>
-						<view class="remark2"><text selectable>{{ authUserInfo.bio }}</text></view>
-						<view v-if="authUserInfo.created_at" class="description"><text selectable>{{ $t('JoinedOn') + ' ' + $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
+						<view class="description"><text selectable>{{ authUserInfo.bio }}</text></view>
+						<view v-if="authUserInfo.created_at" class="remark2"><text selectable>{{ $t('JoinedOn') + ' ' + $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
 					</view>
 					<view class="right">
 						<u-icon name="arrow-right" color="#8799a3" @click="briefInfoClick" />
@@ -19,7 +19,7 @@
 			</view>
 			<view class="cu-list grid col-3 text-center no-border">
 				<view class="cu-item" v-for="(value, key) in numInfo" :key="key">
-					<view class="badge text-xxl text-black">
+					<view class="badge text-xxl grid-text">
 						<block>{{value}}</block>
 					</view>
 					<!-- <view :class="['iconfont ' + iconList[index].icon, 'text-' + iconList[index].color, 'text-xxl']"></view> -->
@@ -30,36 +30,36 @@
 				<view class="contri u-skeleton-rect" v-html="contriHtml"></view>
 			</view>
 			<view class="user-bg">
-				<view class="cu-list menu sm-border">
+				<view class="cu-list menu">
 					<view class="cu-item" :class="baseInfoIcon[index].arrow?'arrow':''" v-for="(value, key, index) in baseInfo" :key="index"
 					 :index="index">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round iconfont" :class="['bg-' + baseInfoIcon[index].color, baseInfoIcon[index].icon]" />
-							<u-link v-if="baseInfoIcon[index].arrow" :font-size="30" color="#8799a3" class="link text-grey padding-left-sm"
+							<u-link v-if="baseInfoIcon[index].arrow" :font-size="30" color="#8799a3" class="link user-item padding-left-sm"
 							 :href="value">{{ value }}</u-link>
-							<text v-else class="text-grey padding-left-sm">{{value}}</text>
+							<text v-else class="user-item padding-left-sm">{{value}}</text>
 						</view>
 					</view>
 				</view>
 			</view>
 			<view class="user-bg margin-top-xs">
-				<view class="cu-list menu sm-border">
+				<view class="cu-list menu">
 					<view class="cu-item arrow" @tap="tapSetting">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
-							<text class="text-grey padding-left-sm">{{$t('Settings')}}</text>
+							<text class="user-item padding-left-sm">{{$t('Settings')}}</text>
 						</view>
 					</view>
 					<view class="cu-item arrow">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-mauve iconfont iconguanyu1" />
-							<text class="text-grey padding-left-sm">{{$t('About')}}</text>
+							<text class="user-item padding-left-sm">{{$t('About')}}</text>
 						</view>
 					</view>
 					<view class="cu-item arrow">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-red iconfont iconfankui1" />
-							<text class="text-grey padding-left-sm">{{$t('Feedback')}}</text>
+							<text class="user-item padding-left-sm">{{$t('Feedback')}}</text>
 						</view>
 					</view>
 				</view>
@@ -68,7 +68,7 @@
 		<view class="padding flex flex-direction user-bg">
 			<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">{{$t('SignOut')}}</button>
 		</view>
-		<view v-if="appInfo.version" class="text-grey text-center padding-bottom-lg user-bg">
+		<view v-if="appInfo.version" class="text-center padding-bottom-lg user-bg">
 			{{appInfo.name}} {{appInfo.version}}
 		</view>
 		<u-skeleton :loading="loading" :animation="true"></u-skeleton>

@@ -49,11 +49,12 @@
 			...mapGetters(['themeBgColor', 'darkMode']),
 		},
 		onReady() {
-			this.darkMode ? uni.setTabBarStyle({
-			  backgroundColor: '#2a2b2d'
-			}) : uni.setTabBarStyle({
-				backgroundColor: '#ffffff'
-			})
+			this.setDarkMode()
+		},
+		watch: {
+			darkMode() {
+				this.setDarkMode()
+			}
 		},
 		data() {
 			return {
@@ -69,6 +70,13 @@
 			}
 		},
 		methods: {
+			setDarkMode() {
+				this.darkMode ? uni.setTabBarStyle({
+				  backgroundColor: '#2a2b2d'
+				}) : uni.setTabBarStyle({
+					backgroundColor: '#ffffff'
+				})
+			},
 			moveHandle() {},
 			// tabs change -> swiper change
 			tabsChange(index) {

@@ -1,6 +1,6 @@
 <!-- setting -->
 <template>
-	<scroll-view scroll-y>
+	<scroll-view scroll-y :class="darkMode?'custom-dark':'custom-light'">
 		<view class="bg-white margin-top-xs">
 			<view class="cu-list menu sm-border u-skeleton-rect">
 				<view class="cu-item arrow" @tap="tapLang">
@@ -152,6 +152,14 @@
 			},
 			changeDarkMode(status) {
 				this.$store.dispatch('initDarkMode', status)
+				this.setDarkMode(status)
+			},
+			setDarkMode(status) {
+				status ? uni.setTabBarStyle({
+				  backgroundColor: '#2a2b2d'
+				}) : uni.setTabBarStyle({
+					backgroundColor: '#ffffff'
+				})
 			}
 		}
 	}

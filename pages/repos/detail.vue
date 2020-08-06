@@ -1,6 +1,6 @@
 <!-- repo detail -->
 <template>
-	<view>
+	<view :class="darkMode?'custom-dark':'custom-light'">
 		<scroll-view scroll-y class="u-skeleton">
 			<view class="order u-skeleton-rect">
 				<view class="item">
@@ -19,7 +19,7 @@
 			</view>
 			<view class="cu-list grid col-3 text-center no-border u-skeleton-rect">
 				<view class="cu-item" v-for="(value, key) in numInfo" :key="key">
-					<view class="badge text-xxl text-black">
+					<view class="badge text-xxl grid-text">
 						<block>{{value}}</block>
 					</view>
 					<text class="text-xl">{{key}}</text>
@@ -111,7 +111,7 @@
 	import languageColors from '@/static/colors.json'
 	export default {
 		computed: {
-			...mapGetters(['themeBgColor'])
+			...mapGetters(['themeBgColor', 'darkMode'])
 		},
 		onReady() {
 			uni.setNavigationBarTitle({

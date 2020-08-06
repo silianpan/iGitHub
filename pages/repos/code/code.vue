@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view :class="darkMode?'custom-dark':'custom-light'">
 		<u-sticky>
 			<view class="u-font-xl text-white" :style="{backgroundColor:themeBgColor}" style="padding: 10rpx 30rpx;">
 				<block v-for="(item, index) in pathList" :key="`${item}${index}`">
@@ -49,7 +49,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['themeBgColor']),
+			...mapGetters(['themeBgColor', 'darkMode']),
 			pathList() {
 				return this.$_.split(this.path, '/')
 			}

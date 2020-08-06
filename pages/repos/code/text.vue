@@ -1,5 +1,6 @@
 <!-- text preview -->
 <template>
+	<view :class="darkMode?'custom-dark':'custom-light'">
 	<!-- #ifdef H5 -->
 	<view v-if="reposContent" v-highlight>
 		<pre><code v-html="reposContent"></code></pre>
@@ -10,13 +11,14 @@
 		<web-view :src="`/hybrid/html/index.html?owner=${encodeURIComponent(owner)}&repo=${encodeURIComponent(repo)}&path=${encodeURIComponent(path)}&defaultBranch=${encodeURIComponent(defaultBranch)}`"></web-view>
 	</view>
 	<!-- #endif -->
+	</view>
 </template>
 
 <script>
 	import { mapGetters } from 'vuex'
 	export default {
 		computed: {
-			...mapGetters(['themeBgColor'])
+			...mapGetters(['themeBgColor', 'darkMode'])
 		},
 		onReady() {
 			uni.setNavigationBarTitle({

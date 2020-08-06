@@ -16,7 +16,7 @@
 				</view>
 				<view class="navbar-right">
 					<view class="right-item">
-						<text class="iconfont iconguolv u-font-lg" @tap="filtLangTap"></text>
+						<text class="iconfont icontiaojie1 u-font-lg" @tap="filtLangTap"></text>
 					</view>
 				</view>
 			</view>

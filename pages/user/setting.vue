@@ -5,7 +5,7 @@
 			<view class="cu-list menu sm-border u-skeleton-rect">
 				<view class="cu-item arrow" @tap="tapLang">
 					<view class="content">
-						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
+						<text class="list-left-icon cu-avatar round bg-purple iconfont iconyuyan1" />
 						<text class="user-item padding-left-sm">{{ $t('Language') }}</text>
 					</view>
 					<view class="action">
@@ -14,7 +14,7 @@
 				</view>
 				<view class="cu-item arrow" @tap="tapTheme">
 					<view class="content">
-						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
+						<text class="list-left-icon cu-avatar round bg-red iconfont icontheme" />
 						<text class="user-item padding-left-sm">{{ $t('Theme') }}</text>
 					</view>
 					<view class="action">
@@ -23,7 +23,7 @@
 				</view>
 				<view class="cu-item">
 					<view class="content">
-						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
+						<text class="list-left-icon cu-avatar round bg-orange iconfont iconyueliang" />
 						<text class="user-item padding-left-sm">{{ $t('DarkMode') }}</text>
 					</view>
 					<view class="action">

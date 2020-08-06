@@ -1,5 +1,5 @@
 <template>
-	<view class="bg-white">
+	<view :class="darkMode?'custom-dark':'custom-light'">
 		<view class="cu-list menu sm-border">
 			<view class="cu-item arrow" v-for="(value, key, index) in baseInfo" :key="index" :index="index">
 				<view class="content">
@@ -18,7 +18,7 @@
 	import { mapGetters } from 'vuex'
 	export default {
 		computed: {
-			...mapGetters(['themeBgColor'])
+			...mapGetters(['themeBgColor', 'darkMode'])
 		},
 		onReady() {
 			uni.setNavigationBarTitle({

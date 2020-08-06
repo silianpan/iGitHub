@@ -6,7 +6,7 @@
 				<view class="cu-item arrow" @tap="tapLang">
 					<view class="content">
 						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
-						<text class="text-grey padding-left-sm">{{ $t('Language') }}</text>
+						<text class="user-item padding-left-sm">{{ $t('Language') }}</text>
 					</view>
 					<view class="action">
 						<view>{{ $t(currentLang) }}</view>
@@ -15,7 +15,7 @@
 				<view class="cu-item arrow" @tap="tapTheme">
 					<view class="content">
 						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
-						<text class="text-grey padding-left-sm">{{ $t('Theme') }}</text>
+						<text class="user-item padding-left-sm">{{ $t('Theme') }}</text>
 					</view>
 					<view class="action">
 						<view class="cu-tag round light text-white" :style="{backgroundColor:themeBgColor}">{{ currentTheme }}</view>
@@ -24,7 +24,7 @@
 				<view class="cu-item">
 					<view class="content">
 						<text class="list-left-icon cu-avatar round bg-cyan iconfont iconshezhi1" />
-						<text class="text-grey padding-left-sm">{{ $t('DarkMode') }}</text>
+						<text class="user-item padding-left-sm">{{ $t('DarkMode') }}</text>
 					</view>
 					<view class="action">
 						<u-switch v-model="darkModeChecked" @change="changeDarkMode" />

@@ -158,6 +158,14 @@
 				        timingFunc: 'easeIn'
 				    }
 				})
+				this.setDarkMode()
+			},
+			setDarkMode() {
+				this.darkMode ? uni.setTabBarStyle({
+				  backgroundColor: '#2a2b2d'
+				}) : uni.setTabBarStyle({
+					backgroundColor: '#ffffff'
+				})
 			},
 			imageError() {
 				if (this.repo && this.repo.owner) {

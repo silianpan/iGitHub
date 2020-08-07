@@ -43,5 +43,8 @@ export default {
 	'DeepBlack': '玄青',
 	'AgateGreen': '湖绿',
 	'DarkGreen': '苍色',
-	'DarkMode': '深色模式'
+	'DarkMode': '深色模式',
+	'public_repos': '公开仓库',
+	'followers': '被关注者',
+	'following': '关注者'
 }

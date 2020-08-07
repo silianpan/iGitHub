@@ -43,5 +43,8 @@ export default {
 	'DeepBlack': 'deep black',
 	'AgateGreen': 'agate green',
 	'DarkGreen': 'dark green',
-	'DarkMode': 'dark mode'
+	'DarkMode': 'dark mode',
+	'public_repos': 'public repos',
+	'followers': 'followers',
+	'following': 'following'
 }

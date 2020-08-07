@@ -23,7 +23,7 @@
 						<block>{{value}}</block>
 					</view>
 					<!-- <view :class="['iconfont ' + iconList[index].icon, 'text-' + iconList[index].color, 'text-xxl']"></view> -->
-					<text class="text-xl">{{key}}</text>
+					<text class="text-xl">{{$t(key)}}</text>
 				</view>
 			</view>
 			<view class="user-bg">

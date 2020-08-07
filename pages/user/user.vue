@@ -13,7 +13,7 @@
 						<view v-if="authUserInfo.created_at" class="remark2"><text selectable>{{ $t('JoinedOn') + ' ' + $u.timeFormat(new Date(authUserInfo.created_at).getTime(), 'yyyy-mm-dd hh:MM:ss') }}</text></view>
 					</view>
 					<view class="right">
-						<u-icon name="arrow-right" color="#8799a3" @click="briefInfoClick" />
+						<u-icon name="arrow-right" :color="darkMode?'#595959':'#8799a3'" @click="briefInfoClick" />
 					</view>
 				</view>
 			</view>

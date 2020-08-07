@@ -3,6 +3,8 @@
 @dark_bg_sub: #2a2b2d;
 @dark_text_main: #d3e0f3;
 @dark_text_sub: #8c8c8c;
+@dark_text_3: #434343;
+@dark_text_4: #595959;
 
 .custom-dark {
 	background-color: @dark_bg_main;
@@ -26,7 +28,11 @@
 		color: @dark_text_main!important;
 	}
 	.cu-item:after {
-		border-bottom: 1px solid @dark_text_sub!important;
+		border-bottom: 1px solid @dark_text_3!important;
+	}
+	
+	.cu-item.arrow::before {
+		color: @dark_text_4!important;
 	}
 	
 	.grid-text, .user-item {

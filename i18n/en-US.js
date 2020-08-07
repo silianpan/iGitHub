@@ -46,5 +46,6 @@ export default {
 	'DarkMode': 'dark mode',
 	'public_repos': 'public repos',
 	'followers': 'followers',
-	'following': 'following'
+	'following': 'following',
+	'MyRepos': 'My Repositories'
 }

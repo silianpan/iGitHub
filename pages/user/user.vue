@@ -18,7 +18,7 @@
 				</view>
 			</view>
 			<view class="cu-list grid col-3 text-center no-border">
-				<view class="cu-item" v-for="(value, key) in numInfo" :key="key">
+				<view class="cu-item" v-for="(value, key) in numInfo" :key="key" @tap="tapNumInfo(key)">
 					<view class="badge text-xxl grid-text">
 						<block>{{value}}</block>
 					</view>
@@ -210,6 +210,13 @@
 				uni.navigateTo({
 					url: '/pages/user/setting'
 				})
+			},
+			tapNumInfo(key) {
+				if (key === 'public_repos') {
+					uni.navigateTo({
+						url: '/pages/repos/repos-auth'
+					})
+				}
 			}
 		}
 	}

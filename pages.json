@@ -33,14 +33,15 @@
 	}, {
 		"path": "pages/user/base-info"
 	}, {
+		"path": "pages/user/setting"
+	}, {
 		"path": "pages/repos/detail"
 	}, {
 		"path": "pages/repos/code/code"
 	}, {
 		"path": "pages/repos/code/text"
 	}, {
-		"path": "pages/user/setting",
-		"style": {}
+		"path": "pages/repos/repos-auth"
 	}],
 	"tabBar": {
 		// "color": "#8699a7",

@@ -6,14 +6,14 @@
 			</view>
 			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
+					<scroll-view class="w-h-100" scroll-y @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 						<TrendingRepo :repos="trendingRepos" />
 						<u-empty v-if="$_.isEmpty(trendingRepos)" mode="list"></u-empty>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom" refresher-enabled
+					<scroll-view class="w-h-100" scroll-y @scrolltolower="reachBottom" refresher-enabled
 					 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
 						<TrendingDeveloper :developers="trendingDevelopers" />
 						<u-empty v-if="$_.isEmpty(trendingDevelopers)" mode="list"></u-empty>

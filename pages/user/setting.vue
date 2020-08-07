@@ -27,7 +27,8 @@
 						<text class="user-item padding-left-sm">{{ $t('DarkMode') }}</text>
 					</view>
 					<view class="action">
-						<u-switch v-model="darkModeChecked" @change="changeDarkMode" />
+						<!-- <u-switch v-model="darkModeChecked" @change="changeDarkMode" /> -->
+						<switch color="#2979ff" :checked="darkModeChecked" @change="changeDarkMode" />
 					</view>
 				</view>
 			</view>
@@ -150,7 +151,8 @@
 				    }
 				})
 			},
-			changeDarkMode(status) {
+			changeDarkMode(e) {
+				const status = e.target.value
 				this.$store.dispatch('initDarkMode', status)
 				this.setDarkMode(status)
 			},

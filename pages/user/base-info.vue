@@ -1,5 +1,5 @@
 <template>
-	<view :class="darkMode?'custom-dark':'custom-light'">
+	<view :class="darkMode?'custom-dark':'custom-light'" style="height: 100%;width: 100%;">
 		<view class="cu-list menu sm-border">
 			<view class="cu-item arrow" v-for="(value, key, index) in baseInfo" :key="index" :index="index">
 				<view class="content">

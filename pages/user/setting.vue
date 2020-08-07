@@ -1,6 +1,6 @@
 <!-- setting -->
 <template>
-	<scroll-view scroll-y :class="darkMode?'custom-dark':'custom-light'">
+	<scroll-view scroll-y :class="darkMode?'custom-dark':'custom-light'" style="height: 100%;width: 100%;">
 		<view class="bg-white margin-top-xs">
 			<view class="cu-list menu sm-border u-skeleton-rect">
 				<view class="cu-item arrow" @tap="tapLang">

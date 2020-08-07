@@ -1,6 +1,6 @@
 <template>
-	<view :class="darkMode?'custom-dark':'custom-light'">
-		<scroll-view scroll-y class="u-skeleton">
+	<view :class="darkMode?'custom-dark':'custom-light'" style="height: 100%;width: 100%;">
+		<scroll-view scroll-y class="u-skeleton" style="height: 100%;width: 100%;">
 			<view class="order" v-if="authUserInfo">
 				<view class="item align-center u-skeleton-rect">
 					<view class="left">

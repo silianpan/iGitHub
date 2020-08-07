@@ -1,5 +1,5 @@
 <template>
-	<view :class="darkMode?'custom-dark':'custom-light'">
+	<view :class="darkMode?'custom-dark':'custom-light'" style="height: 100%;width: 100%;">
 		<u-navbar :is-back="false" title-color="#ffffff" :background="{background:themeBgColor}">
 			<view class="slot-wrap">
 				<view class="search-wrap">

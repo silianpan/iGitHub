@@ -1,8 +1,8 @@
 <template>
 	<view :class="darkMode?'custom-dark':'custom-light'" class="w-h-100">
-		<scroll-view scroll-y class="w-h-100 u-skeleton">
+		<scroll-view scroll-y class="w-h-100">
 			<view class="order" v-if="authUserInfo">
-				<view class="item align-center u-skeleton-rect">
+				<view class="item align-center">
 					<view class="left">
 						<image @error="imageError" class="avatar2" :src="userAvatar || authUserInfo.avatar_url" mode="aspectFill"></image>
 					</view>
@@ -27,8 +27,8 @@
 				</view>
 			</view>
 			<view class="user-bg">
-				<view class="contri u-skeleton-rect" v-html="contriHtml"></view>
-				<!-- <view class="contri u-skeleton-rect" v-html="contri3dHtml"></view> -->
+				<view class="contri" v-html="contriHtml"></view>
+				<!-- <view class="contri" v-html="contri3dHtml"></view> -->
 			</view>
 			<view class="user-bg">
 				<view class="cu-list menu">
@@ -72,7 +72,7 @@
 		<view v-if="appInfo.version" class="text-center padding-bottom-lg user-bg">
 			{{appInfo.name}} {{appInfo.version}}
 		</view>
-		<u-skeleton :loading="loading" :animation="true"></u-skeleton>
+		<!-- <u-skeleton :loading="loading" :animation="true"></u-skeleton> -->
 	</view>
 </template>
 
@@ -86,7 +86,7 @@
 					name: ''
 				},
 				userAvatar: '',
-				loading: true,
+				// loading: true,
 				contri3dHtml: '',
 				contriHtml: '',
 				baseInfoIcon: [{
@@ -215,7 +215,7 @@
 					name: this.authUserInfo.name
 				})
 				// await this.get3dContributions(this.authUserInfo.name)
-				this.loading = false
+				// this.loading = false
 			},
 			tapSetting() {
 				uni.navigateTo({

@@ -7,11 +7,16 @@
 			<u-radio v-for="(value, key) in timeMap" :key="key" :name="key">{{value}}</u-radio>
 		</u-radio-group>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
-		<u-search class="padding-left-sm" v-model="keyword" clearabled :show-action="false" :shape="'square'" @search="searchAction" />
+		<u-row>
+			<u-col span="8">
+				<u-search class="padding-left-sm" v-model="keyword" clearabled :show-action="false" :shape="'square'" @search="searchAction" />
+			</u-col>
+			<u-col span="4">
+				<!-- clear search history -->
+				<button class="cu-btn sm bg-blue" @tap="clearSearchHistoryTap">{{$t('ClearSearchHistory')}}</button>
+			</u-col>
+		</u-row>
 		<!-- search history -->
-		<view class="padding-top-sm padding-right-sm bg-white" style="text-align: right;">
-			<button class="cu-btn sm bg-blue" @tap="clearSearchHistoryTap">{{$t('ClearSearchHistory')}}</button>
-		</view>
 		<view @tap="historyLangTap(item)" v-for="(item, index) in langParamsHistory" :key="index" class="padding-left-sm">{{item.langName}}</view>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
 		<view @tap="allLangTap" class="padding-left-sm">{{$t('AllLanguage')}}</view>

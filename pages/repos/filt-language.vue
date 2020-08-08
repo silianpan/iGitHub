@@ -17,7 +17,10 @@
 			</u-col>
 		</u-row>
 		<!-- search history -->
-		<view @tap="historyLangTap(item)" v-for="(item, index) in langParamsHistory" :key="index" class="padding-left-sm">{{item.langName}}</view>
+		<!-- <view @tap="historyLangTap(item)" v-for="(item, index) in langParamsHistory" :key="index" class="padding-left-sm">{{item.langName}}</view> -->
+		<u-radio-group @change="historyLangTap" wrap class="padding-left-sm" v-model="selectedLangHistory" :size="30">
+			<u-radio v-for="(item, index) in langParamsHistory" :key="item.language" :name="item.language">{{item.langName}}</u-radio>
+		</u-radio-group>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
 		<view @tap="allLangTap" class="padding-left-sm">{{$t('AllLanguage')}}</view>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
@@ -33,6 +36,7 @@
 		},
 		data() {
 			return {
+				selectedLangHistory: '',
 				keyword: '',
 				currentTime: 'daily',
 				timeMap: {
@@ -117,9 +121,9 @@
 				this.langName = e.item.name
 				this.langCode = this.langNameCodeMap[e.item.name]
 			},
-			historyLangTap(item) {
-				this.langName = item.langName
-				this.langCode = item.langCode
+			historyLangTap(langCode) {
+				this.langCode = langCode
+				this.langName = this.langParamsHistory.filter(item => item.language === langCode)[0].langName
 			},
 			allLangTap() {
 				this.langName = this.$t('AllLanguage')

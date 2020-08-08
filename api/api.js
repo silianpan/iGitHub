@@ -113,7 +113,7 @@ export default {
 			return minRequest.get('/user/starred', params)
 		},
 		// List repositories for the authenticated user
-		listAuthUserRepos() {
+		listAuthUserRepos(params) {
 			return minRequest.get('/user/repos', params)
 		},
 		searchRepos(params) {

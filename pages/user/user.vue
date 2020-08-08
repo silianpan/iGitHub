@@ -28,6 +28,7 @@
 			</view>
 			<view class="user-bg">
 				<view class="contri u-skeleton-rect" v-html="contriHtml"></view>
+				<view class="contri u-skeleton-rect" v-html="contri3dHtml"></view>
 			</view>
 			<view class="user-bg">
 				<view class="cu-list menu">
@@ -86,6 +87,7 @@
 				},
 				userAvatar: '',
 				loading: true,
+				contri3dHtml: '',
 				contriHtml: '',
 				baseInfoIcon: [{
 						key: 'company',
@@ -200,10 +202,19 @@
 					}
 				}
 			},
+			async get3dContributions(name) {
+				let res = await this.$minApi.get3dContributions(name)
+				const reg = /[\s\S]*(\<canvas[\s\S]*\<\/canvas\>)[\s\S]*/
+				if (res && res.match(reg)) {
+					res = (reg.exec(res)[1]).trim()
+					this.contri3dHtml = res
+				}
+			},
 			async initContributions() {
 				await this.getContributions({
 					name: this.authUserInfo.name
 				})
+				await this.get3dContributions(this.authUserInfo.name)
 				this.loading = false
 			},
 			tapSetting() {

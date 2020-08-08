@@ -42,6 +42,15 @@ export default {
 				}
 			})
 		},
+		get3dContributions(name) {
+			return minRequest.get(`/${name}`, null, {
+				baseURL: globalConfig.baseUrl3dContri,
+				header: {
+					'Accept': 'text/html',
+					'content-type': 'text/html; charset=utf-8'
+				}
+			})
+		},
 		listTrendingRepo(params = {}) {
 			return minRequest.get('/repositories', params, {
 				baseURL: globalConfig.baseUrlTrending

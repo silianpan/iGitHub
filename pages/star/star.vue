@@ -14,21 +14,18 @@
 			uni.setNavigationBarTitle({
 			    title: this.$t('Stars')
 			})
-			// navBar-bg-color
-			uni.setNavigationBarColor({
-			    frontColor: '#ffffff',
-			    backgroundColor: this.themeBgColor,
-			    animation: {
-			        duration: 400,
-			        timingFunc: 'easeIn'
-			    }
-			})
+			this.setNavBarColor()
 		},
 		computed: {
 			...mapGetters(['themeBgColor', 'darkMode'])
 		},
 		components: {
 			Repos
+		},
+		watch: {
+			themeBgColor() {
+				this.setNavBarColor()
+			}
 		},
 		data() {
 			return {
@@ -60,6 +57,17 @@
 			})
 		},
 		methods: {
+			setNavBarColor() {
+				// navBar-bg-color
+				uni.setNavigationBarColor({
+				    frontColor: '#ffffff',
+				    backgroundColor: this.themeBgColor,
+				    animation: {
+				        duration: 400,
+				        timingFunc: 'easeIn'
+				    }
+				})
+			},
 			async listAuthUserReposStarred(triggered, freshing, callbackFunc) {
 				const params = {
 					sort: 'created',

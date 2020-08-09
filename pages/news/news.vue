@@ -19,22 +19,22 @@
 	import { mapGetters } from 'vuex'
 	import Event from './event'
 	export default {
+		components: {
+			Event
+		},
+		computed: {
+			...mapGetters(['authUserInfo', 'themeBgColor', 'darkMode'])
+		},
 		onReady() {
 			uni.setNavigationBarTitle({
 			    title: this.$t('News')
 			})
-			// navBar-bg-color
-			uni.setNavigationBarColor({
-			    frontColor: '#ffffff',
-			    backgroundColor: this.themeBgColor,
-			    animation: {
-			        duration: 400,
-			        timingFunc: 'easeIn'
-			    }
-			})
+			this.setNavBarColor()
 		},
-		components: {
-			Event
+		watch: {
+			themeBgColor() {
+				this.setNavBarColor()
+			}
 		},
 		data() {
 			return {
@@ -45,9 +45,6 @@
 				triggered: false,
 				receivedEvents: []
 			}
-		},
-		computed: {
-			...mapGetters(['authUserInfo', 'themeBgColor', 'darkMode'])
 		},
 		onLoad() {
 			this._freshing = false
@@ -70,6 +67,17 @@
 			})
 		},
 		methods: {
+			setNavBarColor() {
+				// navBar-bg-color
+				uni.setNavigationBarColor({
+				    frontColor: '#ffffff',
+				    backgroundColor: this.themeBgColor,
+				    animation: {
+				        duration: 400,
+				        timingFunc: 'easeIn'
+				    }
+				})
+			},
 			imageError(item) {
 				item.actor.avatar_url = '/static/img/60x60.png'
 			},

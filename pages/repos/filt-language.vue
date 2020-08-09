@@ -17,14 +17,13 @@
 			</u-col>
 		</u-row>
 		<!-- search history -->
-		<!-- <view @tap="historyLangTap(item)" v-for="(item, index) in langParamsHistory" :key="index" class="padding-left-sm">{{item.langName}}</view> -->
+		<!-- <view @tap="historyLangTap(item)" v-for="(item, index) in langHistory" :key="index" class="padding-left-sm">{{item.langName}}</view> -->
 		<u-radio-group @change="historyLangTap" wrap class="padding-left-sm" v-model="selectedLangHistory" :size="30">
-			<u-radio v-for="(item, index) in langParamsHistory" :key="item.language" :name="item.language">{{item.langName}}</u-radio>
+			<u-radio v-for="(item, index) in langHistory" :key="item.language" :name="item.language">{{item.langName}}</u-radio>
 		</u-radio-group>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
-		<view @tap="allLangTap" class="padding-left-sm">{{$t('AllLanguage')}}</view>
-		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
-		<uni-indexed-list :style="'top:' + (180 + langParamsHistory.length * 32) + 'px!important'" :options="langList" show-select @click="bindClick" />
+		<!-- <view @tap="allLangTap" class="padding-left-sm">{{$t('AllLanguage')}}</view> -->
+		<uni-indexed-list :style="'top:' + (180 + langHistory.length * 18) + 'px!important'" :options="langList" show-select @click="bindClick" />
 	</view>
 </template>
 
@@ -32,7 +31,16 @@
 	import { mapGetters } from 'vuex'
 	export default {
 		computed: {
-			...mapGetters(['langParamsHistory', 'themeBgColor'])
+			...mapGetters(['langParamsHistory', 'themeBgColor']),
+			langHistory() {
+				return [
+					{
+						language: null,
+						langName: this.$t('AllLanguage')
+					},
+					...this.langParamsHistory
+				]
+			}
 		},
 		data() {
 			return {

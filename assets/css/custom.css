@@ -223,3 +223,7 @@ svg:not(:root) {
 }
 
 /* scroll drawer end */
+
+.uni-indexed-list {
+	position: relative!important;
+}

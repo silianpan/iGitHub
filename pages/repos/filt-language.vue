@@ -23,7 +23,7 @@
 		</u-radio-group>
 		<u-divider :use-slot="false" :half-width="'100%'" :margin-top="10" :margin-bottom="10" />
 		<!-- <view @tap="allLangTap" class="padding-left-sm">{{$t('AllLanguage')}}</view> -->
-		<uni-indexed-list :style="'top:' + (180 + langHistory.length * 18) + 'px!important'" :options="langList" show-select @click="bindClick" />
+		<uni-indexed-list :options="langList" show-select @click="bindClick" />
 	</view>
 </template>
 

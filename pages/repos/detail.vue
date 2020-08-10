@@ -163,7 +163,7 @@
 				this.repo = await this.$minApi.getRepos(this.owner, this.repoName)
 				this.numInfo = {
 					watchers: this.repo.watchers,
-					stargazers_count: this.repo.stargazers_count,
+					stars: this.repo.stargazers_count,
 					forks: this.repo.forks
 				}
 			},

@@ -1,6 +1,6 @@
 <!-- text preview -->
 <template>
-	<view :class="darkMode?'custom-dark':'custom-light'">
+	<view :class="darkMode?'custom-dark':'custom-light'" class="w-h-100">
 	<!-- #ifdef H5 -->
 	<view v-if="reposContent" v-highlight>
 		<pre><code v-html="reposContent"></code></pre>

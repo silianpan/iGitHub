@@ -1,5 +1,5 @@
 <template>
-	<view :class="darkMode?'custom-dark':'custom-light'">
+	<view :class="darkMode?'custom-dark':'custom-light'" class="w-h-100">
 		<u-sticky>
 			<view class="u-font-xl text-white" :style="{backgroundColor:themeBgColor}" style="padding: 10rpx 30rpx;">
 				<block v-for="(item, index) in pathList" :key="`${item}${index}`">

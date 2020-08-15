@@ -47,5 +47,6 @@ export default {
 	'public_repos': 'public repos',
 	'followers': 'followers',
 	'following': 'following',
-	'MyRepos': 'My Repositories'
+	'MyRepos': 'My Repositories',
+	'Dark': 'Dark'
 }

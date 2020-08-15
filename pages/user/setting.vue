@@ -74,7 +74,8 @@
 					{ text: this.$t('Verdigris'), color: '#549688' },
 					{ text: this.$t('DeepBlack'), color: '#3d3b4f' },
 					{ text: this.$t('AgateGreen'), color: '#25f8cb' },
-					{ text: this.$t('DarkGreen'), color: '#75878a' }
+					{ text: this.$t('DarkGreen'), color: '#75878a' },
+					{ text: this.$t('Dark'), color: '#161a23' }
 				]
 			}
 		},

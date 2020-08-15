@@ -47,5 +47,6 @@ export default {
 	'public_repos': '公开仓库',
 	'followers': '被关注者',
 	'following': '关注者',
-	'MyRepos': '我的仓库'
+	'MyRepos': '我的仓库',
+	'Dark': '暗黑'
 }

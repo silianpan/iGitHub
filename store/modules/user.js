@@ -63,7 +63,7 @@ export default {
 			//#endif
 		},
 		async authLogin({ commit }, params) {
-			if (params && params.code && params.state === 'igithub') {
+			if (params && params.code && params.state === 'funcode') {
 				uni.showLoading({
 					title: '努力加载中...'
 				})

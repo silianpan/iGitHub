@@ -8,9 +8,9 @@
 		onLaunch() {
 			// init system
 			this.initSystem()
-			// auto login
-			// this.autoLogin()
 			this.listenSystemTheme()
+			// auto login
+			this.autoLogin()
 		},
 		methods: {
 			// listen system theme: dark or light

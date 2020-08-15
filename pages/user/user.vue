@@ -1,7 +1,10 @@
 <template>
 	<view :class="darkMode?'custom-dark':'custom-light'" class="w-h-100">
 		<scroll-view scroll-y class="w-h-100">
-			<view class="order" v-if="authUserInfo">
+			<view class="order" v-if="!authUserInfo">
+				<view class="text-center" style="color:#0068d7" @tap="tapLogout">{{$t('ToLogin')}} ?</view>
+			</view>
+			<view class="order" v-else>
 				<view class="item align-center">
 					<view class="left">
 						<image @error="imageError" class="avatar2" :src="userAvatar || authUserInfo.avatar_url" mode="aspectFill"></image>
@@ -17,7 +20,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-list grid col-3 text-center no-border">
+			<view v-if="!$_.isEmpty(numInfo)" class="cu-list grid col-3 text-center no-border">
 				<view class="cu-item" v-for="(value, key) in numInfo" :key="key" @tap="tapNumInfo(key)">
 					<view class="badge text-xxl grid-text">
 						<block>{{value}}</block>
@@ -26,7 +29,7 @@
 					<text class="text-xl">{{$t(key)}}</text>
 				</view>
 			</view>
-			<view class="user-bg">
+			<view v-if="!$_.isEmpty(contriHtml)" class="user-bg">
 				<view class="contri" v-html="contriHtml"></view>
 				<!-- <view class="contri" v-html="contri3dHtml"></view> -->
 			</view>
@@ -65,13 +68,13 @@
 					</view>
 				</view>
 			</view>
+			<view class="padding flex flex-direction user-bg">
+				<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">{{$t('SignOut')}}</button>
+			</view>
+			<view v-if="appInfo.version" class="text-center padding-bottom-lg user-bg">
+				{{appInfo.name}} {{appInfo.version}}
+			</view>
 		</scroll-view>
-		<view class="padding flex flex-direction user-bg">
-			<button class="cu-btn line-red margin-tb-sm" @tap="tapLogout">{{$t('SignOut')}}</button>
-		</view>
-		<view v-if="appInfo.version" class="text-center padding-bottom-lg user-bg">
-			{{appInfo.name}} {{appInfo.version}}
-		</view>
 		<!-- <u-skeleton :loading="loading" :animation="true"></u-skeleton> -->
 	</view>
 </template>
@@ -211,11 +214,13 @@
 				}
 			},
 			async initContributions() {
-				await this.getContributions({
-					name: this.authUserInfo.name
-				})
-				// await this.get3dContributions(this.authUserInfo.name)
-				// this.loading = false
+				if (this.authUserInfo && this.authUserInfo.name) {
+					await this.getContributions({
+						name: this.authUserInfo.name
+					})
+					// await this.get3dContributions(this.authUserInfo.name)
+					// this.loading = false
+				}
 			},
 			tapSetting() {
 				uni.navigateTo({

@@ -1,7 +1,7 @@
 <template>
 	<scroll-view :class="darkMode?'custom-dark':'custom-light'" class="w-h-100" scroll-y @scrolltolower="reachBottom" refresher-enabled
 	 :refresher-triggered="triggered" @refresherrefresh="onRefresh" @refresherrestore="onRestore" @refresherpulling="onPulling">
-		<Repos :repos="starredRepos" />
+		<Repos v-if="$_.isArray(starredRepos)" :repos="starredRepos" />
 		<u-loadmore class="padding-bottom padding-top" :status="loadMoreStatus" icon-type="flower" />
 	</scroll-view>
 </template>

@@ -48,5 +48,6 @@ export default {
 	'followers': 'followers',
 	'following': 'following',
 	'MyRepos': 'My Repositories',
-	'Dark': 'Dark'
+	'Dark': 'Dark',
+	'ToLogin': 'To login'
 }

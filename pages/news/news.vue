@@ -82,10 +82,13 @@
 				item.actor.avatar_url = '/static/img/60x60.png'
 			},
 			async listAuthUserReceivedEvents(triggered, freshing, callbackFunc) {
-				this.loadMoreStatus = 'loading'
-				const res = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name, this.page, this.perPage)
-				if (this.$_.isFunction(callbackFunc)) {
-					callbackFunc(res)
+				let res = ''
+				if (this.authUserInfo && this.authUserInfo.name) {
+					this.loadMoreStatus = 'loading'
+					res = await this.$minApi.listAuthUserReceivedEvents(this.authUserInfo.name, this.page, this.perPage)
+					if (this.$_.isFunction(callbackFunc)) {
+						callbackFunc(res)
+					}
 				}
 				this.triggered = triggered
 				this._freshing = freshing

@@ -1,12 +1,12 @@
 <template>
-	<view>
+	<view v-if="$_.isArray(repos)">
 		<view class="order" v-for="(item, index) in repos" :key="index">
 			<view class="item" @tap="clickRepoDetail(item)">
 				<view class="left">
-					<image @error="imageError(item)" class="avatar" :src="item.owner.avatar_url" mode="aspectFill"></image>
+					<image v-if="item.owner" @error="imageError(item)" class="avatar" :src="item.owner.avatar_url" mode="aspectFill"></image>
 				</view>
 				<view class="content">
-					<view class="title u-line-2"><text selectable>{{ item.owner.login + ' / ' + item.name }}</text></view>
+					<view v-if="item.name && item.owner" class="title u-line-2"><text selectable>{{ item.owner.login + ' / ' + item.name }}</text></view>
 					<view class="description"><text selectable>{{ item.description }}</text></view>
 					<u-link class="link" :font-size="30" color="#0965d2" :href="item.homepage">{{ item.homepage }}</u-link>
 					<u-row class="foot">

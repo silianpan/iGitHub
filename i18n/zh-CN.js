@@ -48,5 +48,6 @@ export default {
 	'followers': '被关注者',
 	'following': '关注者',
 	'MyRepos': '我的仓库',
-	'Dark': '暗黑'
+	'Dark': '暗黑',
+	'ToLogin': '去登录'
 }

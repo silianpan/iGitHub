@@ -48,8 +48,9 @@ export default {
 			})
 		},
 		autoLogin({ getters, dispatch }) {
-			if (getters.isAuthed) {
-				dispatch('loginAuth')
+			if (!getters.isAuthed) {
+				// dispatch('loginAuth')
+				dispatch('logoutAuth')
 			}
 		},
 		loginAuth() {

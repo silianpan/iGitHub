@@ -76,10 +76,7 @@ function throttle(fn, wait) {
  */
 const goLoginDebounce = debounce(
 	function() {
-		Vue.prototype.$store.dispatch('logout')
-		uni.reLaunch({
-			url: '/pages/login/login'
-		})
+		Vue.prototype.$store.dispatch('logoutAuth')
 	},
 	250
 )
@@ -124,9 +121,10 @@ export const checkStatus = (response = {}) => {
  */
 export const checkLogin = (response) => {
 	let {
-		code
+		message
 	} = response
-	if (code === 7004) {
+	// code === 401
+	if (message === 'Requires authentication') {
 		goLoginDebounce()
 	}
 	return response

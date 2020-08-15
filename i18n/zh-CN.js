@@ -34,6 +34,7 @@ export default {
 	'Volcano': '火山',
 	'Orange': '橘黄',
 	'IndigoBlue': '靛青',
+	'Indigo': '靛蓝',
 	'Verdant': '苍翠',
 	'Water': '水色',
 	'Grey': '灰色',

@@ -34,6 +34,7 @@ export default {
 	'Volcano': 'volcano',
 	'Orange': 'Orange',
 	'IndigoBlue': 'indigo-blue',
+	'Indigo': 'indigo',
 	'Verdant': 'verdant',
 	'Water': 'water',
 	'Grey': 'grey',

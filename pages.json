@@ -45,7 +45,7 @@
 	}],
 	"tabBar": {
 		// "color": "#8699a7",
-		// "selectedColor": "#fa541c",
+		// "selectedColor": "#27547d",
 		// "backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/index/index",
@@ -72,7 +72,7 @@
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",
 		// "navigationBarTitleText": "uni-app",
-		// "navigationBarBackgroundColor": "#fa541c",
+		// "navigationBarBackgroundColor": "#27547d",
 		// "backgroundColor": "#ffffff"
 	}
 }

@@ -33,9 +33,22 @@
 				</view>
 			</view>
 		</view>
-		<u-action-sheet @click="clickLang" :list="listLang" v-model="showLang" :cancel-btn="false"></u-action-sheet>
-		<!-- <u-action-sheet @click="clickTheme" :list="listTheme" v-model="showTheme" :cancel-btn="false"></u-action-sheet> -->
-		<view class="cu-modal bottom-modal" :class="modalTheme" @tap="hideThemeModal">
+		
+		<!-- languages modal -->
+		<view class="cu-modal bottom-modal" :class="modalLang" @tap="modalLang = null">
+			<view class="cu-dialog">
+				<view class="cu-list menu">
+					<view @tap="clickLang(index)" class="cu-item" v-for="(item, index) in listLang" :key="item.text">
+						<view class="content">
+							<text>{{item.text}}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- theme modal -->
+		<view class="cu-modal bottom-modal" :class="modalTheme" @tap="modalTheme = null">
 			<view class="cu-dialog">
 				<view class="grid col-3 padding-sm">
 					<view class="padding-sm" v-for="(item,index) in listTheme" :key="`theme-${index}`" @tap="clickTheme(item)">
@@ -84,9 +97,9 @@
 			return {
 				darkModeChecked: false,
 				modalTheme: null,
+				modalLang: null,
 				currentLang: '',
-				currentTheme: '',
-				showLang: false
+				currentTheme: ''
 			}
 		},
 		onReady() {
@@ -117,7 +130,7 @@
 				this.currentLang = uni.getStorageSync('_lang').data || 'System'
 			},
 			tapLang() {
-				this.showLang = true
+				this.modalLang = 'show'
 			},
 			clickLang(index) {
 				if (index === 0) {
@@ -135,9 +148,6 @@
 			},
 			tapTheme() {
 				this.modalTheme = 'show'
-			},
-			hideThemeModal() {
-				this.modalTheme = null
 			},
 			clickTheme(item) {
 				this.currentTheme = item.text

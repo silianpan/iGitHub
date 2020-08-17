@@ -39,7 +39,7 @@
 			<view class="cu-dialog">
 				<view class="cu-list menu">
 					<view @tap="clickLang(index)" class="cu-item" v-for="(item, index) in listLang" :key="item.text">
-						<view class="content">
+						<view class="content justify-center">
 							<text>{{item.text}}</text>
 						</view>
 					</view>

@@ -16,16 +16,14 @@
 			})
 			this.setNavBarColor()
 		},
+		onShow() {
+			this.setNavBarColor()
+		},
 		computed: {
 			...mapGetters(['themeBgColor', 'darkMode'])
 		},
 		components: {
 			Repos
-		},
-		watch: {
-			themeBgColor() {
-				this.setNavBarColor()
-			}
 		},
 		data() {
 			return {

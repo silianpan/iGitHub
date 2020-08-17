@@ -31,10 +31,8 @@
 			})
 			this.setNavBarColor()
 		},
-		watch: {
-			themeBgColor() {
-				this.setNavBarColor()
-			}
+		onShow() {
+			this.setNavBarColor()
 		},
 		data() {
 			return {

@@ -12,13 +12,13 @@ class Request {
 		// 检查请求拦截
 		if (this.interceptor.request && typeof this.interceptor.request === 'function') {
 			let tmpConfig = {};
-			let interceptorReuest = this.interceptor.request(options);
-			if (interceptorReuest === false) {
-				return false;
+			let interceptorRequest = this.interceptor.request(options);
+			if (interceptorRequest === false) {
+				// 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
+				return new Promise(()=>{});
 			}
-			this.options = interceptorReuest;
+			this.options = interceptorRequest;
 		}
-		
 		options.dataType = options.dataType || this.config.dataType;
 		options.responseType = options.responseType || this.config.responseType;
 		options.url = options.url || '';
@@ -32,7 +32,7 @@ class Request {
 				uni.hideLoading();
 				// 清除定时器，如果请求回来了，就无需loading
 				clearTimeout(this.config.timer);
-				this.timer = null;
+				this.config.timer = null;
 				// 判断用户对拦截返回数据的要求，如果originalData为true，返回所有的数据(response)到拦截器，否则只返回response.data
 				if(this.config.originalData) {
 					// 判断是否存在拦截器
@@ -64,11 +64,11 @@ class Request {
 						}
 					} else {
 						// 不返回原始数据的情况下，服务器状态码不为200，modal弹框提示
-						if(response.errMsg) {
-							uni.showModal({
-								title: response.errMsg
-							});
-						}
+						// if(response.errMsg) {
+						// 	uni.showModal({
+						// 		title: response.errMsg
+						// 	});
+						// }
 						reject(response)
 					}
 				}
@@ -92,6 +92,11 @@ class Request {
 			}
 			uni.request(options);
 		})
+		// .catch(res => {
+		// 	// 如果返回reject()，不让其进入this.$u.post().then().catch()后面的catct()
+		// 	// 因为很多人都会忘了写后面的catch()，导致报错捕获不到catch
+		// 	return new Promise(()=>{});
+		// })
 	}
 
 	constructor() {

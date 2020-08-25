@@ -1,9 +1,13 @@
 <template>
 	<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
-		<!-- 多加一个if判断，避免微信小程序第二次打开后，视图没有重新渲染，而导致数据混乱 -->
-		<view class="u-datetime-picker" @tap.stop v-if="value">
+		<view class="u-datetime-picker">
 			<view class="u-picker-header" @touchmove.stop.prevent="">
-				<view class="u-btn-picker u-btn-picker--tips" :style="{ color: cancelColor }" hover-class="u-opacity" :hover-stay-time="150" @tap="getResult('cancel')">取消</view>
+				<view class="u-btn-picker u-btn-picker--tips" 
+					:style="{ color: cancelColor }" 
+					hover-class="u-opacity" 
+					:hover-stay-time="150" 
+					@tap="getResult('cancel')"
+				>{{cancelText}}</view>
 				<view class="u-picker__title">{{ title }}</view>
 				<view
 					class="u-btn-picker u-btn-picker--primary"
@@ -13,22 +17,22 @@
 					@touchmove.stop=""
 					@tap.stop="getResult('confirm')"
 				>
-					确定
+					{{confirmText}}
 				</view>
 			</view>
 			<view class="u-picker-body">
 				<picker-view v-if="mode == 'region'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column v-if="params.province">
+					<picker-view-column v-if="!reset && params.province">
 						<view class="u-column-item" v-for="(item, index) in provinces" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.city">
+					<picker-view-column v-if="!reset && params.city">
 						<view class="u-column-item" v-for="(item, index) in citys" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.area">
+					<picker-view-column v-if="!reset && params.area">
 						<view class="u-column-item" v-for="(item, index) in areas" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
 						</view>
@@ -72,15 +76,15 @@
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'selector'" :value="defaultSelector" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column>
+				<picker-view v-else-if="mode == 'selector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+					<picker-view-column v-if="!reset">
 						<view class="u-column-item" v-for="(item, index) in range" :key="index">
 							<view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'multiSelector'" :value="defaultSelector" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column v-for="(item, index) in range" :key="index">
+				<picker-view v-else-if="mode == 'multiSelector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+					<picker-view-column v-if="!reset" v-for="(item, index) in range" :key="index">
 						<view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
 							<view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
 						</view>
@@ -109,6 +113,8 @@ import areas from '../../libs/util/area.js';
  * @property {String} cancel-color 取消按钮的颜色（默认#606266）
  * @property {String} confirm-color 确认按钮的颜色（默认#2979ff）
  * @property {String} default-time 默认选中的时间，mode=time时有效
+ * @property {String} confirm-text 确认按钮的文字
+ * @property {String} cancel-text 取消按钮的文字
  * @property {String} default-region 默认选中的地区，中文形式，mode=region时有效
  * @property {String} default-code 默认选中的地区，编号形式，mode=region时有效
  * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭Picker（默认true）
@@ -232,6 +238,16 @@ export default {
 		title: {
 			type: String,
 			default: ''
+		},
+		// 取消按钮的文字
+		cancelText: {
+			type: String,
+			default: '取消'
+		},
+		// 确认按钮的文字
+		confirmText: {
+			type: String,
+			default: '确认'
 		}
 	},
 	data() {
@@ -248,10 +264,10 @@ export default {
 			hour: 0,
 			minute: 0,
 			second: 0,
+			reset: false,
 			startDate: '',
 			endDate: '',
 			valueArr: [],
-			reset: false,
 			provinces: provinces,
 			citys: citys[0],
 			areas: areas[0][0],
@@ -331,6 +347,9 @@ export default {
 		},
 		// 生成递进的数组
 		generateArray: function(start, end) {
+			// 转为数值格式，否则用户给end-year等传递字符串值时，下面的end+1会导致字符串拼接，而不是相加
+			start = Number(start);
+			end = Number(end);
 			end = end > start ? end : start;
 			// 生成数组，获取其中的索引，并剪出来
 			return [...Array(end + 1).keys()].slice(start);
@@ -427,6 +446,9 @@ export default {
 			else if (this.params.month) index = 1;
 			else if (this.params.year) index = 1;
 			else index = 0;
+			// 当月份变化时，会导致日期的天数也会变化，如果原来选的天数大于变化后的天数，则重置为变化后的最大值
+			// 比如原来选中3月31日，调整为2月后，日期变为最大29，这时如果day值继续为31显然不合理，于是将其置为29(picker-column从1开始)
+			if(this.day > this.days.length) this.day = this.days.length;
 			this.valueArr.splice(index, 1, this.getIndex(this.days, this.day));
 		},
 		setHours() {
@@ -563,7 +585,8 @@ export default {
 		},
 		// 获取时间戳
 		getTimestamp() {
-			let time = this.year + '-' + this.month + '-' + this.day + ' ' + this.hour + ':' + this.minute + ':' + this.second;
+			// yyyy-mm-dd为安卓写法，不支持iOS，需要使用"/"分隔，才能二者兼容
+			let time = this.year + '/' + this.month + '/' + this.day + ' ' + this.hour + ':' + this.minute + ':' + this.second;
 			return new Date(time).getTime() / 1000;
 		}
 	}

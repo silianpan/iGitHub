@@ -62,7 +62,6 @@
 		provide() {
 			return {
 				uTable: this,
-				uTd: this
 			};
 		},
 		data() {
@@ -87,10 +86,4 @@
 		width: 100%;
 		box-sizing: border-box;
 	}
-
-	/* #ifdef MP */
-	.u-table /deep/ t-tr {
-		display: flex;
-	}
-	/* #endif */
 </style>

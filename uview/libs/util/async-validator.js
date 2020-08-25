@@ -866,9 +866,8 @@ function pattern$2(rule, value, callback, source, options) {
 }
 
 function date(rule, value, callback, source, options) {
-	// console.log('integer rule called %j', rule);
 	var errors = [];
-	var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field); // console.log('validate on %s value', value);
+	var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field); 
 
 	if (validate) {
 		if (isEmptyValue(value) && !rule.required) {

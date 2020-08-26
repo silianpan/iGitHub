@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import _ from 'lodash'
 import globalConfig from '@/config'
+import { getQueryString } from '@/utils/href'
 export default {
 	state: {
 		accessToken: '',
@@ -48,7 +49,15 @@ export default {
 			})
 		},
 		autoLogin({ getters, dispatch }) {
-			if (!getters.isAuthed) {
+			let isCallbackUrl = false
+			// #ifdef H5
+			const code = getQueryString('code')
+			const state = getQueryString('state')
+			if (code && state) {
+				isCallbackUrl = true
+			}
+			// #endif
+			if (!getters.isAuthed && !isCallbackUrl) {
 				// dispatch('loginAuth')
 				dispatch('logoutAuth')
 			}

@@ -42,6 +42,8 @@
 		"path": "pages/repos/code/text"
 	}, {
 		"path": "pages/repos/repos-auth"
+	}, {
+		"path": "pages/login/commitment"
 	}],
 	"tabBar": {
 		// "color": "#8699a7",

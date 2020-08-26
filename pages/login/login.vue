@@ -6,6 +6,7 @@
 		<view class="padding-lr-xl flex flex-direction text-center">
 			<button class="cu-btn margin-tb-sm lg text-white" :style="{backgroundColor:themeBgColor}" @click="loginAuth">{{$t('SecureLogin')}}</button>
 		</view>
+		<text class="padding-lr-xl flex align-end justify-center user-sc" @tap="tapCommitment">{{$t('UserServiceCommitment')}}</text>
 	</view>
 </template>
 
@@ -18,6 +19,11 @@
 		methods: {
 			loginAuth() {
 				this.$store.dispatch('loginAuth')
+			},
+			tapCommitment() {
+				uni.navigateTo({
+					url: '/pages/login/commitment'
+				})
 			}
 		}
 	}
@@ -29,11 +35,15 @@
 		vertical-align: middle;
 		text-align: center;
 		width: calc(100vw);
-		height: 50vh;
+		height: calc(50vh);
 
 		uni-image {
 			width: 240rpx;
 			height: 240rpx;
 		}
+	}
+
+	.user-sc {
+		height: calc(40vh - 150rpx);
 	}
 </style>

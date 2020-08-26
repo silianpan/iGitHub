@@ -107,7 +107,6 @@
 
 <script>
 	import { mapGetters } from 'vuex'
-	import marked from 'marked'
 	import languageColors from '@/static/colors.json'
 	export default {
 		computed: {

@@ -50,5 +50,6 @@ export default {
 	'following': '关注者',
 	'MyRepos': '我的仓库',
 	'Dark': '暗黑',
-	'ToLogin': '去登录'
+	'ToLogin': '去登录',
+	'UserServiceCommitment': '用户服务承诺'
 }

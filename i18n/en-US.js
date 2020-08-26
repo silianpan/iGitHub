@@ -50,5 +50,6 @@ export default {
 	'following': 'following',
 	'MyRepos': 'My Repositories',
 	'Dark': 'Dark',
-	'ToLogin': 'To login'
+	'ToLogin': 'To login',
+	'UserServiceCommitment': 'User Service Commitment'
 }

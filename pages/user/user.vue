@@ -54,7 +54,7 @@
 							<text class="user-item padding-left-sm">{{$t('Settings')}}</text>
 						</view>
 					</view>
-					<view class="cu-item arrow">
+					<view class="cu-item arrow" @tap="tapAbout">
 						<view class="content">
 							<text class="list-left-icon cu-avatar round bg-mauve iconfont iconguanyu1" />
 							<text class="user-item padding-left-sm">{{$t('About')}}</text>
@@ -233,6 +233,11 @@
 						url: '/pages/repos/repos-auth'
 					})
 				}
+			},
+			tapAbout() {
+				uni.navigateTo({
+					url: '/pages/user/about'
+				})
 			}
 		}
 	}

@@ -44,6 +44,8 @@
 		"path": "pages/repos/repos-auth"
 	}, {
 		"path": "pages/login/commitment"
+	}, {
+		"path": "pages/user/about"
 	}],
 	"tabBar": {
 		// "color": "#8699a7",

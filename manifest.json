@@ -127,36 +127,36 @@
             "port" : 9090,
             "disableHostCheck" : true,
             "proxy" : {
-                "/apiv3" : {
+                "/apiGithub" : {
                     "target" : "https://api.github.com",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/apiv3" : ""
+                        "^/apiGithub" : ""
                     }
                 },
-                "/apitoken" : {
+                "/apiToken" : {
                     "target" : "https://github.com",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/apitoken" : ""
+                        "^/apiToken" : ""
                     }
                 },
-                "/api3dcontri" : {
+                "/apiContri" : {
                     "target" : "https://github-3d-contribution.herokuapp.com",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/api3dcontri" : ""
+                        "^/apiContri" : ""
                     }
                 },
-                "/apitrending" : {
+                "/apiTrending" : {
                     "target" : "https://ghapi.huchen.dev",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/apitrending" : ""
+                        "^/apiTrending" : ""
                     }
                 }
             }

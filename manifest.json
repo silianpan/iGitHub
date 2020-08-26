@@ -151,17 +151,17 @@
                         "^/api3dcontri" : ""
                     }
                 },
-                "/trending" : {
+                "/apitrending" : {
                     "target" : "https://ghapi.huchen.dev",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/trending" : ""
+                        "^/apitrending" : ""
                     }
                 }
             }
         },
-        "title" : "iGitHub",
+        "title" : "FunCode",
         "router" : {
             "mode" : "hash",
             "base" : "/funcode"

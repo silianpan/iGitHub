@@ -22,7 +22,7 @@ const githubAuthUrl = ipAddressToken + '/login/oauth/authorize?client_id=' + git
  * api prefix
  */
 const apiPrefixToken = '/apitoken'
-const apiPrefixTrending = '/trending'
+const apiPrefixTrending = '/apitrending'
 const apiPrefix = '/apiv3'
 const apiPrefix3dContri = '/api3dcontri'
 /**

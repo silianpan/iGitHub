@@ -6,7 +6,7 @@
 		<view class="padding-lr-xl flex flex-direction text-center">
 			<button class="cu-btn margin-tb-sm lg text-white" :style="{backgroundColor:themeBgColor}" @click="loginAuth">{{$t('SecureLogin')}}</button>
 		</view>
-		<text class="padding-lr-xl flex align-end justify-center user-sc" @tap="tapCommitment">{{$t('UserServiceCommitment')}}</text>
+		<view class="padding-lr-xl flex align-end justify-center user-sc"><text @tap="tapCommitment">{{$t('UserServiceCommitment')}}</text></view>
 	</view>
 </template>
 

@@ -10,7 +10,7 @@
 
 A GitHub client that combines beauty and practicality
 
-[![doc][doc-image]][doc-url] [![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] [![GitHub license][license-image]][github-url]
+[![doc][doc-image]][doc-url] [![gitee][gitee-image]][gitee-url] [![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] [![GitHub license][license-image]][github-url]
 
 [uni-app-image]: https://img.shields.io/badge/uni--app-latest-%2342b983
 [uni-app-url]: https://uniapp.dcloud.io/
@@ -22,10 +22,14 @@ A GitHub client that combines beauty and practicality
 [license-image]: https://img.shields.io/github/license/silianpan/iGitHub
 [doc-image]: https://img.shields.io/badge/document-latest-blue
 [doc-url]: http://silianpan.cn/funcode-doc/
+[gitee-image]: https://gitee.com/twofloor/iGitHub/badge/star.svg?theme=dark
+[gitee-url]: https://gitee.com/twofloor/iGitHub/stargazers
 
 </div>
 
 ## [文档地址](http://silianpan.cn/funcode-doc/)
+
+[Gitee](https://gitee.com/twofloor/iGitHub)
 
 ## 安装使用
 

@@ -1,3 +1,15 @@
+![FunCode](http://silianpan.cn/funcode-doc/logo.png)
+
+[![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] 
+
+[uni-app-image]: https://img.shields.io/badge/uni--app-latest-%2342b983
+[uni-app-url]: https://uniapp.dcloud.io/
+[github-starts-image]: https://img.shields.io/github/stars/silianpan/iGitHub?style=social
+[github-url]: https://github.com/silianpan/iGitHub
+[github-commit-activity-url]: https://img.shields.io/github/commit-activity/m/silianpan/iGitHub
+[github-top-language-image]: https://img.shields.io/github/languages/top/silianpan/iGitHub?color=%234fc08d
+[vue-url]: https://vuejs.org/
+
 ## [文档地址](http://funcode-doc.silianpan.cn)
 
 ## 安装使用

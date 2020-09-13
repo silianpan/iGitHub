@@ -1,6 +1,14 @@
-<center>
-   <img src="http://silianpan.cn/funcode-doc/logo.png" height="120" alt="funcode"/>
-</center>
+<p align="center">
+  <a href="http://silianpan.cn/funcode-doc/">
+    <img width="200" src="http://silianpan.cn/funcode-doc/logo.png">
+  </a>
+</p>
+
+<h1 align="center">FunCode</h1>
+
+<div align="center">
+
+A GitHub client that combines beauty and practicality
 
 [![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] [![GitHub license][license-image]][github-url]
 
@@ -12,6 +20,8 @@
 [github-top-language-image]: https://img.shields.io/github/languages/top/silianpan/iGitHub?color=%234fc08d
 [vue-url]: https://vuejs.org/
 [license-image]: https://img.shields.io/github/license/silianpan/iGitHub
+
+</div>
 
 ## [文档地址](http://funcode-doc.silianpan.cn)
 

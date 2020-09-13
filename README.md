@@ -1,4 +1,6 @@
-![FunCode](http://silianpan.cn/funcode-doc/logo.png)
+<center>
+   <img src="http://silianpan.cn/funcode-doc/logo.png" height="120" alt="funcode"/>
+</center>
 
 [![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] [![GitHub license][license-image]][github-url]
 

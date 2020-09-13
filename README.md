@@ -10,7 +10,7 @@
 
 A GitHub client that combines beauty and practicality
 
-[![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] [![GitHub license][license-image]][github-url]
+[![doc][doc-image]][doc-url] [![uni-app-deps][uni-app-image]][uni-app-url] [![GitHub stars][github-starts-image]][github-url] [![GitHub commit activity][github-commit-activity-url]][github-url] [![GitHub top language][github-top-language-image]][vue-url] [![GitHub license][license-image]][github-url]
 
 [uni-app-image]: https://img.shields.io/badge/uni--app-latest-%2342b983
 [uni-app-url]: https://uniapp.dcloud.io/
@@ -20,10 +20,12 @@ A GitHub client that combines beauty and practicality
 [github-top-language-image]: https://img.shields.io/github/languages/top/silianpan/iGitHub?color=%234fc08d
 [vue-url]: https://vuejs.org/
 [license-image]: https://img.shields.io/github/license/silianpan/iGitHub
+[doc-image]: https://img.shields.io/badge/document-latest-blue
+[doc-url]: http://silianpan.cn/funcode-doc/
 
 </div>
 
-## [文档地址](http://funcode-doc.silianpan.cn)
+## [文档地址](http://silianpan.cn/funcode-doc/)
 
 ## 安装使用
 

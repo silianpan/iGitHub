@@ -152,7 +152,7 @@
                     }
                 },
                 "/apiTrending" : {
-                    "target" : "https://ghapi.huchen.dev",
+                    "target" : "https://hackertab.pupubird.com",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {

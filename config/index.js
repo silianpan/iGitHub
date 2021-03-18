@@ -4,7 +4,7 @@
 // OAuth address
 const ipAddressToken = 'https://github.com'
 // Trending address
-const ipAddressTrending = 'https://ghapi.huchen.dev'
+const ipAddressTrending = 'https://hackertab.pupubird.com'
 // after authorized
 const ipAddress = 'https://api.github.com'
 // contributions

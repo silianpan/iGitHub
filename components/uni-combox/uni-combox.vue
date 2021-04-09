@@ -22,6 +22,17 @@
 
 <script>
 	import uniIcons from '../uni-icons/uni-icons.vue'
+	/**
+	 * Combox 组合输入框
+	 * @description 组合输入框一般用于既可以输入也可以选择的场景
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=1261
+	 * @property {String} label 左侧文字
+	 * @property {String} labelWidth 左侧内容宽度
+	 * @property {String} placeholder 输入框占位符
+	 * @property {Array} candidates 候选项列表
+	 * @property {String} emptyTips 筛选结果为空时显示的文字
+	 * @property {String} value 组合框的值
+	 */
 	export default {
 		name: 'uniCombox',
 		components: {
@@ -51,7 +62,7 @@
 				default: '无匹配项'
 			},
 			value: {
-				type: String,
+				type: [String, Number],
 				default: ''
 			}
 		},
@@ -72,7 +83,7 @@
 			},
 			filterCandidates() {
 				return this.candidates.filter((item) => {
-					return item.indexOf(this.inputVal) > -1
+					return item.toString().indexOf(this.inputVal) > -1
 				})
 			},
 			filterCandidatesLength() {
@@ -97,7 +108,7 @@
 			onBlur() {
 				setTimeout(() => {
 					this.showSelector = false
-				}, 50)
+				}, 153)
 			},
 			onSelectorClick(index) {
 				this.inputVal = this.filterCandidates[index]
@@ -121,8 +132,6 @@
 		height: 40px;
 		flex-direction: row;
 		align-items: center;
-		/* border-bottom: solid 1px #DDDDDD;
- */
 	}
 
 	.uni-combox__label {
@@ -193,6 +202,7 @@
 		text-align: center;
 		border-bottom: solid 1px #DDDDDD;
 		margin: 0px 10px;
+		cursor: pointer;
 	}
 
 	.uni-combox__selector-empty:last-child,

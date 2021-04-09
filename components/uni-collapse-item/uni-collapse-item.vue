@@ -1,6 +1,6 @@
 <template>
 	<view :class="{ 'uni-collapse-cell--disabled': disabled,'uni-collapse-cell--notdisabled': !disabled, 'uni-collapse-cell--open': isOpen,'uni-collapse-cell--hide':!isOpen }" class="uni-collapse-cell">
-		<view class="uni-collapse-cell__title" @click="onClick">
+		<view :class="{ 'uni-collapse-cell--disabled': disabled}" class="uni-collapse-cell__title" @click="onClick">
 			<image v-if="thumb" :src="thumb" class="uni-collapse-cell__title-img" />
 			<text class="uni-collapse-cell__title-text">{{ title }}</text>
 			<!-- #ifdef MP-ALIPAY -->
@@ -120,7 +120,6 @@
 		border-bottom-style: solid;
 	}
 
-
 	.uni-collapse-cell--hover {
 		background-color: #f1f1f1;
 	}
@@ -131,18 +130,16 @@
 
 	.uni-collapse-cell--disabled {
 		background-color: #f1f1f1;
-		/* opacity: 0.3;
- */
+		/* #ifdef H5 */
+		cursor: not-allowed !important;
+		/* #endif */
 	}
-
 
 	.uni-collapse-cell--hide {
 		height: 48px;
 	}
 
 	.uni-collapse-cell--animation {
-		/* transition: transform 0.3s ease;
- */
 		transition-property: transform;
 		transition-duration: 0.3s;
 		transition-timing-function: ease;
@@ -161,6 +158,9 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-collapse-cell__title:active {
@@ -168,8 +168,8 @@
 	}
 
 	.uni-collapse-cell__title-img {
-		height: 52rpx;
-		width: 52rpx;
+		height: 26px;
+		width: 26px;
 		margin-right: 10px;
 	}
 
@@ -178,7 +178,6 @@
 		height: 20px;
 		transform: rotate(0deg);
 		transform-origin: center center;
-
 	}
 
 	.uni-collapse-cell__title-arrow-active {
@@ -187,7 +186,7 @@
 
 	.uni-collapse-cell__title-text {
 		flex: 1;
-		font-size: 28rpx;
+		font-size: 14px;
 		/* #ifndef APP-NVUE */
 		white-space: nowrap;
 		color: inherit;

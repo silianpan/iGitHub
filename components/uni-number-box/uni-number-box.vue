@@ -1,10 +1,10 @@
 <template>
 	<view class="uni-numbox">
-		<view @click="_calcValue('minus')" class="uni-numbox__minus">
+		<view @click="_calcValue('minus')" class="uni-numbox__minus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
 		</view>
-		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
-		<view @click="_calcValue('plus')" class="uni-numbox__plus">
+		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
+		<view @click="_calcValue('plus')" class="uni-numbox__plus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
 		</view>
 	</view>
@@ -58,6 +58,7 @@
 			inputValue(newVal, oldVal) {
 				if (+newVal !== +oldVal) {
 					this.$emit("change", newVal);
+					this.$emit("input", newVal);
 				}
 			}
 		},
@@ -101,6 +102,7 @@
 				return scale;
 			},
 			_onBlur(event) {
+				this.$emit('blur', event)
 				let value = event.detail.value;
 				if (!value) {
 					// this.inputValue = 0;
@@ -113,6 +115,9 @@
 					value = this.min;
 				}
 				this.inputValue = value;
+			},
+			_onFocus(event) {
+				this.$emit('focus', event)
 			}
 		}
 	};
@@ -120,7 +125,6 @@
 <style scoped>
 	/* #ifdef APP-NVUE */
 	/* #endif */
-
 	.uni-numbox {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -131,12 +135,18 @@
 		width: 120px;
 	}
 
+	.uni-cursor-point {
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
+	}
+
 	.uni-numbox__value {
 		background-color: #ffffff;
 		width: 40px;
 		height: 35px;
 		text-align: center;
-		font-size: 32rpx;
+		font-size: 16px;
 		border-width: 1rpx;
 		border-style: solid;
 		border-color: #e5e5e5;
@@ -153,18 +163,14 @@
 		justify-content: center;
 		width: 35px;
 		height: 35px;
-		/* line-height: $box-line-height;
- */
-		/* text-align: center;
- */
 		font-size: 20px;
 		color: #333;
 		background-color: #f8f8f8;
 		border-width: 1rpx;
 		border-style: solid;
 		border-color: #e5e5e5;
-		border-top-left-radius: 6rpx;
-		border-bottom-left-radius: 6rpx;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
 		border-right-width: 0;
 	}
 
@@ -180,18 +186,21 @@
 		border-width: 1rpx;
 		border-style: solid;
 		border-color: #e5e5e5;
-		border-top-right-radius: 6rpx;
-		border-bottom-right-radius: 6rpx;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
 		background-color: #f8f8f8;
 		border-left-width: 0;
 	}
 
 	.uni-numbox--text {
-		font-size: 40rpx;
+		font-size: 20px;
 		color: #333;
 	}
 
 	.uni-numbox--disabled {
 		color: #c0c0c0;
+		/* #ifdef H5 */
+		cursor: not-allowed;
+		/* #endif */
 	}
 </style>

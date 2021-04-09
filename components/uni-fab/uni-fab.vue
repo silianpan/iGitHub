@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<view v-if="popMenu && (leftBottom||rightBottom||leftTop||rightTop)" :class="{
+	<view class="uni-cursor-point">
+		<view v-if="popMenu && (leftBottom||rightBottom||leftTop||rightTop) && content.length > 0" :class="{
         'uni-fab--leftBottom': leftBottom,
         'uni-fab--rightBottom': rightBottom,
         'uni-fab--leftTop': leftTop,
@@ -29,8 +29,8 @@
 		  'uni-fab__circle--rightTop': rightTop,
 		  'uni-fab__content--other-platform': !isAndroidNvue
 		}" class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
-			<view class="fab-circle-v" :class="{'uni-fab__plus--active': isShow}"></view>
-			<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow}"></view>
+			<view class="fab-circle-v" :class="{'uni-fab__plus--active': isShow && content.length > 0}"></view>
+			<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow  && content.length > 0}"></view>
 		</view>
 	</view>
 </template>
@@ -105,7 +105,7 @@
 					color: '#3c3e49',
 					selectedColor: '#007AFF',
 					backgroundColor: '#fff',
-					buttonColor: '#3c3e49'
+					buttonColor: '#007AFF'
 				}
 			}
 		},
@@ -218,6 +218,12 @@
 		z-index: 10;
 	}
 
+	.uni-cursor-point {
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
+	}
+
 	.uni-fab--active {
 		opacity: 1;
 	}
@@ -226,6 +232,7 @@
 		left: 5px;
 		bottom: 20px;
 		/* #ifdef H5 */
+		left: calc(5px + var(--window-left));
 		bottom: calc(20px + var(--window-bottom));
 		/* #endif */
 		padding: 10px;
@@ -235,6 +242,7 @@
 		left: 5px;
 		top: 30px;
 		/* #ifdef H5 */
+		left: calc(5px + var(--window-left));
 		top: calc(30px + var(--window-top));
 		/* #endif */
 		padding: 10px;
@@ -244,6 +252,7 @@
 		right: 5px;
 		bottom: 20px;
 		/* #ifdef H5 */
+		right: calc(5px + var(--window-right));
 		bottom: calc(20px + var(--window-bottom));
 		/* #endif */
 		padding: 10px;
@@ -253,6 +262,7 @@
 		right: 5px;
 		top: 30px;
 		/* #ifdef H5 */
+		right: calc(5px + var(--window-right));
 		top: calc(30px + var(--window-top));
 		/* #endif */
 		padding: 10px;
@@ -276,6 +286,7 @@
 		left: 15px;
 		bottom: 30px;
 		/* #ifdef H5 */
+		left: calc(15px + var(--window-left));
 		bottom: calc(30px + var(--window-bottom));
 		/* #endif */
 	}
@@ -284,6 +295,7 @@
 		left: 15px;
 		top: 40px;
 		/* #ifdef H5 */
+		left: calc(15px + var(--window-left));
 		top: calc(40px + var(--window-top));
 		/* #endif */
 	}
@@ -292,6 +304,7 @@
 		right: 15px;
 		bottom: 30px;
 		/* #ifdef H5 */
+		right: calc(15px + var(--window-right));
 		bottom: calc(30px + var(--window-bottom));
 		/* #endif */
 	}
@@ -300,6 +313,7 @@
 		right: 15px;
 		top: 40px;
 		/* #ifdef H5 */
+		right: calc(15px + var(--window-right));
 		top: calc(40px + var(--window-top));
 		/* #endif */
 	}

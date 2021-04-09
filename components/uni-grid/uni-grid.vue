@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-grid-wrap">
-		<view :id="elId" ref="uni-grid" class="uni-grid" :class="{ 'uni-grid--border': showBorder }" :style="{ 'border-left-style':'solid','border-left-color':borderColor, 'border-left-width':showBorder?'1px':0 }">
+		<view :id="elId" ref="uni-grid" class="uni-grid" :class="{ 'uni-grid--border': showBorder }" :style="{ 'border-left-color':borderColor}">
 			<slot />
 		</view>
 	</view>
@@ -66,7 +66,9 @@
 			this.children = []
 		},
 		mounted() {
-			this.init()
+			this.$nextTick(() => {
+				this.init()
+			})
 		},
 		methods: {
 			init() {
@@ -119,15 +121,20 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		/* flex: 1;
- */
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
 
 	.uni-grid--border {
+		position: relative;
+		/* #ifdef APP-NVUE */
 		border-left-color: #e5e5e5;
 		border-left-style: solid;
-		border-left-width: 1px;
+		border-left-width: 0.5px;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		z-index: 1;
+		border-left: 1px #e5e5e5 solid;
+		/* #endif */
 	}
 </style>

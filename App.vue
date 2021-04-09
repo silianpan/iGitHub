@@ -15,7 +15,7 @@
 		methods: {
 			// listen system theme: dark or light
 			listenSystemTheme() {
-				uni.onUIStyleChange(res => {
+				uni.onThemeChange(res => {
 					this.$store.dispatch('initDarkMode', res.style === 'dark')
 				})
 			},
@@ -70,7 +70,7 @@
 	@import "colorui/icon.css";
 	@import 'assets/css/uni.css';
 	@import 'assets/css/iconfont.css';
-	@import '@/uview/index.scss';
+	@import '@/uview-ui/index.scss';
 	@import 'assets/css/custom.css';
 	@import 'assets/css/custom.less';
 	@import 'assets/css/file-icons/style.css';

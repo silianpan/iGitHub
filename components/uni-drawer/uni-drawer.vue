@@ -1,34 +1,39 @@
 <template>
-	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer }" class="uni-drawer">
-		<view class="uni-drawer__mask" :class="{ 'uni-drawer__mask--visible': showDrawer && mask }" @tap="close" />
-		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}">
+	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer }" class="uni-drawer" @touchmove.stop.prevent="clear">
+		<view class="uni-drawer__mask" :class="{ 'uni-drawer__mask--visible': showDrawer && mask }" @tap="close('mask')" />
+		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}" :style="{width:drawerWidth+'px'}">
 			<slot />
 		</view>
+		<!-- #ifdef H5 -->
+		<keypress @esc="close('mask')" />
+		<!-- #endif -->
 	</view>
 </template>
 
 <script>
+	// #ifdef H5
+	import keypress from './keypress.js'
+	// #endif
 	/**
 	 * Drawer 抽屉
 	 * @description 抽屉侧滑菜单
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=26
-	 * @property {Boolean} visible = [true|false] Drawer的显示状态
 	 * @property {Boolean} mask = [true | false] 是否显示遮罩
+	 * @property {Boolean} maskClick = [true | false] 点击遮罩是否关闭
 	 * @property {Boolean} mode = [left | right] Drawer 滑出位置
 	 * 	@value left 从左侧滑出
 	 * 	@value right 从右侧侧滑出
+	 * @property {Number} width 抽屉的宽度 ，仅 vue 页面生效
 	 * @event {Function} close 组件关闭时触发事件
 	 */
 	export default {
 		name: 'UniDrawer',
+		components: {
+			// #ifdef H5
+			keypress
+			// #endif
+		},
 		props: {
-			/**
-			 * 显示状态
-			 */
-			visible: {
-				type: Boolean,
-				default: false
-			},
 			/**
 			 * 显示模式（左、右），只在初始化生效
 			 */
@@ -42,6 +47,20 @@
 			mask: {
 				type: Boolean,
 				default: true
+			},
+			/**
+			 * 遮罩是否可点击关闭
+			 */
+			maskClick: {
+				type: Boolean,
+				default: true
+			},
+			/**
+			 * 抽屉宽度
+			 */
+			width: {
+				type: Number,
+				default: 220
 			}
 		},
 		data() {
@@ -49,30 +68,26 @@
 				visibleSync: false,
 				showDrawer: false,
 				rightMode: false,
-				watchTimer: null
-			}
-		},
-		watch: {
-			visible(val) {
-				if (val) {
-					this.open()
-				} else {
-					this.close()
-				}
+				watchTimer: null,
+				drawerWidth: 220
 			}
 		},
 		created() {
-			this.visibleSync = this.visible
-			setTimeout(() => {
-				this.showDrawer = this.visible
-			}, 100)
+			// #ifndef APP-NVUE
+			this.drawerWidth = this.width
+			// #endif
 			this.rightMode = this.mode === 'right'
 		},
 		methods: {
-			close() {
+			clear() {},
+			close(type) {
+				// fixed by mehaotian 抽屉尚未完全关闭或遮罩禁止点击时不触发以下逻辑
+				if ((type === 'mask' && !this.maskClick) || !this.visibleSync) return
 				this._change('showDrawer', 'visibleSync', false)
 			},
 			open() {
+				// fixed by mehaotian 处理重复点击打开的事件
+				if (this.visibleSync) return
 				this._change('visibleSync', 'showDrawer', true)
 			},
 			_change(param1, param2, status) {
@@ -82,7 +97,7 @@
 				}
 				this.watchTimer = setTimeout(() => {
 					this[param2] = status
-					this.$emit(status ? 'open' : 'close')
+					this.$emit('change', status)
 				}, status ? 50 : 300)
 			}
 		}
@@ -90,8 +105,6 @@
 </script>
 
 <style scoped>
-	/* 抽屉宽度
- */
 	.uni-drawer {
 		/* #ifndef APP-NVUE */
 		display: block;
@@ -119,18 +132,27 @@
 
 	.uni-drawer--left {
 		left: 0;
+		/* #ifdef APP-NVUE */
 		transform: translateX(-220px);
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		transform: translateX(-100%);
+		/* #endif */
 	}
 
 	.uni-drawer--right {
 		right: 0;
+		/* #ifdef APP-NVUE */
 		transform: translateX(220px);
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		transform: translateX(100%);
+		/* #endif */
 	}
 
 	.uni-drawer__content--visible {
 		transform: translateX(0px);
 	}
-
 
 	.uni-drawer__mask {
 		/* #ifndef APP-NVUE */

@@ -106,6 +106,9 @@
 		line-height: 25px;
 		text-align: center;
 		border-radius: 3px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-fav--circle {
@@ -131,6 +134,6 @@
 		line-height: 25px;
 		align-items: center;
 		justify-content: center;
-		font-size: 28rpx;
+		font-size: 14px;
 	}
 </style>

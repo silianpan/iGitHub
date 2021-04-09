@@ -1,28 +1,40 @@
+import { isPC } from "./isPC"
 export default {
 	data() {
 		return {
 			position: [],
-			button: []
+			button: {},
+			btn: "[]"
 		}
 	},
-	computed: {
-		pos() {
-			return JSON.stringify(this.position)
-		},
-		btn() {
-			return JSON.stringify(this.button)
-		}
-	},
+	// computed: {
+	// 	pos() {
+	// 		return JSON.stringify(this.position)
+	// 	},
+	// 	btn() {
+	// 		return JSON.stringify(this.button)
+	// 	}
+	// },
 	watch: {
+		button: {
+			handler(newVal) {
+				this.btn = JSON.stringify(newVal)
+			},
+			deep: true
+		},
 		show(newVal) {
 			if (this.autoClose) return
-			let valueObj = this.position[0]
-			if (!valueObj) {
+			if (!this.button) {
 				this.init()
 				return
 			}
-			valueObj.show = newVal
-			this.$set(this.position, 0, valueObj)
+			this.button.show = newVal
+		},
+		leftOptions() {
+			this.init()
+		},
+		rightOptions() {
+			this.init()
 		}
 	},
 	created() {
@@ -32,7 +44,6 @@ export default {
 	},
 	mounted() {
 		this.init()
-
 	},
 	beforeDestroy() {
 		this.swipeaction.children.forEach((item, index) => {
@@ -43,9 +54,8 @@ export default {
 	},
 	methods: {
 		init() {
-			
-			setTimeout(() => {
-				this.getSize()
+			clearTimeout(this.swipetimer)
+			this.swipetimer = setTimeout(() => {
 				this.getButtonSize()
 			}, 50)
 		},
@@ -53,41 +63,71 @@ export default {
 			if (!this.autoClose) return
 			this.swipeaction.closeOther(this)
 		},
-		
+
 		change(e) {
 			this.$emit('change', e.open)
-			let valueObj = this.position[0]
-			if (valueObj.show !== e.open) {
-				valueObj.show = e.open
-				this.$set(this.position, 0, valueObj)
+			let show = this.button.show
+			if (show !== e.open) {
+				this.button.show = e.open
+			}
+
+		},
+
+		appTouchStart(e) {
+			// #ifdef H5
+			if(isPC()) return
+			// #endif
+			const {
+				clientX
+			} = e.changedTouches[0]
+			this.clientX = clientX
+			this.timestamp = new Date().getTime()
+		},
+		appTouchEnd(e, index, item, position) {
+			// #ifdef H5
+			if(isPC()) return
+			// #endif
+			const {
+				clientX
+			} = e.changedTouches[0]
+			// fixed by xxxx 模拟点击事件，解决 ios 13 点击区域错位的问题
+			let diff = Math.abs(this.clientX - clientX)
+			let time = (new Date().getTime()) - this.timestamp
+			if (diff < 40 && time < 300) {
+				this.$emit('click', {
+					content: item,
+					index,
+					position
+				})
 			}
 		},
-		onClick(index, item) {
+		// #ifdef H5
+		onClickForPC(index, item, position) {
+			// #ifdef H5
+			if(!isPC()) return
+			// #endif
 			this.$emit('click', {
 				content: item,
-				index
+				index,
+				position
 			})
 		},
-		getSize() {
-			const views = uni.createSelectorQuery().in(this)
-			views
-				.selectAll('.selector-query-hock')
-				.boundingClientRect(data => {
-					if (this.autoClose) {
-						data[0].show = false
-					} else {
-						data[0].show = this.show
-					}
-					this.position = data
-				})
-				.exec()
-		},
+		// #endif
 		getButtonSize() {
 			const views = uni.createSelectorQuery().in(this)
 			views
-				.selectAll('.button-hock')
+				.selectAll('.uni-swipe_button-group')
 				.boundingClientRect(data => {
-					this.button = data
+					let show = 'none'
+					if (this.autoClose) {
+						show = 'none'
+					} else {
+						show = this.show
+					}
+					this.button = {
+						data,
+						show
+					}
 				})
 				.exec()
 		}

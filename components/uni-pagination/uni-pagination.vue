@@ -135,7 +135,7 @@
 		width: 60px;
 		height: 30px;
 		line-height: 30px;
-		font-size: 28rpx;
+		font-size: 14px;
 		position: relative;
 		background-color: #f8f8f8;
 		flex-direction: row;
@@ -145,13 +145,16 @@
 		border-width: 1px;
 		border-style: solid;
 		border-color: #e5e5e5;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-pagination__child-btn {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		font-size: 28rpx;
+		font-size: 14px;
 		position: relative;
 		flex-direction: row;
 		justify-content: center;
@@ -169,7 +172,7 @@
 		align-items: center;
 		height: 30px;
 		line-height: 30px;
-		font-size: 28rpx;
+		font-size: 14px;
 		color: #333;
 	}
 
@@ -191,10 +194,13 @@
 
 	.uni-pagination--disabled {
 		opacity: 0.3;
+		/* #ifdef H5 */
+		cursor: not-allowed;
+		/* #endif */
 	}
 
 	.uni-pagination--hover {
-		color: rgba(0, 0, 0, .6);
+		color: rgba(0, 0, 0, 0.6);
 		background-color: #f1f1f1;
 	}
 </style>

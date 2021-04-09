@@ -6,7 +6,7 @@ import MinCache from './utils/MinCache'
 import store from './store'
 import _ from 'lodash'
 import NP from 'number-precision'
-import uView from '@/uview'
+import uView from '@/uview-ui'
 // highlight.js代码高亮插件
 import Highlight from '@/utils/highlight'
 import i18n from './i18n'

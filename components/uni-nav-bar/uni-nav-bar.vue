@@ -12,7 +12,7 @@
 					</view>
 					<slot name="left" />
 				</view>
-				<view class="uni-navbar__header-container uni-navbar__content_view">
+				<view class="uni-navbar__header-container uni-navbar__content_view" @tap="onClickTitle">
 					<view class="uni-navbar__header-container-inner uni-navbar__content_view" v-if="title.length">
 						<text class="uni-nav-bar-text" :style="{color: color }">{{ title }}</text>
 					</view>
@@ -58,6 +58,7 @@
 	 * @property {Boolean} shadow = [true|false] 导航栏下是否有阴影
 	 * @event {Function} clickLeft 左侧按钮点击时触发
 	 * @event {Function} clickRight 右侧按钮点击时触发
+	 * @event {Function} clickTitle 中间标题点击时触发
 	 */
 	export default {
 		name: "UniNavBar",
@@ -122,6 +123,9 @@
 			},
 			onClickRight() {
 				this.$emit("clickRight");
+			},
+			onClickTitle() {
+				this.$emit("clickTitle");
 			}
 		}
 	};
@@ -133,12 +137,12 @@
 		font-size: 34rpx;
 		/* #endif */
 		/* #ifndef APP-PLUS */
-		font-size: 32rpx;
+		font-size: 16px;
 		/* #endif */
 	}
 
 	.uni-nav-bar-right-text {
-		font-size: 28rpx;
+		font-size: 14px;
 	}
 
 	.uni-navbar__content {
@@ -153,8 +157,6 @@
 		/* #endif */
 		align-items: center;
 		flex-direction: row;
-		/* background-color: #FFFFFF;
- */
 	}
 
 	.uni-navbar__header {
@@ -165,8 +167,6 @@
 		height: 44px;
 		line-height: 44px;
 		font-size: 16px;
-		/* background-color: #ffffff;
- */
 	}
 
 	.uni-navbar__header-btns {
@@ -178,6 +178,9 @@
 		padding: 0 6px;
 		justify-content: center;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-navbar__header-btns-left {
@@ -208,9 +211,8 @@
 		flex: 1;
 		align-items: center;
 		justify-content: center;
-		font-size: 28rpx;
+		font-size: 14px;
 	}
-
 
 	.uni-navbar__placeholder-view {
 		height: 44px;
